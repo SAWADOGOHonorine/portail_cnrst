@@ -1,0 +1,51 @@
+
+
+.footer-container {
+    margin-top: 80px;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+    border-top: 1px solid #eee;
+    background-color: #fafafa;
+}
+
+.footer-container a {
+    color: #1e40af;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer-container a:hover {
+    text-decoration: underline;
+}
+/* Conteneur principal */
+.content-wrapper {
+    min-height: calc(100vh - 100px); /* Ajuster selon la hauteur du footer */
+}
+
+/* Footer collé en bas */
+.footer-container {
+    height: 100px;
+    padding: 20px 0;
+    background-color: #fafafa;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+    border-top: 1px solid #eee;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fafafa;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
