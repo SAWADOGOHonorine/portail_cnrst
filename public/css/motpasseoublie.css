@@ -1,0 +1,20 @@
+.success-message {
+    background-color: #d1fae5;
+    color: #065f46;
+    padding: 12px;
+    border: 1px solid #10b981;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.button-logout {
+    background-color: transparent;
+    color: #1e40af;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 500;
+}
