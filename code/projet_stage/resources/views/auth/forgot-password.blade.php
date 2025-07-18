@@ -5,8 +5,7 @@
 @section('content')
 <div class="forgot-wrapper">
     <div class="form-login">
-        <h2>Mot de passe oublié</h2>
-
+        <h2>Mot de passe oublié!</h2>
         <p class="form-description-left">
             Le mot de passe sera envoyé à votre email
         </p>

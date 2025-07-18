@@ -19,7 +19,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-// Redirection directe vers le tableau de bord
+        // Redirection directe vers le tableau de bord
             return redirect()->route('dashboard')->with('status', 'Vous êtes connectée.');
             return redirect()->route('dashboard');
         }

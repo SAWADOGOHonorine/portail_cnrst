@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Connexion invité</title>
+    <title>portail_cnrst</title>
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('css/formlogin.css') }}">
     <link rel="stylesheet" href="{{ asset('css/navigation.css') }}">
