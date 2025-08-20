@@ -1,44 +1,85 @@
 <?php
-use App\Http\Controllers\ProfileController;
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CvController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\PasswordResetController;
-use App\Http\Controllers\RegisterController;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Http\Request;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ResetPasswordController;
 
-
-// les routes
-
-// route pour la page d'acceuil
+//  la page d'accueil
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home'); 
 
-//  route pour le dashboard
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//  Pages statiques
+Route::view('/apropos', 'about')->name('about');
+Route::view('/programmes', 'programms')->name('programms');
+Route::view('/actualites', 'news')->name('news');
+Route::view('/contact', 'contact')->name('contact');
+// FAQ
+Route::view('/faq', 'faq')->name('faq');
 
-// route pour la connexion
-Route::get('/connexion', function () {
-    return view('auth.custom-login');
-})->name('custom.login');
+// Médias
+Route::view('/medias', 'media')->name('media');
+// Contacts (déjà défini)
+Route::view('/contact', 'contact')->name('contact');
 
-// route de mot de passe oublié
-Route::get('/forgot-password', [PasswordResetController::class, 'showForm'])->name('password.request');
-Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'])->name('password.email');
+//  Dashboard
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+//  Authentification
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.attempt');
 
 // route pour register
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
 
-Route::get('/register', [RegisterController::class, 'showForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'register']);
+// route la deconnexion
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//  Mot de passe oublié
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+//  Réinitialisation du mot de passe
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', function (Request $request) {
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:8|confirmed',
+    ]);
+
+    $status = Password::reset(
+        $request->only('email', 'password', 'password_confirmation', 'token'),
+        function ($user, $password) {
+            $user->forceFill([
+                'password' => bcrypt($password)
+            ])->save();
+        }
+    );
+
+    return $status === Password::PASSWORD_RESET
+        ? redirect()->route('login')->with('status', __($status))
+        : back()->withErrors(['email' => [__($status)]]);
+})->name('password.update');
+
+// routes des pages supplémentaires du dashboard
+Route::get('/accueil', function () {
+    return view('partials.accueil');
+})->name('accueil');
+
+Route::get('/infos', function () {
+    return view('partials.infos');
+})->name('infos');
+
+Route::get('/documentation/{section}', function ($section) {
+    return view("partials.documentation.$section");
+})->name('documentation.section');
 
 
-// route pour la connexion
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
 
 
-
-require __DIR__.'/auth.php';

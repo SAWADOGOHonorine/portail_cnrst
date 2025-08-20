@@ -1,4 +1,12 @@
 
+body {
+    margin: 0;
+    padding: 0;
+    padding-top: 80px;
+    /* background-color: rgb(175, 169, 169); */
+    font-family: 'Segoe UI', Verdana, Geneva, Tahoma, sans-serif;
+    min-height: 100vh;
+}
 
 .footer-container {
     margin-top: 80px;

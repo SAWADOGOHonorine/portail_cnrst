@@ -44,7 +44,13 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+$bootstrapPath = __DIR__.'/../bootstrap/app.php';
+
+if (!file_exists($bootstrapPath)) {
+    die('Erreur : Le fichier bootstrap/app.php est introuvable.');
+}
+
+$app = require_once $bootstrapPath;
 
 $kernel = $app->make(Kernel::class);
 

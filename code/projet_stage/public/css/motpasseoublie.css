@@ -1,20 +1,172 @@
-.success-message {
-    background-color: #d1fae5;
-    color: #065f46;
-    padding: 12px;
-    border: 1px solid #10b981;
+
+/*  la structure globale */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    padding-top: 80px; /* espace pour le menu fixe */
+}
+
+
+/*  Conteneur principal */
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(100vh - 100px);
+    padding-top: 40px;
+    padding-bottom: 80px;
+    box-sizing: border-box;
+}
+
+/*  Boîte du formulaire */
+.form-login {
+    width: 100%;
+    max-width: 600px;
+    background-color: #ffffff;
     border-radius: 6px;
-    margin-bottom: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border: 1px solid rgb(50, 168, 82);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/*  Titre du formulaire */
+.form-login h2 {
+    background-color: rgb(50, 168, 82);
+    color: #ffffff;
+    padding: 24px;
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
     text-align: center;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+/*  Contenu du formulaire */
+.form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+/*  Libellés */
+.form-content label {
+    align-self: flex-start;
+    width: 80%;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-weight: bold;
+    color: #333;
     font-size: 14px;
 }
 
-.button-logout {
-    background-color: transparent;
-    color: #1e40af;
-    border: none;
+/*  Champs de saisie */
+.input-login {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
     font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/*  Bouton Envoyer */
+.button-login {
+    background-color: rgb(50, 168, 82);
+    color: white;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
     cursor: pointer;
-    text-decoration: underline;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.button-login:hover {
+    background-color:rgb(19, 152, 38);
+}
+
+/*  Message de succès */
+.success-message {
+    background-color: #e0ffe0;
+    color: #006400;
+    padding: 12px 20px;
+    margin: 12px auto;
+    border-radius: 4px;
+    width: 80%;
+    font-weight: bold;
+    text-align: center;
+}
+
+/*  Liens du bas centrés */
+.form-bottom-links {
+    text-align: center;
+    padding: 0 24px;
+    margin-top: 24px;
+    font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.link-login {
+    color: rgb(50, 168, 82);
+    text-decoration: none;
     font-weight: 500;
 }
+
+.link-login:hover {
+    text-decoration: underline;
+}
+
+.link-separator {
+    margin: 0 8px;
+    color: #888;
+}
+
+/* pour rendre Responsive */
+@media screen and (max-width: 768px) {
+    .form-login {
+        max-width: 90%;
+    }
+
+    .form-content label,
+    .input-login,
+    .button-login {
+        width: 100%;
+    }
+
+    .form-bottom-links {
+        padding: 0 12px;
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .form-login h2 {
+        font-size: 18px;
+        padding: 16px;
+    }
+
+    .input-login {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .button-login {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .form-bottom-links {
+        font-size: 12px;
+    }
+}
+

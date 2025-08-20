@@ -4,5 +4,5 @@
 <footer class="footer-container">
     © {{ date('Y') }} Portail CNRST. Tous droits réservés.
     <br>
-    <a href="https://www.cnrst.bf" target="_blank">Visiter le site du CNRST</a>
+    <p href="https://www.cnrst.bf" target="_blank"> Centre National de la Recherche Scientifique et Technologique, All rights reserved!</p>
 </footer>
