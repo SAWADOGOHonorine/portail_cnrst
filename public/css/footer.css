@@ -1,51 +1,96 @@
 
-
-.footer-container {
-    margin-top: 80px;
-    padding: 20px 0;
-    text-align: center;
-    font-size: 14px;
-    color: #777;
-    border-top: 1px solid #eee;
-    background-color: #fafafa;
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #ffffff;
 }
 
-.footer-container a {
-    color: #1e40af;
+main {
+    margin-bottom: 0;
+    min-height: calc(100vh - 100px);
+    background-color: #ffffff;
+}
+.footer-container {
+    background-color: #6b261b; /* Rouge foncé institutionnel */
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0.75rem 1rem;
+    text-align: center;
+    width: 100%;
+    border-top: 2px solid #4e1c14;
+    box-sizing: border-box;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-content p {
+    margin: 0;
+    font-weight: 100;
+}
+
+.footer-content a {
+    color:#B71C1C; /* Rouge vif pour le lien */
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
 }
 
-.footer-container a:hover {
+.footer-content a:hover {
     text-decoration: underline;
-}
-/* Conteneur principal */
-.content-wrapper {
-    min-height: calc(100vh - 100px); /* Ajuster selon la hauteur du footer */
+    color: #ffffff;
 }
 
-/* Footer collé en bas */
+/* pour mettre le footer en bas et la feche de retour à droite */
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
 .footer-container {
-    height: 100px;
-    padding: 20px 0;
-    background-color: #fafafa;
+    background-color:rgb(81, 190, 95);
+    color: #ffffff;
+    padding: 0.75rem 1rem;
     text-align: center;
-    font-size: 14px;
-    color: #777;
-    border-top: 1px solid #eee;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+    border-top: 2px solid #ffffff;
+    box-sizing: border-box;
 }
-
-.footer-container {
+ /* pour le button de retouren haut */
+ .scroll-top {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #fafafa;
-    padding: 20px 0;
-    border-top: 1px solid #eee;
-    text-align: center;
+    bottom: 0.25rem;
+    right: 1rem;
+    background-color: #6b261b;
+    color: #FFFFFF;
+    padding: 0.5rem 0.6rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    z-index: 1000;
+    transition: background-color 0.2s ease;
 }
+
+.scroll-top:hover {
+    background-color: #4e1c14;
+}
+
+
+
+
 

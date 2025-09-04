@@ -1,0 +1,29 @@
+.logout-container {
+  max-width: 600px;
+  margin: 5rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-left: 4px solid #2E7D32;
+  box-shadow: 0 0 6px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.logout-actions a {
+  display: inline-block;
+  margin: 1rem;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #2E7D32;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #f0f0f0;
+  color: #2E7D32;
+  border: 1px solid #2E7D32;
+}

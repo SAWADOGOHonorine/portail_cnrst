@@ -1,74 +1,355 @@
-.navbar {
-    background-color: #ffffff;
-    border-bottom: 1px solid #e5e5e5;
-    padding: 14px 0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+/* ===== RESET ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+}
+/* pour la bande du menu en haut */
+.cnest-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1.5rem;
+    background-color: rgb(27, 94, 32);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    border-bottom: 2px solid #fff;
+    font-family: 'Open Sans', sans-serif;
 }
 
-.nav-inner {
-    width: 90%;
-    max-width: 1000px;
+.cnest-marquee {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    animation: slide-left 20s linear infinite;
+    font-size: 1rem;
+    color: #fffaf0;
+    line-height: 1.4;
+}
+
+.cnest-marquee .rouge {
+    color: rgb(225, 0, 0);
+    font-weight: bold;
+}
+
+@keyframes slide-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+
+}
+
+
+/* pour le logo */
+.logo-container img.logo-cnrst {
+    max-height: 40px;
+    object-fit: contain;
+}
+.logo-cnrst {
+    max-height: 40px;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+}
+
+/* ===== HEADER INSTITUTIONNEL ===== */
+.header-institutionnel {
+    position: absolute;
+    width: 100%;
+    margin-top: 0.25rem;
+    top: 0;
+    background-color: #fff;
+    z-index: 900;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    border-bottom: 2px solid rgb(50, 168, 82);
+}
+
+/* ===== BRANDING CNRST ===== */
+.branding {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: clamp(0.5rem, 2vw, 1rem) 0;
+    gap: 1rem;
+}
+.branding.hidden {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+}
+.logo-cnrs {
+    height: clamp(40px, 5vw, 60px);
+    margin-right: 1rem;
+}
+.titre-cnrs {
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    color: rgb(225, 0, 0);
+    font-weight: bold;
+}
+#brandingBloc {
+    opacity: 1;
+}
+
+/* ===== MENU WRAPPER ===== */
+.menu-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border-top: 1px solid #ddd;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1280px;
     margin: 0 auto;
+    padding: 1rem 0.5rem;
+}
+
+/* ===== NAVIGATION ===== */
+.nav-toggle {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color:rgb(27, 94, 32);
+    margin: 1rem;
+    cursor: pointer;
+}
+.nav-horizontal {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0.2rem 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
-
-.nav-logo {
-    font-weight: bold;
-    font-size: 18px;
-    color: #1e40af;
+.nav-horizontal.show {
+    display: flex;
+}
+.nav-links {
+    display: flex;
+    gap:  0.75rem;
+    list-style: none;
+}
+.nav-links a {
     text-decoration: none;
+    color: black;
+    font-weight: 500;
+    position: relative;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.90rem;
+}
+.nav-links a:hover {
+    background-color: rgb(225, 0, 0);
+    color: #fff;
+    border-radius: 2px;
+}
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0%;
+    background-color: rgb(225, 0, 0);
+}
+.nav-links a:hover::after {
+    width: 100%;
 }
 
-.nav-link,
-.nav-link-mobile {
-    color: #1e40af;
+/* ===== SOUS-MENU ===== */
+.has-submenu {
+    position: relative;
+}
+.submenu {
+    position: absolute;
+    top: calc(90% + 7px);
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 0.5rem 0;
+    display: none;
+    min-width: 180px;
+    margin-top: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    z-index: 999;
+}
+.submenu li {
+    list-style: none;
+}
+.submenu a {
+    display: block;
+    padding: 0.4rem 0.75rem;
+    color: rgb(0, 104, 55);
     text-decoration: none;
     font-weight: 500;
 }
-
-.nav-link:hover,
-.nav-link-mobile:hover {
-    text-decoration: underline;
+.submenu a:hover {
+    color: rgb(225, 0, 0);
+    background-color: #f5f5f5;
 }
-
-.nav-desktop {
-    display: none;
-}
-
-.nav-mobile-toggle {
+.has-submenu:hover .submenu {
     display: block;
 }
-
-/* pour le bandeau du menu */
-.menu-header {
-    background-color: #1e40af;
-    padding: 16px 24px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+.submenu-icon {
+    margin-left: 6px;
+    font-size: 0.8rem;
+    color: rgb(0, 122, 51);
+    vertical-align: middle;
+}
+.has-submenu.open .submenu-icon {
+    transform: rotate(180deg);
 }
 
-.menu-title {
-    color: #ffffff;
-    font-size: 20px;
-    font-weight: 600;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin: 0;
+/* ===== LANGUE ===== */
+.lang-select {
+    margin-left: 1rem;
+}
+.lang-select select {
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid rgb(0, 122, 51);
+    font-weight: 500;
+    background-color: #fff;
+    color: rgb(0, 122, 51);
+    cursor: pointer;
 }
 
-/* Responsive rules */
-@media screen and (min-width: 640px) {
-    .nav-desktop {
-        display: flex;
-        gap: 20px;
-    }
+/* ===== ACTIONS HEADER ===== */
+.header-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 0,5rem;
+    position: relative;
+}
+.search-container {
+    position: relative;
+}
+.search-trigger {
+    cursor: pointer;
+    font-weight: 500;
+    color: rgb(0, 122, 51);
+}
+.search-form {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    background: #fff;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 250px;
+    transform: translateY(-10px);
+}
+.search-container:hover .search-form {
+    display: flex;
+}
+.search-form input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    font-size: 0.875rem;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+.search-form button {
+    padding: 0.5rem;
+    background-color: rgb(225, 0, 0);
+    border: 1px solid #ccc;
+    font-size: 0.875rem;
+    width: 100%;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.search-form button:hover {
+   background-color:rgb(0, 122, 51);
+}
+.search-login {
+    gap: 0.75rem;
+}
 
-    .nav-mobile-toggle {
+/* ===== BOUTON CONNEXION ===== */
+.login-button {
+    padding: 0.4rem 0.75rem;
+    background-color: rgb(27, 94, 32);
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 4px;
+    border: 1px solid rgb(0, 122, 51);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 0.9rem;
+}
+.login-button:hover {
+    background-color: rgb(225, 0, 0);
+    color: #fff;
+    border-color: rgb(225, 0, 0);
+} 
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .nav-horizontal {
+        flex-direction: column;
+        align-items: flex-start; 
         display: none;
+        width: 100%;
     }
-
-    .mobile-menu {
-        display: none !important;
+    .nav-horizontal.show {
+        display: flex;
+    }
+    .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+    }
+    .header-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        width: 100%;
+    }
+    .search-login {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        width: 100%;
+    }
+    .login-button {
+        width: 100%;
+        text-align: center;
+    }
+    .nav-toggle {
+        display: block;
+        font-size: 0.75rem;
+        background: none;
+        border: none;
+        color: #006837;
+        cursor: pointer;
+        margin: 1rem;
+    }
+    .logo-cnrst {
+        max-height: 45px;
     }
 }
+
+
+  

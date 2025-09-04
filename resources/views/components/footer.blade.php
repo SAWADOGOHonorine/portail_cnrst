@@ -2,7 +2,10 @@
 
 <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
 <footer class="footer-container">
-    © {{ date('Y') }} Portail CNRST. Tous droits réservés.
-    <br>
-    <a href="https://www.cnrst.bf" target="_blank">Visiter le site du CNRST</a>
+    <div class="footer-content">
+        <p>© {{ date('Y') }} Portail CNRST –</p>
+        <a href="https://www.cnrst.bf" target="_blank">cnrst.bf</a>
+        <p>– Tous droits réservés –</p>
+        <a href="/mentions-legales">Mentions légales</a>
+    </div>
 </footer>

@@ -1,0 +1,220 @@
+/* ===== PAGE CONTACT ===== */
+.contact-page {
+    font-family: Roboto, Open Sans ou Source Sans Pro;
+    color: #222;
+    background-color: #fff;
+    
+}
+
+/* ===== BANNIÈRE ===== */
+.banner {
+    background-color:rgb(27, 94, 32);
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 7rem;
+    
+   
+}
+
+.banner h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.banner p {
+    font-size: 0.9rem;
+    margin-top: 20rem;
+}
+
+/* ===== FORMULAIRE ===== */
+.contact-form {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    font-family: 'Open Sans', sans-serif;
+    color: #222;
+    
+}
+
+.contact-form h2 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    color: rgb(46, 125, 50);
+}
+
+.contact-form p {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex: 1 1 60%;
+    min-width: 300px;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    background-color: #fff;
+    
+    
+}
+
+button[type="submit"] {
+    background-color: rgb(27, 94, 32);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: rgb(170, 0, 0);
+}
+
+/* pour les coordonnées */
+.contact-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.detail-block {
+    flex: 1 1 200px;
+    min-width: 220px;
+}
+
+.detail-block h3 {
+    font-size: 1.1rem;
+    color: rgb(46, 125, 50);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.detail-block p {
+    margin: 0.2rem 0;
+    color: #333;
+}
+
+
+/* pour la carte de localisation */
+.map-section {
+    max-width: 1000px;
+    margin: rem auto;
+    padding: 1rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.map-section h3 {
+    font-size: 1.25rem;
+    color: rgb(46, 125, 50);
+    margin-bottom: 2rem;
+}
+
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+    
+}
+
+.map-button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.map-wrapper iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+/* .btn-maps {
+    font-size: 0.8rem; 
+    background-color: #00703C;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+} */
+
+.map-button {
+    display: inline-block;
+    background-color:rgb(27, 94, 32);
+    color: white;
+    padding: 0.5rem 0.25rem;
+    border-radius: 2px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform:uppercase;
+    margin-top: 1.5rem;
+}
+
+.map-button:hover {
+    background-color: #a00;
+}
+
+
+/* pour le retour à l'acceul */
+
+/* ===== RESPONSIVE MOBILE ===== */
+@media screen and (max-width: 768px) {
+    .contact-info {
+        flex-direction: column;
+    }
+
+    .contact-form,
+    .info-block,
+    .map-block {
+        width: 100%;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+    }
+    .map-wrapper {
+        height: 250px;
+    }
+
+    .map-button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+
