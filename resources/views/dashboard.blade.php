@@ -1,109 +1,124 @@
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>@yield('title', 'Dashboard')</title>
 
-    <!--  le liens CSS (Bootstrap + ton CSS perso) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <!-- Bootstrap + CSS perso -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 <body>
-          <!-- menu latéral -->
+    <!-- Sidebar -->
     <div id="sidebar">
-
-        <!--  Titre/Logo du menu -->
         <div class="sidebar-header p-3 text-white fw-bold">
             Mon Admin
         </div>
 
-        <!--  Mon espace avec sous-menu accordéon -->
-<li class="nav-item">
-    <a class="nav-link text-white d-flex justify-content-between align-items-center"
-       data-bs-toggle="collapse" href="#monEspaceMenu" role="button" aria-expanded="false"
-       aria-controls="monEspaceMenu">
-        <span><i class="bi bi-person-circle me-4"></i> Mon espace</span>
-        <i class="bi bi-chevron-down"></i>
-    </a>
-    <div class="collapse ms-5" id="monEspaceMenu">
-        <ul id="submenuDoc">
-            <li><a class="nav-link" href="#" onclick="loadContent('documentation/cv')">
-                <i class="bi bi-file-earmark-person me-4"></i> Documents</a></li>
-            <li><a class="nav-link" href="#" onclick="loadContent('documentation/fiches')">
-                <i class="bi bi-journal-text me-4"></i> Mes fiches techniques</a></li>
-            <li><a class="nav-link" href="#" onclick="loadContent('documentation/articles')">
-                <i class="bi bi-file-earmark-richtext me-4"></i> Mes articles</a></li>
-            <li><a class="nav-link" href="#" onclick="loadContent('documentation/autre')">
-                <i class="bi bi-three-dots me-4"></i> Autres</a></li>
-        </ul>
-    </div>
-</li>
-
-        <!--  Menu principal -->
         <ul class="nav flex-column">
+            <!-- Mon espace -->
+            <li class="nav-item">
+                <a class="nav-link text-white d-flex justify-content-between align-items-center"
+                   data-bs-toggle="collapse" href="#monEspaceMenu" role="button" aria-expanded="false"
+                   aria-controls="monEspaceMenu">
+                    <span><i class="bi bi-person-circle me-2"></i> Mon espace</span>
+                    <i class="bi bi-chevron-down"></i>
+                </a>
+                <div class="collapse ms-4" id="monEspaceMenu">
+                    <ul>
+                        <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/cv_form')">
+                            <i class="bi bi-file-earmark-person me-2"></i> Mon CV</a></li>
+                        <li><a class="nav-link" href="#" onclick="loadContent('documentation/fiches')">
+                            <i class="bi bi-journal-text me-2"></i> Mes fiches techniques</a></li>
+                        <li><a class="nav-link" href="#" onclick="loadContent('documentation/articles')">
+                            <i class="bi bi-file-earmark-richtext me-2"></i> Mes articles</a></li>
+                        <li><a class="nav-link" href="#" onclick="loadContent('documentation/autre')">
+                            <i class="bi bi-three-dots me-2"></i> Autres</a></li>
+                    </ul>
+                </div>
+            </li>
 
             <!-- Tableau de bord -->
             <li class="nav-item">
                 <a href="#" class="nav-link text-white" onclick="loadContent('dashboard')">
-                    <i class="bi bi-speedometer2 me-2"></i> <span class="link-text">Tableau de bord</span>
+                    <i class="bi bi-speedometer2 me-2"></i> Tableau de bord
                 </a>
             </li>
 
             <!-- Accueil -->
             <li class="nav-item">
                 <a href="#" class="nav-link text-white" onclick="loadContent('accueil')">
-                    <i class="bi bi-house-door me-2"></i> <span class="link-text">Accueil</span>
+                    <i class="bi bi-house-door me-2"></i> Accueil
                 </a>
             </li>
 
             <!-- Infos -->
             <li class="nav-item">
                 <a href="#" class="nav-link text-white" onclick="loadContent('infos')">
-                    <i class="bi bi-info-circle me-2"></i> <span class="link-text">Infos</span>
+                    <i class="bi bi-info-circle me-2"></i> Infos
                 </a>
             </li>
 
-           <!--  Documentation avec sous-menu accordéon -->
-    <li class="nav-item">
-        <a class="nav-link text-white d-flex justify-content-between align-items-center"
-        data-bs-toggle="collapse" href="#documentationMenu" role="button" aria-expanded="false"
-        aria-controls="documentationMenu">
-            <span><i class="bi bi-journal-bookmark me-2"></i> Documentation</span>
-            <i class="bi bi-chevron-down"></i>
-        </a>
-        <div class="collapse ms-4" id="documentationMenu">
-            <ul id="submenuDoc">
-                <li><a class="nav-link" href="#" onclick="loadContent('documentation/cv')">
-                    <i class="bi bi-file-earmark-person me-2"></i> Mon CV</a></li>
-                <li><a class="nav-link" href="#" onclick="loadContent('documentation/fiches')">
-                    <i class="bi bi-journal-text me-2"></i> Mes fiches techniques</a></li>
-                <li><a class="nav-link" href="#" onclick="loadContent('documentation/articles')">
-                    <i class="bi bi-file-earmark-richtext me-2"></i> Mes articles</a></li>
-                <li><a class="nav-link" href="#" onclick="loadContent('documentation/autre')">
-                    <i class="bi bi-three-dots me-2"></i> Autres</a></li>
-            </ul>
-        </div>
-    </li>
+            <!-- Documentation -->
+            <li class="nav-item">
+                <a class="nav-link text-white d-flex justify-content-between align-items-center"
+                   data-bs-toggle="collapse" href="#documentationMenu" role="button" aria-expanded="false"
+                   aria-controls="documentationMenu">
+                    <span><i class="bi bi-journal-bookmark me-2"></i> Documentation</span>
+                    <i class="bi bi-chevron-down"></i>
+                </a>
+             <div class="collapse ms-4" id="documentationMenu">
+                <ul>
+                    {{--  Lien vers le formulaire dans le dashboard --}}
+                    <li>
+                        <a class="nav-link" href="{{ route('publications.create') }}">
+                            <i class="bi bi-file-earmark-person me-2"></i> Publications
+                        </a>
+                    </li>
+
+                    {{--  Liens vers les vues publiques chargées via JavaScript --}}
+                    <li>
+                        <a class="nav-link" href="#" onclick="loadContent('documentation/fiches')">
+                            <i class="bi bi-journal-text me-2"></i> Articles
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#" onclick="loadContent('documentation/articles')">
+                            <i class="bi bi-file-earmark-richtext me-2"></i> Mes articles
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#" onclick="loadContent('documentation/autre')">
+                            <i class="bi bi-three-dots me-2"></i> Autres
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            </li>
         </ul>
     </div>
-         <!-- le contenu principal -->
+
+    <!-- Main content -->
     <div id="main">
-              <!-- TOPBAR ( la barre supérieure) -->
+        <!-- Topbar -->
         <nav id="topbar" class="d-flex justify-content-between align-items-center px-3">
-            <!-- Bouton toggle + Titre -->
             <div class="d-flex align-items-center">
                 <button id="toggleSidebar" class="btn text-white me-3"><i class="bi bi-list fs-4"></i></button>
                 <span class="fw-bold text-white">@yield('title', 'Dashboard')</span>
             </div>
-            <!-- Barre de recherche -->
+
+            <!-- Search -->
             <div class="input-group" style="width: 300px;">
                 <span class="input-group-text bg-white border-end-0">
-                    <i class="bi bi-search"></i> 
+                    <i class="bi bi-search"></i>
                 </span>
                 <input type="text" class="form-control input-dark border-start-0" placeholder="Rechercher..." name="search" />
             </div>
-            <!-- Icône notifications -->
+
+            <!-- Notifications -->
             <div class="position-relative me-3">
                 <i class="bi bi-bell-fill fs-4 text-white"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -112,7 +127,7 @@
                 </span>
             </div>
 
-            <!-- le logo admin avec menu dropdown -->
+            <!-- Admin dropdown -->
             <div class="admin-logo-container">
                 <i class="bi bi-person-circle fs-4 text-white" id="adminLogo" style="cursor: pointer;"></i>
                 <div class="admin-dropdown hidden mt-3" id="adminDropdown">
@@ -124,15 +139,41 @@
                 </div>
             </div>
         </nav>
-            <!-- le contenu des pages -->
-        <div class="container-fluid mt-4"  id="content-area">
+        <!-- Zone de contenu dynamique -->
+        <div class="container-fluid mt-4" id="content-area">
             <h2>Bienvenue sur le Dashboard</h2>
             <p>Sélectionnez un menu à gauche.</p>
         </div>
     </div>
-   
-         <!-- les  scripts utilisés -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function loadContent(viewName) {
+            fetch('/' + viewName)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('content-area').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Erreur lors du chargement :', error);
+                    document.getElementById('content-area').innerHTML = '<div class="alert alert-danger">Erreur de chargement du contenu.</div>';
+                });
+        }
+    </script>
+    <script>
+        function loadContent(viewName) {
+            fetch(`/load-view/${viewName}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('main-content').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Erreur de chargement :', error);
+                });
+        }
+    </script>
+
     <script src="{{ asset('js/dashboard.js') }}"></script>
 </body>
 </html>

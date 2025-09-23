@@ -1,0 +1,68 @@
+/* Detail section */
+.detail{
+  max-width:1200px;
+  margin:12px auto 28px;
+  padding:0 16px;
+}
+.detail__title{
+  margin:0 0 12px;
+  font-size:22px;
+  font-weight:800;
+  color:#243035;
+  position:relative;
+}
+.detail__title::after{
+  content:"";
+  position:absolute;
+  left:0; bottom:-6px;
+  width:60px; height:4px;
+  background:#2dbf62;
+  border-radius:3px;
+}
+.detail__card{
+  background:#fff;
+  border:1px solid #e6e9ec;
+  border-radius:8px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+  padding:16px;
+}
+.detail__meta{ margin:0 0 6px; }
+.detail__block{
+  border-top:1px solid #e6e9ec;
+  padding-top:12px;
+  margin-top:12px;
+}
+.detail__heading{
+  margin:0 0 8px;
+  font-size:16px;
+  color:#3b444b;
+}
+.detail__grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+@media (min-width:900px){
+  .detail__grid{ grid-template-columns:1fr 1fr; }
+}
+.detail__actions{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:16px;
+  gap:10px;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:none;
+  border-radius:8px;
+  padding:10px 14px;
+  font-weight:700;
+  cursor:pointer;
+}
+.btn--secondary{ background:#e9ecef; color:#1f2a33; }
+.btn--secondary:hover{ background:#dde2e6; }
+.muted{ color:#5b6670; }
+
+/* Si header fixe: garde ta classe .after-header existante pour l’offset */

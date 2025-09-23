@@ -4,71 +4,78 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Http\Request;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\PageController;
+use App\Http\Controllers\CvController;
+use App\Http\Controllers\PartenairesController;
+use App\Http\Controllers\ValorisationsController;
+use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\EquipmentController;
 
 //  les Pages statiques
 Route::get('/', function () {
-    return view('pages.home');
+    return view('welcome');
 });
 
-// Route::get('/apropos', function () {
-//     return view('about');
-// })->name('about');
-
-// Route::get('/programmes', function () {
-//     return view('programms');
-// })->name('programms');
-
-Route::get('/actualites', function () {
-    return view('news');
-})->name('news');
+// route pour partenaires
+Route::get('/partenaires', [PartenairesController::class, 'index'])->name('partenaires');
+Route::get('/partenaires/{id}', [PartenairesController::class, 'show'])->name('partenaire.show');
 
 
-// routes pour les pages gerer par pagecontroller
+Route::get('/valorisations', [ValorisationsController::class, 'index'])->name('valorisations');
 
-Route::get('/home', [PageController::class, 'home'])->name('home');
-Route::get('/about/partenariat', [pageController::class, 'partenariat'])->name('about.partenariat');
-// Route::get('/about', [PageController::class, 'about'])->name('about');
-Route::get('/contact', [PageController::class, 'contact'])->name('contact');
-Route::post('/contact', [PageController::class, 'send'])->name('contact.send');
+// route pour les chercheurs
+Route::get('/chercheurs', function () {
+    return view('pages.chercheurs');
+})->name('chercheurs');
 
-Route::get('/programmes/recherche', [PageController::class, 'recherche']);
-Route::get('/programmes/innovation', [PageController::class, 'innovation']);
-Route::get('/programmes/partenariats', [PageController::class, 'partenariats']);
+// route pour le contact
+Route::get('/contact', function () {
+    return view('pages.contact');
+})->name('contact');
+// route pour credits
+Route::get('/credits', function () {
+    return view('pages.credit');
+})->name('credit');
 
-Route::get('/actualités/nationale', [PageController::class, 'nationale']);
-Route::get('/actualités/internationale', [PageController::class, 'internationale']);
-
-Route::get('/faq/inscription', [PageController::class, 'inscription']);
-Route::get('/faq/financement', [PageController::class, 'financement']);
-
-Route::get('/medias/photos', [PageController::class, 'photos']);
-Route::get('/medias/videos', [PageController::class, 'videos']);
-
+Route::get('/search', function () {
+    return view('pages.search');
+})->name('search');
 
 //  Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+// route pour la page d'accès refusé du dashboard
+Route::get('/access-dashboard-refuse', function () {
+    return view('error.accessdasboard_refuse');
+})->name('access.dashboard.refuse');
 
 //  Authentification pour la connexion
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.attempt');
 
-// route pour l'inscription
+// Route pour l'inscription
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
 // route pourla déconnexion
 Route::post('/logout', function () {
     Auth::logout();
-    return redirect('/')->with('logout_success', true);
+    return redirect()->route('logout.success');
 })->name('logout');
+Route::get('/logout_success', function () {
+    return view('auth.logout_success'); 
+})->name('logout.success');
 
 //  route pour le mot de passe oublié 
-Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
-Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password'); 
+})->name('password.request');
+
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
 
 //  Réinitialisation du mot de passe
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
@@ -105,6 +112,35 @@ Route::get('/infos', function () {
 Route::get('/documentation/{section}', function ($section) {
     return view("partials.documentation.$section");
 })->name('documentation.section');
+
+// route pour les publications
+
+// Page publique
+Route::get('/publications', [PublicationController::class, 'index'])->name('publications.index');
+
+// Dashboard sécurisé
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/publications/create', [PublicationController::class, 'create'])->name('publications.create');
+    Route::post('/dashboard/publications', [PublicationController::class, 'store'])->name('publications.store');
+});
+
+Route::middleware(['web', 'auth'])->group(function () {
+    Route::get('/mon_espace/cv_form', [CvController::class, 'create'])->name('cv.create');
+    Route::post('/mon_espace/cv_form', [CvController::class, 'store'])->name('cv.store');
+    Route::get('/cv/download', [CvController::class, 'downloadPdf'])->name('cv.download');
+    Route::get('/cv/file/download', [CvController::class, 'downloadUploadedFile'])->name('cv.file.download');
+});
+
+// route pour les equipements
+
+Route::get('/equipment', [EquipmentController::class, 'index'])->name('equipment.index');
+Route::get('/equipment/create', [EquipmentController::class, 'create'])->name('equipment.create');
+Route::post('/equipment', [EquipmentController::class, 'store'])->name('equipment.store');
+
+
+
+
+
 
 
 

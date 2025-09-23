@@ -1,4 +1,187 @@
- @extends('layouts.app')
+@extends('layouts.app')
+
+@section('titre', 'Accueil')
+
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/pages/accueil.css') }}">
+@endpush
+
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/pages/banniere.css') }}">
+@endpush
+
+@section('content')
+<div class="page-accueil">
+
+  <!-- Barre de recherche -->
+  <div class="search-bar">
+    <input type="text" placeholder="Rechercher une publication, un chercheur..." />
+    <button type="submit"><i class="bi bi-search"></i></button>
+  </div>
+
+  <div class="accueil-container">
+    
+    <!-- Bloc gauche : photo + infos -->
+    <div class="profil-gauche">
+      <img src="{{ asset('images/honorine.jpg') }}" alt="Photo Honorine" class="photo-profil">
+      <h2 class="nom-profil">HONORINE</h2>
+      <p class="domaine-profil">UX académique – Structuration institutionnelle – Portails nationaux</p>
+    </div>
+
+    <!-- Bloc centre : publications -->
+    <div class="profil-centre">
+      <h3 class="titre-section">Publications</h3>
+      <ul class="liste-publications">
+        <li>
+          <strong>Modularité Blade pour portails publics</strong><br>
+          <em>Honorine, 2025</em><br>
+          Implémentation de partials Blade pour structuration académique.
+        </li>
+        <li>
+          <strong>Comparaison UX : CNRST vs FONRID</strong><br>
+          <em>Honorine, 2025</em><br>
+          Étude comparative des pratiques UX sur portails nationaux.
+        </li>
+        <!-- Ajoute d'autres publications ici -->
+      </ul>
+    </div>
+
+    <!-- Bloc droite : thématiques -->
+    <div class="profil-droite">
+      <h3 class="titre-section">Thématiques</h3>
+      <ul class="liste-thematiques">
+        <li>Anthropologie</li>
+        <li>Communication</li>
+        <li>Droit</li>
+        <li>Économie</li>
+        <li>Éducation</li>
+        <li>Environnement</li>
+        <li>Géographie</li>
+        <li>Histoire</li>
+        <li>Linguistique</li>
+        <li>Littérature</li>
+        <li>Philosophie</li>
+        <li>Psychologie</li>
+        <li>Santé</li>
+        <li>Science politique</li>
+        <li>Sociologie</li>
+        <li>Travail social</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+@endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- @extends('layouts.app')
 
 @section('title', 'acceuil')
 
@@ -19,12 +202,12 @@
       </div>
 
       <div class="apropos-droite">
-        <img src="{{ asset('images/imsection1.jpg') }}" alt="CNRST Burkina Faso">
+        <img id="imageInstitutionnelle" src="{{ asset('images/image2.jpg') }}" alt="CNRST Burkina Faso">
       </div>
-    </section>
+    </section> -->
 
     <!-- deuxieme section messsage de bienvenue -->
-    <section class="sonasp-bienvenue">
+    <!-- <section class="sonasp-bienvenue">
         <section class="sonasp-bienvenue">
       <div class="bienvenue-container layout-texte-gauche">
         <div class="bienvenue-texte">
@@ -96,12 +279,12 @@
       </div>
 
       <a href="#" class="btn-cnrs">Voir plus <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
-    </section>
+    </section> -->
 
 <!-- =========================
      NOS MISSIONS DU CNRST
      ========================= -->
-<section class="missions-cnrs">
+<!-- <section class="missions-cnrs">
   <h2 class="missions-title">Nos missions</h2>
 
   <div class="missions-grid">
@@ -132,10 +315,40 @@
   <div class="missions-btn-container">
     <a href="#" class="btn-voir-plus">Voir plus <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
   </div>
+</section> -->
+
+<!-- pour la section directions -->
+<!-- <section class="cnrst-directions">
+    <h2>Nos directions</h2>
+  <div class="cnrst-wrapper">
+    <div class="cnrst-image">
+      <img src="{{ asset('images/image2.jpg') }}" alt="Direction générale du CNRST">
+    </div>
+
+    <div class="cnrst-text">
+        <p>La direction générale du CNRST est organisée autour :</p><br> <br>
+      <ul class="cnrst-list">
+        <li>Direction Générale (DG)</li>
+        <li>Direction de la Recherche Scientifique (DRS)</li>
+        <li>Direction de l’Innovation et du Transfert Technologique (DITT)</li>
+        <li>Direction de la Valorisation des Résultats de la Recherche (DVRR)</li>
+        <li>Direction des Programmes et Projets Scientifiques (DPPS)</li>
+        <li>Direction des Ressources Humaines (DRH)</li>
+        <li>Direction des Finances et de la Comptabilité (DFC)</li>
+        <li>Direction de la Communication et des Relations Extérieures (DCRE)</li>
+        <li>Direction des Archives et de la Documentation Scientifique (DADS)</li>
+        <li>Direction de l’Informatique et des Systèmes d’Information (DISI)</li>
+      </ul>
+    </div>
+    <a href="{{ route('about.directions') }}" class="btn-directions">
+      Voir plus <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+    </a>
+
+  </div>
 </section>
 
 
-</div>
+</div> -->
 
 @endsection 
 

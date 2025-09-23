@@ -1,94 +1,45 @@
-
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-color: #ffffff;
-}
-
-main {
-    margin-bottom: 0;
-    min-height: calc(100vh - 100px);
-    background-color: #ffffff;
-}
-.footer-container {
-    background-color: #6b261b; /* Rouge foncé institutionnel */
-    color: #ffffff;
-    font-family: 'Open Sans', sans-serif;
+.footer-section {
+    background-color: #f2f2f2; 
+    color: #333333;
+    padding: 2rem 1rem;
     font-size: 0.85rem;
-    line-height: 1.4;
-    margin: 0;
-    padding: 0.75rem 1rem;
-    text-align: center;
-    width: 100%;
-    border-top: 2px solid #4e1c14;
-    box-sizing: border-box;
+    border-top: 1px solid #198754;
 }
 
-.footer-content {
-    max-width: 1200px;
+.footer-wrapper {
+    max-width: 960px;
     margin: 0 auto;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.footer-content p {
-    margin: 0;
-    font-weight: 100;
-}
-
-.footer-content a {
-    color:#B71C1C; /* Rouge vif pour le lien */
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.footer-content a:hover {
-    text-decoration: underline;
-    color: #ffffff;
-}
-
-/* pour mettre le footer en bas et la feche de retour à droite */
-.page-wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-main {
-    flex: 1;
-}
-
-.footer-container {
-    background-color:rgb(81, 190, 95);
-    color: #ffffff;
-    padding: 0.75rem 1rem;
     text-align: center;
-    border-top: 2px solid #ffffff;
-    box-sizing: border-box;
-}
- /* pour le button de retouren haut */
- .scroll-top {
-    position: fixed;
-    bottom: 0.25rem;
-    right: 1rem;
-    background-color: #6b261b;
-    color: #FFFFFF;
-    padding: 0.5rem 0.6rem;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: 1.2rem;
-    z-index: 1000;
-    transition: background-color 0.2s ease;
 }
 
-.scroll-top:hover {
-    background-color: #4e1c14;
+.footer-logo img {
+    margin-bottom: 1rem;
 }
+
+.footer-links {
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.footer-links a {
+    color: #145c32;
+    text-decoration: none;
+    margin: 0 0.4rem;
+    transition: color 0.2s ease;
+    font-size: 1.05rem;
+}
+
+.footer-links a:hover {
+    color: #000000;
+}
+
+.footer-text p {
+    margin-bottom: 0.3rem;
+    font-size: 0.8rem;
+    color: #555555;
+}
+
 
 
 

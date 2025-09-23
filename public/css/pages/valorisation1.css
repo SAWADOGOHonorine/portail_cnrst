@@ -1,0 +1,134 @@
+.valorisations {
+    padding: 2rem 1rem;
+    background-color: #ffffff;
+    margin-top: 0 !important;
+}
+
+.valorisations h4 {
+    text-align: left;
+    color: #145c32;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.valorisation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.valorisation-card {
+    background-color: #f2f2f2;
+    border: 1px solid #198754;
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    font-size: 0.85rem;
+    transition: transform 0.2s ease;
+}
+
+.valorisation-card:hover {
+    transform: translateY(-2px);
+}
+
+.valorisation-titre {
+    color: #198754;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.valorisation-date {
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.valorisation-porteur {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.3rem;
+}
+
+.valorisation-tags {
+    margin-bottom: 0.4rem;
+}
+
+.tag {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #fff;
+    margin-right: 0.3rem;
+}
+
+.tag-tech {
+    background-color: #6c757d;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    padding-bottom: 1rem;
+    gap: 0.5rem;
+}
+
+.page-number,
+.page-arrow {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid #198754;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.page-number {
+    background-color: #e9f5ec;
+    color: #145c32;
+}
+
+.page-number:hover {
+    background-color: #ffffff;
+    color: #145c32;
+}
+
+.page-number.active {
+    background-color: #198754;
+    color: #fff;
+    border-color: #198754;
+}
+
+.page-number.active:hover {
+    background-color: #dee2e6;
+    color: #145c32;
+}
+
+.page-arrow {
+    background-color: #198754;
+    color: #fff;
+}
+
+.page-arrow:hover {
+    background-color: #dee2e6;
+    color: #145c32;
+}
+
+.page-arrow.active {
+    background-color: #198754;
+    color: #fff;
+    border-color: #198754;
+}
+
+.page-arrow.active:hover {
+    background-color: #dee2e6;
+    color: #145c32;
+}

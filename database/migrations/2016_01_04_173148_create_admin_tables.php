@@ -7,21 +7,11 @@ use Illuminate\Support\Facades\Schema;
 class CreateAdminTables extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
-    public function getConnection()
-    {
-        return config('admin.database.connection') ?: config('database.default');
-    }
-
-    /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create(config('admin.database.users_table'), function (Blueprint $table) {
+        Schema::create('admin_users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username', 190)->unique();
             $table->string('password', 60);
@@ -31,14 +21,14 @@ class CreateAdminTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create(config('admin.database.roles_table'), function (Blueprint $table) {
+        Schema::create('admin_roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50)->unique();
             $table->string('slug', 50)->unique();
             $table->timestamps();
         });
 
-        Schema::create(config('admin.database.permissions_table'), function (Blueprint $table) {
+        Schema::create('admin_permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50)->unique();
             $table->string('slug', 50)->unique();
@@ -47,7 +37,7 @@ class CreateAdminTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create(config('admin.database.menu_table'), function (Blueprint $table) {
+        Schema::create('admin_menu', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id')->default(0);
             $table->integer('order')->default(0);
@@ -55,39 +45,38 @@ class CreateAdminTables extends Migration
             $table->string('icon', 50);
             $table->string('uri')->nullable();
             $table->string('permission')->nullable();
-
             $table->timestamps();
         });
 
-        Schema::create(config('admin.database.role_users_table'), function (Blueprint $table) {
+        Schema::create('admin_role_users', function (Blueprint $table) {
             $table->integer('role_id');
             $table->integer('user_id');
             $table->index(['role_id', 'user_id']);
             $table->timestamps();
         });
 
-        Schema::create(config('admin.database.role_permissions_table'), function (Blueprint $table) {
+        Schema::create('admin_role_permissions', function (Blueprint $table) {
             $table->integer('role_id');
             $table->integer('permission_id');
             $table->index(['role_id', 'permission_id']);
             $table->timestamps();
         });
 
-        Schema::create(config('admin.database.user_permissions_table'), function (Blueprint $table) {
+        Schema::create('admin_user_permissions', function (Blueprint $table) {
             $table->integer('user_id');
             $table->integer('permission_id');
             $table->index(['user_id', 'permission_id']);
             $table->timestamps();
         });
 
-        Schema::create(config('admin.database.role_menu_table'), function (Blueprint $table) {
+        Schema::create('admin_role_menu', function (Blueprint $table) {
             $table->integer('role_id');
             $table->integer('menu_id');
             $table->index(['role_id', 'menu_id']);
             $table->timestamps();
         });
 
-        Schema::create(config('admin.database.operation_log_table'), function (Blueprint $table) {
+        Schema::create('admin_operation_log', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->string('path');
@@ -101,19 +90,18 @@ class CreateAdminTables extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists(config('admin.database.users_table'));
-        Schema::dropIfExists(config('admin.database.roles_table'));
-        Schema::dropIfExists(config('admin.database.permissions_table'));
-        Schema::dropIfExists(config('admin.database.menu_table'));
-        Schema::dropIfExists(config('admin.database.user_permissions_table'));
-        Schema::dropIfExists(config('admin.database.role_users_table'));
-        Schema::dropIfExists(config('admin.database.role_permissions_table'));
-        Schema::dropIfExists(config('admin.database.role_menu_table'));
-        Schema::dropIfExists(config('admin.database.operation_log_table'));
+        Schema::dropIfExists('admin_users');
+        Schema::dropIfExists('admin_roles');
+        Schema::dropIfExists('admin_permissions');
+        Schema::dropIfExists('admin_menu');
+        Schema::dropIfExists('admin_user_permissions');
+        Schema::dropIfExists('admin_role_users');
+        Schema::dropIfExists('admin_role_permissions');
+        Schema::dropIfExists('admin_role_menu');
+        Schema::dropIfExists('admin_operation_log');
     }
 }
+

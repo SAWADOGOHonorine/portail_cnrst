@@ -1,44 +1,3 @@
-// document.addEventListener('DOMContentLoaded', function () {
-//     console.log("Navigation chargée");
-
-//     // Bouton Connexion
-//     const loginBtn = document.querySelector('.login-button');
-//     if (loginBtn) {
-//         loginBtn.addEventListener('click', function () {
-//             console.log("Bouton connexion cliqué");
-//         });
-//     }
-
-//     // Fonction toggle du menu (burger)
-//     window.toggleMenu = function (icon) {
-//         const navLinks = document.querySelector('.nav-links');
-//         navLinks.classList.toggle('active');
-
-//         // Animation du burger
-//         icon.classList.toggle('open');
-//     };
-
-//     // Animation du header au scroll
-//     const topBar = document.querySelector('.top-bar');
-//     if (topBar) {
-//         window.addEventListener('scroll', () => {
-//             if (window.scrollY > 50) {
-//                 topBar.style.padding = '8px 30px';
-//                 topBar.style.fontSize = '0.9rem';
-//             } else {
-//                 topBar.style.padding = '15px 30px';
-//                 topBar.style.fontSize = '1rem';
-//             }
-//         });
-//     }
-
-//     const hamburger = document.getElementById('hamburger');
-//     const navItems = document.getElementById('navItems');
-
-//     hamburger.addEventListener('click', () => {
-//       navItems.classList.toggle('show');
-//   });
-// });
 
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -66,6 +25,14 @@
     });
 });
 
+  function toggleSearchForm() {
+    const form = document.getElementById('searchForm');
+    if (form.style.display === 'flex') {
+      form.style.display = 'none';
+    } else {
+      form.style.display = 'flex';
+    }
+  }
     
     console.log("Navigation JS chargé !");
 

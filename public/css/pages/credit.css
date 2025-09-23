@@ -1,0 +1,173 @@
+
+/* Section principale */
+.section {
+    padding: 3rem 0;
+    background-color: #f9f9f9;
+}
+
+/* Titre de section */
+.section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #145c32;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+/* Conteneur central */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Boîte de contenu */
+.for_box {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Images circulaires */
+.for_box img {
+    border-radius: 55%;
+    border: none;
+    margin-bottom: 1rem;
+}
+
+/* Nom */
+.for_box h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #198754;
+    margin-bottom: 0.5rem;
+}
+
+/* Description */
+.for_box p {
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Emphase */
+.for_box em {
+    color: #145c32;
+    font-style: normal;
+    font-weight: bold;
+}
+
+/* Titre encadré */
+.title1 span {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #54bd82;
+    text-transform: uppercase;
+    border-bottom: 2px solid #54bd82;
+    padding-bottom: 0.5rem;
+}
+
+/* Section promo chiffres */
+.section-promo {
+    padding: 3rem 0;
+    color: #fff;
+}
+
+.iconbox-wrap {
+    margin-bottom: 2rem;
+}
+
+.iconbox {
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.iconbox-wrap-icon i {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.iconbox-wrap-content h5 span {
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: block;
+}
+
+.iconbox-wrap-text {
+    font-size: 1rem;
+    color: #fff;
+}
+
+/* style pour la section developpeurs */
+.horizontal-dev {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.dev-profile {
+    flex: 1 1 45%;
+    text-align: center;
+}
+
+.dev-profile img {
+    border-radius: 55%;
+    border: none;
+    margin-bottom: 1rem;
+}
+
+.dev-profile h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #198754;
+    margin-bottom: 0.5rem;
+}
+
+.dev-profile p {
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.dev-profile em {
+    color: #145c32;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .horizontal-dev {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dev-profile {
+        flex: 1 1 100%;
+        margin-bottom: 2rem;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .for_box {
+        padding: 1.5rem 1rem;
+    }
+
+    .section h2 {
+        font-size: 1.6rem;
+    }
+
+    .iconbox {
+        padding: 1rem 0.5rem;
+    }
+}

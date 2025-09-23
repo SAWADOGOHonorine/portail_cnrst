@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Cv extends Model
 {
     use HasFactory;
-    protected $table = 'cv'; // 👈 Empêche Laravel de chercher "cvs"
-    
 
-    // Autorise les champs à être remplis via create() ou update()
+    // Nom explicite de la table si elle n’est pas au pluriel
+    protected $table = 'cv';
+
+    // Champs autorisés à être remplis automatiquement
     protected $fillable = [
+        // Champs existants
         'photo',
         'diplomes',
         'domaines_competence',
@@ -21,14 +23,30 @@ class Cv extends Model
         'autres_infos',
         'site_web',
         'user_id',
+
+        // Champs du formulaire Blade
+        'full_name',
+        'job_title',
+        'email',
+        'phone',
+        'city',
+        'linkedin',
+        'github',
+        'summary',
+        'skills',
+        'educations',
+        'experiences',
+        'interests',
+        'cv_path', // chemin du fichier PDF/DOC uploadé
     ];
 
-     //  Relation entre CV et utilisateur
+    // Relation institutionnelle : chaque CV appartient à un utilisateur
     public function user()
-{
-    return $this->belongsTo(User::class);
+    {
+        return $this->belongsTo(User::class);
+    }
 }
-}
+
 
 
 

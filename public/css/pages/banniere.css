@@ -1,0 +1,42 @@
+.stats-banner {
+    background-color: #000; /* fond noir institutionnel */
+    padding: 40px 0;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.stats-banner__inner {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.stats-banner__item {
+    text-align: center;
+    flex: 1 1 200px;
+    min-width: 180px;
+}
+
+.stats-banner__item i {
+    font-size: 2.5rem;
+    color: #28a745; /* vert institutionnel */
+    margin-bottom: 10px;
+    display: block;
+}
+
+.stats-banner__value {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.stats-banner__label {
+    font-size: 1rem;
+    letter-spacing: 1px;
+    color: #ccc;
+    margin-top: 5px;
+    text-transform: uppercase;
+}

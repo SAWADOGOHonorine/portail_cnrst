@@ -1,0 +1,18 @@
+.cv-form h3 { 
+    font-weight: 700; 
+}
+.cv-form label { 
+    font-weight: 600; 
+}
+.cv-form .form-control { 
+    border-radius: 6px; 
+}
+.cv-form textarea { 
+    resize: vertical; 
+}
+.cv-form .btn { 
+    border-radius: 6px; 
+}
+.cv-form .alert { 
+    border-radius: 6px; 
+} 

@@ -6,90 +6,57 @@
     <link rel="stylesheet" href="{{ asset('css/pages/contact.css') }}">
 @endpush
 
-@section('contact')
-<div class="contact-page">
-    <!-- Bannière -->
-    <section class="banner">
-        <h1>Nous contacter</h1>
-        <a href="{{ route('home') }}">Accueil</a> &gt; <span>Contact</span>
-    </section>
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/pages/banniere.css') }}">
+@endpush
 
-    <!-- pour le formulaire de contact -->
-    <section class="contact-form">
-        <h2>Contactez-nous pour vos renseignements</h2>
-        <p>Si vous avez des questions, veuillez utiliser les coordonnées suivantes.</p>
+@section('content')
+<section class="contact-section">
+  <h2 class="title">NOUS CONTACTER</h2>
 
-        <form action="{{ route('contact.send') }}" method="POST">
-            @csrf
+  <div class="contact-grid">
 
-            <div class="form-group">
-                <label for="name">Nom & Prénom</label>
-                <input type="text" id="name" name="name" required>
-            </div>
+    <!-- Colonne 1 -->
+    <div class="partners">
+      <div class="card-header"><h3>Partenaires</h3></div>
+      <a href="#">CNRST</a>
+      <a href="#">ARES</a>
+      <a href="#">Incub@io</a>
+      <div style="height:20px"></div>
+      <a href="#">O CNRST</a>
+      <a href="#">ARES</a>
+      <a href="#">Incub@io</a>
+    </div>
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
+    <!-- Colonne 2 -->
+    <div class="center">
+      <div class="card-header"><h3>CNRST</h3></div>
+      <p class="big-email"><i class="fa-solid fa-envelope"></i> contact@cnrst.bf</p>
+      <div class="social-links">
+        <a href="#"><i class="fa-solid fa-earth-americas"></i> cnrst.bf</a>
+        <a href="#"><i class="fa-brands fa-facebook"></i> facebook</a>
+      </div>
+    </div>
 
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
+    <!-- Colonne 3 -->
+    <div class="team">
+      <div class="card-header"><h3>Équipe référente</h3></div>
 
-            <button type="submit">ENVOYER</button>
-        </form>
-    </section>
-    
-    <!-- Coordonnées institutionnelles -->
-    <section class="contact-details">
-        <div class="detail-block">
-            <h3><i class="fas fa-phone-alt"></i> Téléphone</h3>
-            <p>+226 51 88 45 97</p>
-            <p>+226 07 67 82 42</p>
-        </div>
+      <h4 class="section-title">Superviseurs</h4>
+      <p><strong>Pr KIENDREREOGO :</strong> <i class="fa-solid fa-phone"></i> (+226) 79 80 83 80</p>
 
-        <div class="detail-block">
-            <h3><i class="fas fa-map-marker-alt"></i> Adresse</h3>
-            <p>01 BP 14 Ouagadougou 01</p>
-            <p>Avenue Thomas Sankara</p>
-        </div>
+      <h4 class="section-title">Administratif</h4>
+      <p><strong>Dr OUEDRAOGO :</strong> <i class="fa-solid fa-phone"></i> (+226) 07 25 65 21</p>
 
-        <div class="detail-block">
-            <h3><i class="fas fa-envelope"></i> Email</h3>
-            <p>cnrst@ymail.com</p>
-            <p>info@cnrst.bf</p>
-        </div>
+      <h4 class="section-title">Technique</h4>
+      <p><strong>M. Léonard M. SAWADOGO :</strong> <i class="fa-brands fa-whatsapp"></i> (+226) 71 67 36 51</p>
+      <p><strong>M. Issoufou NIKIEMA :</strong> <i class="fa-brands fa-whatsapp"></i> (+226) 79 31 82 46</p>
+    </div>
 
-        <div class="detail-block">
-            <h3><i class="fas fa-clock"></i> Heures d'ouverture</h3>
-            <p>Lun–Ven : 08:00 – 17:00</p>
-        </div>
-    </section>
+  </div>
+</section>
 
-        <!-- Carte de localisation -->
-    <section class="map-section">
-        <h3>📍 Localisation du CNRST</h3>
-
-        <div class="map-wrapper">
-            <iframe 
-                src="https://www.google.com/maps?q=9FJW+H3X,+Avenue+du+Capitaine+Thomas+Sankara,+Ouagadougou,+Burkina+Faso&output=embed" 
-                frameborder="0" 
-                allowfullscreen 
-                loading="lazy">
-            </iframe>
-        </div>
-
-        <div class="map-button-wrapper">
-            <a 
-                href="https://www.google.com/maps?q=9FJW+H3X,+Avenue+du+Capitaine+Thomas+Sankara,+Ouagadougou,+Burkina+Faso" 
-                target="_blank" 
-                class="map-button">
-                Voir sur Google Maps
-            </a>
-        </div>
-
-    </section>
-
-</div>
 @endsection
+
+
+

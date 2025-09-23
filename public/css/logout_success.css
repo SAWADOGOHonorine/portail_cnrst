@@ -1,0 +1,57 @@
+.logout-container {
+  max-width: 600px;
+  margin: 5rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-left: 4px solid #2E7D32;
+  box-shadow: 0 0 px rgba(0,0,0,0.05);
+  text-align: center;
+}
+/* .logout-container h{
+  font-size: 0.75rem;
+} */
+
+.logout-actions a {
+  display: inline-block;
+  margin: 1rem;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: rgb(46, 125, 50);
+  color: white;
+}
+
+.btn-retour {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #ffffff;
+  color: #2E7D32;
+  border: 2px solid rgb(46, 125, 50);
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.btn-retour::after {
+  content: '→';
+  margin-left: 0.3rem;
+  transition: margin-left 0.3s ease;
+}
+
+.btn-retour:hover {
+  background-color: rgb(46, 125, 50);
+  color: #ffffff;
+}
+
+.btn-retour:hover::after {
+  margin-left: 1rem;
+}
+
+
+

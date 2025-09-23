@@ -28,14 +28,14 @@ body {
     background-color: #ffffff;
     border-radius: 6px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    border: 1px solid rgb(50, 168, 82);
+    border: 1px solid rgb(46, 125, 50);
     box-sizing: border-box;
     overflow: hidden;
 }
 
 /*  Titre du formulaire */
 .form-login h2 {
-    background-color:rgb(50, 168, 82);
+    background-color:rgb(46, 125, 50);
     color: #ffffff;
     padding: 24px;
     margin: 0;
@@ -79,7 +79,7 @@ body {
 
 /*  Bouton de connexion */
 .button-login {
-    background-color:rgb(50, 168, 82);
+    background-color:rgb(46, 125, 50);
     color: white;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 600;
@@ -93,7 +93,7 @@ body {
 }
 
 .button-login:hover {
-    background-color: rgb(19, 152, 38);
+    background-color: rgb(46, 125, 50);
 }
 
 /*  Liens du bas */
@@ -106,7 +106,7 @@ body {
 }
 
 .link-login {
-    color: rgb(50, 168, 82);
+    color: rgb(46, 125, 50);
     text-decoration: none;
     font-weight: 500;
 }

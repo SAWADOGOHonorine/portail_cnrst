@@ -1,0 +1,244 @@
+.enseignants-section { 
+    padding: 24px 0; 
+    background: #ffffff; }
+.enseignants-section .page-title h1 { 
+    margin: 0; 
+    font-size: 28px; 
+    font-weight: 800; 
+    color: #212121; }
+.enseignants-section .page-title .strong { 
+    color: #1e1e1e; 
+    letter-spacing: .5px; }
+.enseignants-section .page-title .underline { 
+    width: 140px; 
+    height: 6px; 
+    background: #23b15a; 
+    margin: 6px 0 16px 0; }
+
+.enseignants-section .status-bar { 
+    margin: 8px 0 12px; 
+}
+.enseignants-section .status-button { 
+    background: #23b15a; 
+    color: #fff; 
+    border: none; 
+    border-radius: 4px; 
+    padding: 10px 14px; 
+    font-weight: 700; 
+    cursor: pointer; }
+.enseignants-section .status-button .caret { 
+    font-weight: 900; 
+    margin-left: 6px; }
+
+.enseignants-section .filters { 
+    border: 1px solid #23b15a; 
+    padding: 14px; 
+    border-radius: 4px; 
+    margin-bottom: 16px; }
+.enseignants-section .filters form { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 10px; }
+.enseignants-section .filter-input { 
+    height: 46px; 
+    border: 1px solid #e0e0e0; 
+    border-radius: 6px; 
+    padding: 0 14px; 
+    font-size: 14px; 
+}
+.enseignants-section .filter-select { 
+    height: 46px; 
+    border: 1px solid #d0d0d0; 
+    border-radius: 6px; 
+    padding: 0 12px; 
+    font-size: 14px; 
+    background: #fff; }
+.enseignants-section .submit-button { 
+    height: 50px; 
+    background: #23b15a; 
+    color: #fff; 
+    border: none; 
+    border-radius: 6px; 
+    font-weight: 800; 
+    font-size: 16px; 
+    cursor: pointer; }
+
+.enseignants-section .container { 
+    max-width: 1100px; 
+    margin: 0 auto; 
+    padding: 0 16px; }
+.enseignants-section .section-count { 
+    margin: 0 0 12px; 
+    font-size: 12px; 
+    color: #607d8b; }
+
+.enseignants-section .cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.enseignants-section .card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  padding: 12px;
+  text-align: left;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background-color .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.enseignants-section .card:hover,
+.enseignants-section .card:focus-within { 
+    background: #fff; 
+    border-color: #bdbdbd; 
+    box-shadow: 0 0 0 2px #e6e6e6 inset; }
+.enseignants-section .card:active { 
+    background: #fff; 
+    border-color: #9e9e9e; 
+    box-shadow: 0 0 0 2px #d9d9d9 inset; }
+
+.enseignants-section .avatar {
+  width: 70px; 
+  height: 70px; 
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #dddddd;
+  display: block; 
+  margin: 8px 0 8px 0;
+}
+.enseignants-section .title-row { 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; }
+.enseignants-section .name { 
+    margin: 0; 
+    font-size: 16px; 
+    font-weight: 700; 
+    color: #18a558; }
+.enseignants-section .role { 
+    margin: 2px 0; 
+    font-size: 12px; 
+    color: #777; 
+}
+.enseignants-section .meta { 
+    margin: 0; 
+    font-size: 13px; 
+    color: #333; }
+.enseignants-section .ufr { 
+    margin: 0; 
+    font-size: 12px; 
+    color: #999; }
+
+.enseignants-section .badge { 
+    display: inline-block; 
+    padding: 2px 6px; 
+    border-radius: 3px; 
+    font-size: 12px; 
+    font-weight: 700; 
+    color: #fff; 
+    background: #9e9e9e; }
+.enseignants-section .badge--dr { 
+    background: #7e7e7e; }
+
+/* Responsive */
+@media (max-width: 992px) { 
+    .enseignants-section .cards { 
+        grid-template-columns: repeat(2, 1fr); 
+    } }
+@media (max-width: 576px) {
+  .enseignants-section .cards { 
+    grid-template-columns: 1fr; 
+}
+  .enseignants-section .section-title { 
+    font-size: 20px; 
+}
+}
+.enseignants-section { 
+    padding: 24px 0; 
+    background: #ffffff; }
+.enseignants-section .page-title h1 { margin: 0; font-size: 28px; font-weight: 800; color: #212121; }
+.enseignants-section .page-title .strong { color: #1e1e1e; letter-spacing: .5px; }
+.enseignants-section .page-title .underline { width: 140px; height: 6px; background: #23b15a; margin: 6px 0 16px 0; }
+
+.enseignants-section .status-bar { margin: 8px 0 12px; }
+.enseignants-section .status-button { background: #23b15a; color: #fff; border: none; border-radius: 4px; padding: 10px 14px; font-weight: 700; cursor: pointer; }
+.enseignants-section .status-button .caret { font-weight: 900; margin-left: 6px; }
+
+.enseignants-section .filters { border: 1px solid #23b15a; padding: 14px; border-radius: 4px; margin-bottom: 16px; }
+.enseignants-section .filters form { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.enseignants-section .filter-input { height: 46px; border: 1px solid #e0e0e0; border-radius: 6px; padding: 0 14px; font-size: 14px; }
+.enseignants-section .filter-select { height: 46px; border: 1px solid #d0d0d0; border-radius: 6px; padding: 0 12px; font-size: 14px; background: #fff; }
+.enseignants-section .submit-button { height: 50px; background: #23b15a; color: #fff; border: none; border-radius: 6px; font-weight: 800; font-size: 16px; cursor: pointer; }
+
+.enseignants-section .container { 
+    max-width: 1100px; 
+    margin: 0 auto; 
+    padding: 0 16px; }
+.enseignants-section .section-count { 
+    margin: 0 0 12px; 
+    font-size: 12px; 
+    color: #607d8b; }
+
+.enseignants-section .cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.enseignants-section .card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  padding: 12px;
+  text-align: left;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background-color .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.enseignants-section .card:hover,
+.enseignants-section .card:focus-within { background: #f3f5f6; border-color: #dcdcdc; }
+.enseignants-section .card:active { background: #eceff1; }
+
+.enseignants-section .avatar {
+  width: 70px; 
+  height: 70px; 
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #dddddd;
+  display: block; 
+  margin: 8px 0 8px 0;
+}
+.enseignants-section .title-row { display: flex; align-items: center; gap: 8px; }
+.enseignants-section .name { 
+    margin: 0; 
+    font-size: 16px; 
+    font-weight: 700; 
+    color: #18a558; }
+.enseignants-section .role { 
+    margin: 2px 0; 
+    font-size: 12px; 
+    color: #777; 
+}
+.enseignants-section .meta { 
+    margin: 0; 
+    font-size: 13px; 
+    color: #333; }
+.enseignants-section .ufr { margin: 0; font-size: 12px; color: #999; }
+
+.enseignants-section .badge { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 12px; font-weight: 700; color: #fff; background: #9e9e9e; }
+.enseignants-section .badge--dr { background: #7e7e7e; }
+
+/* Responsive */
+@media (max-width: 992px) { 
+    .enseignants-section .cards { 
+        grid-template-columns: repeat(2, 1fr); 
+    } }
+@media (max-width: 576px) {
+  .enseignants-section .cards { 
+    grid-template-columns: 1fr; 
+}
+  .enseignants-section .section-title { 
+    font-size: 20px; 
+}
+}
