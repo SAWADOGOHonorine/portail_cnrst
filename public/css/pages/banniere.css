@@ -1,7 +1,7 @@
 .stats-banner {
-    background-color: #000; /* fond noir institutionnel */
+    background-color: rgb(0, 0, 0);
     padding: 40px 0;
-    color: #fff;
+    color: rgb(255, 255, 255);
     font-family: 'Segoe UI', sans-serif;
 }
 
@@ -22,7 +22,7 @@
 
 .stats-banner__item i {
     font-size: 2.5rem;
-    color: #28a745; /* vert institutionnel */
+    color: #28a745; 
     margin-bottom: 10px;
     display: block;
 }

@@ -141,6 +141,9 @@
 .enseignants-section .badge--dr { 
     background: #7e7e7e; }
 
+    
+
+    
 /* Responsive */
 @media (max-width: 992px) { 
     .enseignants-section .cards { 
@@ -157,19 +160,65 @@
 .enseignants-section { 
     padding: 24px 0; 
     background: #ffffff; }
-.enseignants-section .page-title h1 { margin: 0; font-size: 28px; font-weight: 800; color: #212121; }
-.enseignants-section .page-title .strong { color: #1e1e1e; letter-spacing: .5px; }
-.enseignants-section .page-title .underline { width: 140px; height: 6px; background: #23b15a; margin: 6px 0 16px 0; }
+.enseignants-section .page-title h1 { 
+    margin: 0; 
+    font-size: 28px; 
+    font-weight: 800; 
+    color: #212121; }
+.enseignants-section .page-title .strong { 
+    color: #1e1e1e; 
+    letter-spacing: .5px; }
+.enseignants-section .page-title .underline { 
+    width: 140px; 
+    height: 6px; 
+    background: #23b15a; 
+    margin: 6px 0 16px 0; }
 
-.enseignants-section .status-bar { margin: 8px 0 12px; }
-.enseignants-section .status-button { background: #23b15a; color: #fff; border: none; border-radius: 4px; padding: 10px 14px; font-weight: 700; cursor: pointer; }
-.enseignants-section .status-button .caret { font-weight: 900; margin-left: 6px; }
+.enseignants-section .status-bar { 
+    margin: 8px 0 12px; }
+.enseignants-section .status-button { 
+    background: #23b15a; 
+    color: #fff; 
+    border: none; 
+    border-radius: 4px; 
+    padding: 10px 14px; 
+    font-weight: 700; 
+    cursor: pointer; }
+.enseignants-section .status-button .caret { 
+    font-weight: 900; 
+    margin-left: 6px; }
 
-.enseignants-section .filters { border: 1px solid #23b15a; padding: 14px; border-radius: 4px; margin-bottom: 16px; }
-.enseignants-section .filters form { display: grid; grid-template-columns: 1fr; gap: 10px; }
-.enseignants-section .filter-input { height: 46px; border: 1px solid #e0e0e0; border-radius: 6px; padding: 0 14px; font-size: 14px; }
-.enseignants-section .filter-select { height: 46px; border: 1px solid #d0d0d0; border-radius: 6px; padding: 0 12px; font-size: 14px; background: #fff; }
-.enseignants-section .submit-button { height: 50px; background: #23b15a; color: #fff; border: none; border-radius: 6px; font-weight: 800; font-size: 16px; cursor: pointer; }
+.enseignants-section .filters { 
+    border: 1px solid #23b15a; 
+    padding: 14px; 
+    border-radius: 4px; 
+    margin-bottom: 16px; }
+.enseignants-section .filters form { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 10px; }
+.enseignants-section .filter-input { 
+    height: 46px; 
+    border: 1px solid #e0e0e0; 
+    border-radius: 6px; 
+    padding: 0 14px; 
+    font-size: 14px; }
+.enseignants-section .filter-select { 
+    height: 46px; 
+    border: 1px solid #d0d0d0; 
+    border-radius: 6px; 
+    padding: 0 12px; 
+    font-size: 14px; 
+    background: #fff; }
+.enseignants-section .submit-button { 
+    height: 50px; 
+    background: #23b15a; 
+    color: #fff; 
+    border: none; 
+    border-radius: 6px; 
+    font-weight: 800; 
+    font-size: 16px; 
+    cursor: pointer; }
 
 .enseignants-section .container { 
     max-width: 1100px; 
@@ -197,8 +246,11 @@
   transition: background-color .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 .enseignants-section .card:hover,
-.enseignants-section .card:focus-within { background: #f3f5f6; border-color: #dcdcdc; }
-.enseignants-section .card:active { background: #eceff1; }
+.enseignants-section .card:focus-within { 
+    background: #f3f5f6; 
+    border-color: #dcdcdc; }
+.enseignants-section .card:active { 
+    background: #eceff1; }
 
 .enseignants-section .avatar {
   width: 70px; 
@@ -242,3 +294,58 @@
     font-size: 20px; 
 }
 }
+
+/* style pour la pagination */
+.section-pagination {
+    background-color: #f8f8f8;
+    padding: 1rem 0;
+    border-top: 1px solid #ddd;
+}
+
+.section-pagination .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.section-pagination .page-item {
+    display: inline-block;
+}
+
+.section-pagination .page-link {
+    display: inline-block;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+    color: #006837;
+    background-color: #fff;
+    border: 1px solid #006837;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: none;
+}
+
+.section-pagination .page-link:hover {
+    background-color: #e6f3ec;
+    border-color: #006837;
+    text-decoration: underline;
+}
+
+.section-pagination .page-item.active .page-link {
+    background-color: #006837;
+    color: #fff;
+    border-color: #006837;
+    font-weight: bold;
+}
+
+.section-pagination .page-item.disabled .page-link {
+    background-color: #eee;
+    color: #999;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+
+

@@ -9,6 +9,8 @@
     <!-- Bootstrap + CSS perso -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mon_espace/cv_form.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mon_espace/fiche.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 <body>
@@ -31,9 +33,9 @@
                     <ul>
                         <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/cv_form')">
                             <i class="bi bi-file-earmark-person me-2"></i> Mon CV</a></li>
-                        <li><a class="nav-link" href="#" onclick="loadContent('documentation/fiches')">
-                            <i class="bi bi-journal-text me-2"></i> Mes fiches techniques</a></li>
-                        <li><a class="nav-link" href="#" onclick="loadContent('documentation/articles')">
+                        <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/fiches')">
+                            <i class="bi bi-journal-text me-2"></i> Mes fiches Techniques </a></li>
+                        <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/articles')">
                             <i class="bi bi-file-earmark-richtext me-2"></i> Mes articles</a></li>
                         <li><a class="nav-link" href="#" onclick="loadContent('documentation/autre')">
                             <i class="bi bi-three-dots me-2"></i> Autres</a></li>
@@ -75,19 +77,19 @@
                     {{--  Lien vers le formulaire dans le dashboard --}}
                     <li>
                         <a class="nav-link" href="{{ route('publications.create') }}">
-                            <i class="bi bi-file-earmark-person me-2"></i> Publications
+                            <i class="bi bi-file-earmark-person me-2"></i> Laboratoires
                         </a>
                     </li>
 
                     {{--  Liens vers les vues publiques chargées via JavaScript --}}
                     <li>
                         <a class="nav-link" href="#" onclick="loadContent('documentation/fiches')">
-                            <i class="bi bi-journal-text me-2"></i> Articles
+                            <i class="bi bi-journal-text me-2"></i> Equipements
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="#" onclick="loadContent('documentation/articles')">
-                            <i class="bi bi-file-earmark-richtext me-2"></i> Mes articles
+                            <i class="bi bi-file-earmark-richtext me-2"></i> Equipes
                         </a>
                     </li>
                     <li>
@@ -128,16 +130,41 @@
             </div>
 
             <!-- Admin dropdown -->
-            <div class="admin-logo-container">
+           <div class="admin-logo-container">
                 <i class="bi bi-person-circle fs-4 text-white" id="adminLogo" style="cursor: pointer;"></i>
+
                 <div class="admin-dropdown hidden mt-3" id="adminDropdown">
-                    <span class="admin-email">Email : {{ Auth::user()->email }}</span>
+                     <!-- Email en haut, hors du bloc profil  -->
+                    <span class="admin-email">{{ Auth::user()->email }}</span>
+
+                    <hr class="admin-separator">
+
+                    <a href="#" class="admin-link" id="toggleProfile">👤 Mon profil</a>
+
+                    <div class="user-profile-details hidden mt-2" id="profileDetails">
+                        <p><strong>Nom :</strong> {{ Auth::user()->name }}</p>
+                        <p><strong>Email :</strong> {{ Auth::user()->email }}</p>
+                        <p><strong>Rôle :</strong> {{ Auth::user()->role ?? 'Utilisateur' }}</p>
+                        <p><strong>Inscrit le :</strong> {{ Auth::user()->created_at->format('d/m/Y') }}</p>
+                        <a href="#" class="admin-link">🔐 Modifier le mot de passe</a>
+                    </div>
+
+                    <!-- Lien Paramètres en dehors du dropdown  -->
+                    <div class="admin-settings-link mt-2">
+                        <a href="#" class="admin-link">⚙️ Paramètres</a>
+                    </div>
+
+                    <hr class="admin-separator">
+
+                     <!-- Bouton Déconnexion toujours visible  -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="logout-btn">Déconnexion</button>
+                        <button type="submit" class="logout-btn">🚪 Déconnexion</button>
                     </form>
                 </div>
             </div>
+           
+
         </nav>
         <!-- Zone de contenu dynamique -->
         <div class="container-fluid mt-4" id="content-area">
@@ -175,6 +202,14 @@
     </script>
 
     <script src="{{ asset('js/dashboard.js') }}"></script>
+   <script>
+    document.getElementById('toggleProfile').addEventListener('click', function (e) {
+        e.preventDefault();
+        const profileBlock = document.getElementById('profileDetails');
+        profileBlock.classList.toggle('hidden');
+    });
+    </script>
+
 </body>
 </html>
 

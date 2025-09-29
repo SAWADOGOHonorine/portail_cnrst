@@ -55,7 +55,7 @@ body{ margin:0;
 /* ========== Carte PARTENARIAT ========== */
 .partner-card{
   max-width:100%;
-  margin:16px 12px 24px;   /* marges latérales fines */
+  margin:16px 12px 24px;   
   border:1px solid #23b15a;
   border-radius:4px;
   background:#fff;
@@ -421,7 +421,7 @@ body{ margin:0;
   color:#fff;
 }
 .page-btn.is-green:hover{
-  background:#eef1f3;      /* gris clair au survol */
+  background:#eef1f3;      
   border-color:#d6dbe0;
   color:#1f2a33;
 }

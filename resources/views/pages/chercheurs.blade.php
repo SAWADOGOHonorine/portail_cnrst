@@ -99,4 +99,46 @@
     </div>
   </div>
 </section>
+
+<!--  SECTION : Pagination stylisée -->
+<section class="section-pagination py-4">
+  @php
+    $currentPage = request()->get('page', 1);
+  @endphp
+
+    <div class="container">
+        <div class="row clearfix">
+            <div class="text-center">
+               <ul class="pagination justify-content-center m-0">
+                  {{-- Bouton précédent --}}
+                  <li class="page-item {{ $currentPage <= 1 ? 'disabled' : '' }}">
+                      <a class="page-link" href="?page={{ max(1, $currentPage - 1) }}" aria-label="&laquo; Précédent">«</a>
+                  </li>
+
+                  {{-- Pages 1 à 10 --}}
+                  @for($i = 1; $i <= 10; $i++)
+                      <li class="page-item {{ $currentPage == $i ? 'active' : '' }}">
+                          <a class="page-link" href="?page={{ $i }}">{{ $i }}</a>
+                      </li>
+                  @endfor
+
+                  {{-- Ellipsis + dernières pages --}}
+                  <li class="page-item disabled"><span class="page-link">...</span></li>
+                  <li class="page-item {{ $currentPage == 13 ? 'active' : '' }}">
+                      <a class="page-link" href="?page=13">13</a>
+                  </li>
+                  <li class="page-item {{ $currentPage == 14 ? 'active' : '' }}">
+                      <a class="page-link" href="?page=14">14</a>
+                  </li>
+
+                  {{-- Bouton suivant --}}
+                  <li class="page-item {{ $currentPage >= 14 ? 'disabled' : '' }}">
+                      <a class="page-link" href="?page={{ min(14, $currentPage + 1) }}" aria-label="Suivant &raquo;">»</a>
+                  </li>
+              </ul>
+
+            </div>
+        </div>
+    </div>
+</section>
 @endsection

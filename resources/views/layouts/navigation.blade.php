@@ -18,17 +18,17 @@
       <!-- Menu principal -->
       <div class="menu-container" id="menuLinks">
         <ul class="menu-links">
-          <li><a href="{{ url('chercheurs') }}">CHERCHEURS</a></li>
-          <li><a href="/publications">PUBLICATIONS</a></li>
-          <li><a href="/laboratoires">LABORATOIRES</a></li>
-          <li><a href="/equipes">ÉQUIPES</a></li>
-          <li><a href="/evenements">EVÉNEMENTS</a></li>
-          <li><a href="/equipements">ÉQUIPEMENTS</a></li>
-          <li><a href="{{ url('valorisations') }}">VALORISATIONS</a></li>
-          <li><a href="{{ url('/partenaires') }}">Partenaires</a></li>
+          <li class="{{ request()->is('chercheurs') ? 'active' : '' }}"><a href="{{ url('chercheurs') }}">CHERCHEURS</a></li>
+          <li class="{{ request()->is('publications') ? 'active' : '' }}"><a href="/publications">PUBLICATIONS</a></li>
+          <li class="{{ request()->is('laboratoires') ? 'active' : '' }}"><a href="/laboratoires">LABORATOIRES</a></li>
+          <li class="{{ request()->is('equipes') ? 'active' : '' }}"><a href="/equipes">ÉQUIPES</a></li>
+          <li class="{{ request()->is('evenements') ? 'active' : '' }}"><a href="/evenements">EVÉNEMENTS</a></li>
+          <li class="{{ request()->is('equipements') ? 'active' : '' }}"><a href="/equipements">ÉQUIPEMENTS</a></li>
+          <li class="{{ request()->is('valorisations') ? 'active' : '' }}"><a href="{{ url('valorisations') }}">VALORISATIONS</a></li>
+          <li class="{{ request()->is('partenaires') ? 'active' : '' }}"><a href="{{ url('/partenaires') }}">PARTENAIRES</a></li>
         </ul>
 
-        <!-- Connexion en dessous, aligné à droite -->
+        <!-- Connexion -->
         <div class="connexion-wrapper-below">
           <span class="login-separator"></span>
           <a href="/login" class="btn-connexion">
@@ -39,6 +39,7 @@
     </div>
   </nav>
 </header>
+
 
 
 

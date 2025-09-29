@@ -1,0 +1,109 @@
+/* Structure générale */
+body {
+  background-color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* Conteneur centré */
+.container {
+  background-color: linear-gradient(to bottom, #ffffff, #f0f0f0);
+  max-width: 700px;
+  width: 100%;
+  padding: 2rem;
+  margin-top: 2rem;
+  /* background-color: #f9f9f9; */
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+/* Titre principal */
+h2 {
+  color: #2e7d32;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Champs de formulaire */
+.form-control {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 0.95rem;
+  color: #000000;
+  width: 100%;
+  margin-top: 0.75rem;
+}
+
+.form-control:focus {
+  border-color: #2e7d32;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+}
+
+/* Bouton enregistrer */
+.btn-success {
+  background-color: #2e7d32;
+  color: #ffffff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.btn-success:hover {
+  background-color: #cc0000;
+}
+
+/* Bouton retour */
+.btn-outline-secondary {
+  background-color: #f0f0f0;
+  color: #000000;
+  border: 1px solid #999;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #cc0000;
+  color: #ffffff;
+  border-color: #cc0000;
+}
+
+/* Message de succès */
+.alert-success {
+  background-color: #f0f0f0;
+  color: #2e7d32;
+  border-left: 4px solid #2e7d32;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* Label */
+label {
+  font-weight: 500;
+  color: #2e7d32;
+  margin-top: 1rem;
+  display: block;
+}
+
+/* Fichier actuel */
+.fichier-actuel {
+  margin-top: 1rem;
+  text-align: center;
+}

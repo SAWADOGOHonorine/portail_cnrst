@@ -1,0 +1,104 @@
+.container {
+    max-width: 900px;
+    margin: auto;
+    font-family: 'Segoe UI', sans-serif;
+    color: #2c2c2c;
+    padding: 0 15px;
+}
+
+h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.pub-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pub-item {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.pub-type {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #007B5E;
+    margin-bottom: 5px;
+}
+
+.pub-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+}
+
+.pub-author {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.pub-coauthors {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.pub-summary {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #2c2c2c;
+}
+
+.pub-meta {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* Pagination centrée et responsive */
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.pagination {
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.page-link {
+    color: #007B5E;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    background-color: #fff;
+}
+
+.page-link:hover {
+    background-color: #e6f2ef;
+    border-color: #007B5E;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .pub-title {
+        font-size: 1.05rem;
+    }
+
+    .pub-summary {
+        font-size: 0.9rem;
+    }
+
+    .page-link {
+        padding: 5px 10px;
+        font-size: 0.85rem;
+    }
+}

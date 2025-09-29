@@ -157,3 +157,29 @@ body{ margin:0; font-family:var(--font); color:var(--text); }
   .partner-title{ font-size:20px; }
   .btn-primary{ height:46px; }
 }
+
+/* la section pagination */
+.pagination .page-link {
+    background-color: #28a745; /* vert */
+    color: white;
+    border: none;
+    margin: 0 2px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff; /* bleu */
+    border: none;
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+.pagination .page-link:hover {
+    background-color: #218838; /* vert foncé au survol */
+    color: white;
+}

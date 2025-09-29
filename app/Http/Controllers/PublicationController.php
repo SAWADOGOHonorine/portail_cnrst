@@ -7,58 +7,56 @@ use App\Models\Publication;
 
 class PublicationController extends Controller
 {
-    /**
-     * Affiche la liste publique des publications.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $publications = Publication::latest()->paginate(10);
-        return view('documentation.publications', compact('publications'));
-    }
+        $query = Publication::query();
 
-    /**
-     * Affiche le formulaire d’ajout dans le dashboard.
-     */
-    public function create()
-    {
-        return view('dashboard.publication_form');
-    }
-
-    /**
-     * Enregistre une nouvelle publication.
-     */
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'titre' => 'required|string|max:255',
-            'auteurs' => 'nullable|string|max:255',
-            'annee' => 'nullable|integer|min:1900|max:' . date('Y'),
-            'theme' => 'nullable|string|max:100',
-            'resume' => 'nullable|string',
-            'mots_cles' => 'nullable|string|max:255',
-            'source' => 'nullable|string|max:255',
-            'lien_externe' => 'nullable|url|max:255',
-            'fichier' => 'nullable|file|mimes:pdf|max:20480',
-        ]);
-
-        if ($request->hasFile('fichier')) {
-            $validated['fichier'] = $request->file('fichier')->store('publications', 'public');
+        // Filtrage facultatif par journal
+        if ($request->filled('journal')) {
+            $query->where('journal', $request->journal);
         }
 
-        Publication::create($validated);
+        // Filtrage facultatif par auteur
+        if ($request->filled('auteur')) {
+            $query->where('auteur', 'like', '%' . $request->auteur . '%');
+        }
 
-        return redirect()->route('publications.create')->with('success', 'Publication enregistrée avec succès.');
+        // Filtrage facultatif par année
+        if ($request->filled('annee')) {
+            $query->where('annee', $request->annee);
+        }
+
+        // Résultat trié du plus récent au plus ancien, avec pagination
+        $publications = $query->latest()->paginate(10);
+
+        return view('publications.index', compact('publications'));
     }
 
-    /**
-     * Affiche la fiche détaillée d’une publication (optionnel).
-     */
-    public function show($id)
+    public function store(Request $request)
     {
-        $publication = Publication::findOrFail($id);
-        return view('publications.show', compact('publication'));
+        $data = $request->validate([
+            'titre' => 'required|string|max:255',
+            'journal' => 'required|string|max:255',
+            'annee' => 'nullable|numeric|min:1900|max:2099',
+            'lien_externe' => 'nullable|url',
+            'auteur' => 'required|string|max:255',
+            'co_auteurs' => 'nullable|string',
+            'resume' => 'nullable|string',
+            // 'statut' peut être ignoré si pas utilisé pour le public
+        ]);
+
+        $data['user_id'] = auth()->id();
+
+        Publication::create($data);
+
+        return redirect()->route('publications.index')->with('success', '✅ Publication enregistrée avec succès.');
     }
 }
+
+
+
+
+
 
 
 

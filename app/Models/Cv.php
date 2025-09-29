@@ -9,12 +9,10 @@ class Cv extends Model
 {
     use HasFactory;
 
-    // Nom explicite de la table si elle n’est pas au pluriel
+    // Si ta table s’appelle bien 'cvs', tu peux supprimer cette ligne
     protected $table = 'cv';
 
-    // Champs autorisés à être remplis automatiquement
     protected $fillable = [
-        // Champs existants
         'photo',
         'diplomes',
         'domaines_competence',
@@ -23,8 +21,6 @@ class Cv extends Model
         'autres_infos',
         'site_web',
         'user_id',
-
-        // Champs du formulaire Blade
         'full_name',
         'job_title',
         'email',
@@ -37,15 +33,15 @@ class Cv extends Model
         'educations',
         'experiences',
         'interests',
-        'cv_path', // chemin du fichier PDF/DOC uploadé
+        'cv_path',
     ];
 
-    // Relation institutionnelle : chaque CV appartient à un utilisateur
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 }
+
 
 
 

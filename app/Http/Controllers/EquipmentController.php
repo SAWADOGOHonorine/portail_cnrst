@@ -11,7 +11,7 @@ class EquipmentController extends Controller
     public function index()
     {
         $equipments = Equipment::all();
-        return view('equipment.index', compact('equipments'));
+        return view('equipment', compact('equipments'));
     }
 
     // Afficher un formulaire de création
@@ -24,7 +24,7 @@ class EquipmentController extends Controller
     public function store(Request $request)
     {
         Equipment::create($request->all());
-        return redirect()->route('equipment.index')->with('success', 'Équipement ajouté avec succès');
+        return redirect()->route('equipment')->with('success', 'Équipement ajouté avec succès');
     }
 }
 

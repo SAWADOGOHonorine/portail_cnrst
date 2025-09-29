@@ -19,6 +19,7 @@
     <link href="{{ asset('css/footer_top.css') }}" rel="stylesheet">
     <link href="{{ asset('css/formlogin.css') }}" rel="stylesheet">
     <link href="{{ asset('css/logout_success.css') }}" rel="stylesheet">
+      <link href="{{ asset('css/mon_espace/cv_form.css') }}" rel="stylesheet">
 
     <!-- PDF CV (si utilisé dans une vue spécifique) -->
     @if(View::hasSection('cv_pdf'))

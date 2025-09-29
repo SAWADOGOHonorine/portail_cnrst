@@ -4,23 +4,38 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Cv;
 
 class CvController extends Controller
 {
-   
-    //  Affiche le formulaire CV
-    
-    public function create(Request $request)
+    /**
+     * Affiche le formulaire CV
+     */
+    public function create()
     {
-        if (!$request->session()->has('status')) {
-            $request->session()->forget('cv_data');
+        $cvs = Cv::where('user_id', auth()->id())->latest()->get();
+        return view('mon_espace.cv_form', compact('cvs'));
+    }
+    /**
+ * Affiche le fichier CV dans le navigateur (sans layout)
+ */
+    public function show($id)
+    {
+        $cv = Cv::findOrFail($id);
+        $path = storage_path('app/public/' . $cv->cv_path);
+
+        if (file_exists($path)) {
+            return response()->file($path); 
         }
 
-        return view('mon_espace.cv_form');
+        return back()->with('error', 'Fichier introuvable.');
     }
-    
-    //   Enregistre les données du CV + le fichier uploadé
-     
+
+
+    /**
+     * Enregistre les données du CV en session + base + fichier
+     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -40,37 +55,49 @@ class CvController extends Controller
             'cv_file'      => ['required', 'file', 'mimes:pdf,doc,docx', 'max:2048'],
         ]);
 
-        // Stockage du fichier CV
+        // 📁 Stockage du fichier avec nom unique
         if ($request->hasFile('cv_file')) {
             $file = $request->file('cv_file');
-            $filename = 'cv_' . auth()->id() . '.' . $file->getClientOriginalExtension();
+            $filename = time() . '_' . $file->getClientOriginalName();
             $path = $file->storeAs('cvs', $filename, 'public');
-            $validated['cv_path'] = $path;
+            $validated['cv_path'] = 'cvs/' . $filename;
+
+            unset($validated['cv_file']);
         }
 
-        unset($validated['cv_file']); 
+        // 💾 Enregistrement en base
+        Cv::create([
+            'user_id' => auth()->id(),
+            'cv_path' => $validated['cv_path'],
+        ]);
 
-        // Enregistrement en session
+        // 💾 Enregistrement en session
         $request->session()->put('cv_data', $validated);
 
-        //  Retour sur la même page avec message
-        return redirect()->route('cv.create')->with('status', 'CV enregistré avec succès.');
-
+        return redirect()->route('cv_form')->with('status', 'CV enregistré avec succès.');
     }
 
-   
-    //   Télécharge le fichier original uploadé
-     
-    public function downloadUploadedFile(Request $request)
+    /**
+     * Génère le PDF du CV actif
+     */
+    public function downloadPdf(Request $request)
     {
         $cvData = $request->session()->get('cv_data');
 
-        if (!$cvData || !isset($cvData['cv_path'])) {
-            return back()->withErrors(['cv' => "Fichier CV introuvable."]);
+        if (!$cvData) {
+            return back()->withErrors(['cv' => "Veuillez d'abord remplir et enregistrer votre CV."]);
         }
 
-        return Storage::disk('public')->download($cvData['cv_path']);
+        $pdf = Pdf::loadView('mon_espace.cv_pdf', ['cv' => $cvData]);
+        $fileName = 'CV_' . preg_replace('/[^A-Za-z0-9_-]+/', '_', $cvData['full_name']) . '.pdf';
+
+        return $pdf->download($fileName);
     }
 }
+
+
+
+
+
 
 

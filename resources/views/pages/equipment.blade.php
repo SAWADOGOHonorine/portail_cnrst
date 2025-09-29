@@ -12,7 +12,7 @@
 <!-- 🔍 SECTION 1 : Recherche -->
 <section class="section-recherche py-4">
     <div class="container">
-        <h2 class="section-title">🔍 Recherche d’équipements</h2>
+        <h2 class="section-title"> Recherche d’équipements</h2>
         <form method="get" action="#">
             <div class="row g-3">
                 <div class="col-md-4">
@@ -42,7 +42,7 @@
 <!-- 🧪 SECTION 2 : Résultats -->
 <section class="section-resultats py-5 bg-light">
     <div class="container">
-        <h2 class="section-title">🧪 Équipements trouvés</h2>
+        <h2 class="section-title"> Équipements trouvés</h2>
         <div class="row">
             @foreach($equipements as $eq)
             <div class="col-md-3 col-sm-6 mb-4">
@@ -62,6 +62,40 @@
                 </a>
             </div>
             @endforeach
+        </div>
+    </div>
+</section>
+
+<!--  SECTION : Pagination stylisée -->
+<section class="section-pagination py-4">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="text-center">
+                <ul class="pagination justify-content-center m-0">
+                    <li class="page-item disabled" aria-disabled="true" aria-label="&laquo; Précedent">
+                        <span class="page-link">«</span>
+                    </li>
+
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">1</span>
+                    </li>
+
+                    @for($i = 2; $i <= 10; $i++)
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ $i }}">{{ $i }}</a>
+                        </li>
+                    @endfor
+
+                    <li class="page-item disabled"><span class="page-link">...</span></li>
+
+                    <li class="page-item"><a class="page-link" href="?page=13">13</a></li>
+                    <li class="page-item"><a class="page-link" href="?page=14">14</a></li>
+
+                    <li class="page-item">
+                        <a class="page-link" href="?page=2" aria-label="Suivant &raquo;">»</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>

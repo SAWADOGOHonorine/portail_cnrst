@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('equipements', function (Blueprint $table) {
+        Schema::create('equipments', function (Blueprint $table) {
             $table->id();
             $table->string('nom'); // AIR QUALITY MONITOR
             $table->string('etat')->nullable(); // Fonctionnel, Défectueux...
