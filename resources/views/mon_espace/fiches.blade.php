@@ -66,6 +66,10 @@
 
                 {{-- Boutons Modifier / Supprimer --}}
                 <div class="mt-3 d-flex gap-2">
+                    {{-- Ajouter une nouvelle fiche --}}
+                    <a href="{{ route('fiches.create') }}" class="btn btn-outline-primary btn-sm">
+                        ➕ Ajouter une fiche
+                    </a>
                     <a href="{{ route('fiches.edit', $fiche->id) }}" class="btn btn-outline-success btn-sm">
                         ✏️ Modifier
                     </a>
@@ -77,6 +81,8 @@
                             🗑 Supprimer
                         </button>
                     </form>
+                    
+
                 </div>
             </div>
         @empty

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Publication extends Model
 {
+    use HasFactory;
 
     protected $fillable = [
         'titre',
@@ -17,8 +18,14 @@ class Publication extends Model
         'co_auteurs',
         'resume',
         'statut',
-        'user_id'
+        'user_id',
+        'thematique_id', // important !
     ];
 
+    public function thematique()
+    {
+        return $this->belongsTo(Thematique::class);
+    }
 }
+
 

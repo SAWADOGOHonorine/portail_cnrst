@@ -5,7 +5,7 @@
     <div class="footer-wrapper">
         <div class="footer-container">
             <div class="footer-logo">
-                <a href="#"><img src="{{ asset('images/logo.webp') }}" width="120" alt="Logo CNRST" /></a>
+                <a href="#"><img src="{{ asset('images/CNRST.png') }}" width="120" alt="Logo CNRST" /></a>
             </div>
 
             <nav class="footer-links">

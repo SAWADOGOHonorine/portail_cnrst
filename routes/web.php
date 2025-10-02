@@ -14,11 +14,11 @@ use App\Http\Controllers\FicheController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\LaboratoireController;
+use App\Http\Controllers\HomeController;
 
 //  les Pages statiques
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 // route pour partenaires
 Route::get('/partenaires', [PartenairesController::class, 'index'])->name('partenaires');
@@ -115,50 +115,57 @@ Route::get('/documentation/{section}', function ($section) {
     return view("partials.documentation.$section");
 })->name('documentation.section');
 
-// Routes publiques (site public)
-Route::get('/publications', [PublicationController::class, 'index'])->name('publications.index');
-Route::get('/publications/{publication}', [PublicationController::class, 'show'])->name('publications.show');
-Route::post('/publications', [PublicationController::class, 'store'])->name('publications.store');
 
-// route publique pour les publications
-Route::get('/publications', [ArticleController::class, 'publicIndex'])->name('publications.index');
-// Routes protégées (dashboard/admin)
-Route::middleware(['auth'])->group(function () {
-    Route::get('/publications/create', [PublicationController::class, 'create'])->name('publications.create');
-    Route::post('/publications', [PublicationController::class, 'store'])->name('publications.store');
-    Route::get('/publications/{publication}/edit', [PublicationController::class, 'edit'])->name('publications.edit');
-    Route::put('/publications/{publication}', [PublicationController::class, 'update'])->name('publications.update');
-    Route::delete('/publications/{publication}', [PublicationController::class, 'destroy'])->name('publications.destroy');
-});
+// les routes pour le dossier mon_espace
 
-Route::get('/cv', [CvController::class, 'create'])->name('cv.form');
+// pour le cv
+Route::get('/cv', [CvController::class, 'create'])->name('cv_form');
 Route::post('/cv', [CvController::class, 'store'])->name('cv.store');
 Route::get('/cv/download', [CvController::class, 'downloadPdf'])->name('cv.download');
 Route::get('/mon_espace/cv_form', function () {
     return view('mon_espace.cv_form');
 });
 
-// Routes pour le dashboard (authentification requise)
+// ----------------------------
+// Page publique (GET)
+Route::get('/publications', [PublicationController::class, 'index'])->name('publications.index');
+
+// ----------------------------
+// Routes admin CRUD (POST, PUT, DELETE)
+Route::middleware(['auth'])->group(function () {
+    // Articles
+    Route::get('/publications/create', [PublicationController::class, 'create'])->name('publications.create');
+    Route::post('/publications', [PublicationController::class, 'store'])->name('publications.store');
+    Route::get('/publications/{id}', [PublicationController::class, 'show'])->name('publications.show');
+    Route::get('/publications/{publication}/edit', [PublicationController::class, 'edit'])->name('publications.edit');
+    Route::put('/publications/{publication}', [PublicationController::class, 'update'])->name('publications.update');
+    Route::delete('/publications/{publication}', [PublicationController::class, 'destroy'])->name('publications.destroy');
+});
+    // ========================
+    // Fiches
+    // ========================
 Route::middleware(['auth'])->group(function () {
     Route::get('/mon_espace/fiches', [FicheController::class, 'index'])->name('fiches.index');
+    Route::get('/mon_espace/fiches/create', [FicheController::class, 'create'])->name('fiches.create');
+    Route::get('/fiches/{id}', [FicheController::class, 'show'])->name('fiches.show');
     Route::get('/mon_espace/fiches/{id}/edit', [FicheController::class, 'edit'])->name('fiches.edit');
     Route::post('/mon_espace/fiches', [FicheController::class, 'store'])->name('fiches.store');
     Route::put('/mon_espace/fiches/{id}', [FicheController::class, 'update'])->name('fiches.update');
+    // Supprimer une fiche
     Route::delete('/mon_espace/fiches/{id}', [FicheController::class, 'destroy'])->name('fiches.destroy');
 });
 
-// Route publique pour afficher les fiches
-Route::get('/fiches', [FicheController::class, 'indexPublic'])->name('fiches.public');
 
-// route pour articles
-Route::middleware(['auth'])->group(function () {
-    Route::get('/mon_espace/articles', [ArticleController::class, 'index'])->name('articles.index');
-    Route::post('/mon_espace/articles', [ArticleController::class, 'store'])->name('articles.store');
-    Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
-Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
-Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
-Route::get('/telecharger/{id}', [ArticleController::class, 'download'])->name('articles.download');
-
+// Routes articles (dashboard privé)
+Route::middleware(['auth'])->prefix('mon_espace')->group(function () {
+    Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
+    Route::get('articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+    Route::put('articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
+    Route::delete('articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+    Route::get('articles/create', [ArticleController::class, 'create'])->name('articles.create');
+    Route::post('articles', [ArticleController::class, 'store'])->name('articles.store');
+    // Route::get('telecharger/{id}', [ArticleController::class, 'download'])->name('articles.download');
+    Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
 });
 
 // route pour la page laboratoire

@@ -1,9 +1,10 @@
 
-   
+    <link rel="stylesheet" href="{{ asset('css/mon_espace/article.css') }}">
+
 
 <div class="container mt-4">
     <h2 class="mb-4"> Mes articles</h2>
-<link rel="stylesheet" href="{{ asset('css/mon_espace/article_index.css') }}">
+
     {{-- Alert success --}}
     @if(session('success'))
         <div class="alert alert-success">
@@ -72,7 +73,7 @@
                             <p><strong>Journal :</strong> {{ $article->journal }}</p>
                         @endif
                         @if($article->summary)
-                            <p><strong>Résumé :</strong> {{ $article->summary }}</p>
+                            <p><strong>Résumé :</strong> {{ Str::limit($article->summary, 80) }}</p>
                         @endif
                         <p><strong>Status :</strong> 
                             <span class="badge bg-{{ $article->status === 'published' ? 'success' : ($article->status === 'accepted' ? 'primary' : 'warning') }}">
@@ -80,18 +81,20 @@
                             </span>
                         </p>
 
-                        @if($article->url)
-                            <a href="{{ $article->url }}" target="_blank" class="btn btn-outline-primary btn-sm mt-auto">
-                                🔗 Voir l'article
-                            </a>
-                        @endif
+                        {{-- Lien vers la page show --}}
+                        <a href="{{ route('articles.show', $article->id) }}" class="btn btn-outline-primary btn-sm mt-auto mb-2">
+                            🔗 Voir l'article
+                        </a>
+
+                        {{-- Télécharger le fichier --}}
                         @if($article->fichier)
-                            <a href="{{ route('articles.download', $article->id) }}" class="btn btn-outline-secondary btn-sm mt-2">
+                            <a href="{{ route('articles.download', $article->id) }}" class="btn btn-outline-secondary btn-sm mb-2">
                                 📄 Télécharger le fichier
                             </a>
                         @endif
 
-                        <div class="mt-2 d-flex gap-2">
+                        <div class="d-flex gap-2">
+                            <a href="{{ route('articles.create') }}" class="btn btn-outline-primary">➕ Ajouter un article</a>
                             {{-- Modifier --}}
                             <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-outline-success btn-sm flex-grow-1">
                                 ✏️ Modifier
@@ -104,7 +107,9 @@
                                 <button type="submit" class="btn btn-outline-danger btn-sm w-100" onclick="return confirm('Confirmer la suppression ?')">
                                     🗑 Supprimer
                                 </button>
+                                 
                             </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -122,15 +127,7 @@
 
 {{-- Script alert auto-disparition --}}
 <script>
-    setTimeout(() => {
-        const alert = document.querySelector('.alert-success');
-        if (alert) {
-            alert.style.transition = 'opacity 0.5s ease';
-            alert.style.opacity = '0';
-            setTimeout(() => alert.remove(), 500);
-        }
-    }, 4000);
-</script>
+    setTi
 
 
 

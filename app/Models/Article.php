@@ -24,4 +24,8 @@ class Article extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function thematique() {
+        return $this->belongsTo(Thematique::class);
+    }
+
 }

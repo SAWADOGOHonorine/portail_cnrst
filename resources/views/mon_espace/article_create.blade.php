@@ -1,12 +1,16 @@
-<!-- @extends('layouts.app')
 
-@section('content')
 
 <link rel="stylesheet" href="{{ asset('css/mon_espace/article_create.css') }}">
 
 <div class="container">
 
-    <h2>➕ Ajouter un nouvel article</h2>
+    <h2> Ajouter un nouvel article</h2>
+    {{-- Message de succès --}}
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <a href="{{ route('articles.index') }}" class="btn-outline-secondary">↩️ Retour à la liste</a>
 
@@ -35,5 +39,14 @@
     </form>
 
 </div>
-
-@endsection -->
+{{-- Script alert auto-disparition --}}
+<script>
+    setTimeout(() => {
+        const alert = document.querySelector('.alert-success');
+        if (alert) {
+            alert.style.transition = 'opacity 0.5s ease';
+            alert.style.opacity = '0';
+            setTimeout(() => alert.remove(), 500);
+        }
+    }, 4000);
+</script>

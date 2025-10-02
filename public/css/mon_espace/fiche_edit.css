@@ -17,7 +17,7 @@
 }
 
 /* ===== Bouton retour ===== */
-a.btn-outline-secondary {
+a.btn-secondary {
     display: inline-block;
     margin-bottom: 20px;
     padding: 8px 15px;
@@ -28,9 +28,20 @@ a.btn-outline-secondary {
     transition: all 0.2s ease-in-out;
 }
 
-a.btn-outline-secondary:hover {
+a.btn-secondary:hover {
     background-color: #218838;
     color: #fff;
+}
+
+/* ===== Alert succès ===== */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+    text-align: center;
 }
 
 /* ===== Inputs & Textarea ===== */
@@ -66,7 +77,7 @@ label {
 }
 
 /* ===== Bouton submit ===== */
-button.btn-success {
+button.btn-primary {
     background-color: #28a745;
     color: white;
     border: none;
@@ -77,7 +88,7 @@ button.btn-success {
     transition: background-color 0.2s ease-in-out;
 }
 
-button.btn-success:hover {
+button.btn-primary:hover {
     background-color: #218838;
 }
 
@@ -88,3 +99,4 @@ button.btn-success:hover {
         margin: 20px;
     }
 }
+

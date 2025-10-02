@@ -1,0 +1,22 @@
+.article-detail {
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+.article-detail h2 {
+    font-weight: 600;
+    color: #333;
+}
+
+.article-detail p {
+    font-size: 0.95rem;
+}
+
+.article-detail h5 {
+    font-weight: 500;
+    color: #555;
+}
+
+.article-detail .btn {
+    min-width: 150px;
+}

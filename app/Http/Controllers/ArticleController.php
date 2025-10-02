@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Fiche;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ArticleController extends Controller
 {
@@ -16,6 +18,11 @@ class ArticleController extends Controller
         $articles = Article::where('user_id', auth()->id())->latest()->paginate(6);
 
         return view('mon_espace.articles', compact('articles'));
+    }
+    // affiche le formulaire d'ajout d'un article
+    public function create()
+    {
+        return view('mon_espace.article_create');
     }
 
     /**
@@ -116,17 +123,58 @@ class ArticleController extends Controller
     }
 
     /**
-     * Affiche la liste publique des publications (site web public).
+     * Affiche la liste publique combinée Articles + Fiches (site web public).
      */
-    public function publicIndex()
+    public function publicIndex(Request $request)
     {
-        // Seuls les articles publiés sont visibles au public
-        $publications = Article::where('status', 'published')
-                               ->latest()
-                               ->paginate(6);
+        // Récupère les articles publiés
+        $articles = Article::where('status', 'published')->latest()->get();
 
-        // Passe la variable $publications à la vue
-        return view('publications.index', compact('publications'));
+        // Récupère toutes les fiches publiques
+        $fiches = Fiche::latest()->get();
+
+        // Combine les deux collections avec un type
+        $combined = collect();
+
+        foreach ($articles as $article) {
+            $combined->push([
+                'type' => 'article',
+                'data' => $article
+            ]);
+        }
+
+        foreach ($fiches as $fiche) {
+            $combined->push([
+                'type' => 'fiche',
+                'data' => $fiche
+            ]);
+        }
+
+        // Tri par date de création décroissante
+        $combined = $combined->sortByDesc(fn($item) => $item['data']->created_at);
+
+        // Pagination manuelle (6 items par page)
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $perPage = 6;
+        $currentItems = $combined->slice(($currentPage - 1) * $perPage, $perPage)->values();
+        $paginatedCombined = new LengthAwarePaginator(
+            $currentItems,
+            $combined->count(),
+            $perPage,
+            $currentPage,
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
+
+        return view('publications.index', ['combined' => $paginatedCombined]);
+    }
+
+    /**
+     * Affiche un article individuel public
+     */
+    public function show($id)
+    {
+        $article = Article::where('status', 'published')->findOrFail($id);
+        return view('publications.show', compact('article'));
     }
 }
 
