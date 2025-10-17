@@ -13,7 +13,7 @@
     <h2>✏️ Modifier l'article</h2>
 
     {{-- Bouton retour à la liste --}}
-    <a href="{{ route('articles.index') }}" class="btn-outline-secondary">↩️ Retour à la liste</a>
+    <a href="{{ route('articles.listes') }}" class="btn-outline-secondary">↩️ Retour à la liste</a>
 
     <form method="POST" action="{{ route('articles.update', $article->id) }}" enctype="multipart/form-data">
         @csrf

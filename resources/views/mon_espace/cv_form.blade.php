@@ -1,9 +1,28 @@
 
-
 <div class="dashboard-container">
     <div class="dashboard-header">
         <h1> Gestion de CV</h1>
     </div>
+    {{-- ✅ Message de succès + lien de téléchargement --}}
+    @if(session('status') && session('cv_data'))
+    @php
+        $cv = session('cv_data');
+        $cvPath = isset($cv['cv_path']) ? public_path('storage/' . $cv['cv_path']) : null;
+    @endphp
+
+    <div class="success-message mt-4">
+        <h3>✅ {{ session('status') }}</h3>
+        <p>Votre CV a été uploadé et sauvegardé avec succès.</p>
+
+        @if($cvPath && file_exists($cvPath))
+            <a href="{{ asset('storage/' . $cv['cv_path']) }}" class="download-btn" download>
+                 Télécharger le fichier CV
+            </a>
+        @else
+            <p class="text-warning"> Le fichier semble introuvable dans le dossier <code>public/storage</code>.</p>
+        @endif
+    </div>
+@endif
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -55,33 +74,12 @@
         </div>
     </form>
 
-    {{-- ✅ Message de succès + lien de téléchargement --}}
-    @if(session('status') && session('cv_data'))
-    @php
-        $cv = session('cv_data');
-        $cvPath = isset($cv['cv_path']) ? public_path('storage/' . $cv['cv_path']) : null;
-    @endphp
-
-    <div class="success-message mt-4">
-        <h3>✅ {{ session('status') }}</h3>
-        <p>Votre CV a été uploadé et sauvegardé avec succès.</p>
-
-        @if($cvPath && file_exists($cvPath))
-            <a href="{{ asset('storage/' . $cv['cv_path']) }}" class="download-btn" download>
-                📥 Télécharger le fichier CV
-            </a>
-        @else
-            <p class="text-warning">⚠️ Le fichier semble introuvable dans le dossier <code>public/storage</code>.</p>
-        @endif
-    </div>
-@endif
-
 </div>
 <script>
 document.getElementById('cv_file').addEventListener('change', function () {
     const fileName = this.files[0]?.name || '';
     document.getElementById('file-name').textContent = fileName
-        ? `✅ Fichier sélectionné : ${fileName}`
+        ? ` Fichier sélectionné : ${fileName}`
         : '';
 });
 </script>

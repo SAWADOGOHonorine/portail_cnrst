@@ -3,104 +3,107 @@
 @section('title', 'Publications')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/pages/publication.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/pages/banniere.css') }}">
+<link rel="stylesheet" href="{{ asset('css/pages/publication.css') }}">
+<link rel="stylesheet" href="{{ asset('css/pages/banniere.css') }}">
 @endpush
 
 @section('content')
 
-<!-- ================== SECTION RECHERCHE ================== -->
-<section class="search-section py-4 bg-light" aria-labelledby="search-title">
-    <div class="container">
-
-        <div class="page-title text-center mb-3">
-            <h1 id="search-title"><span class="strong">PUBLICATIONS</span></h1>
-            <div class="underline mx-auto"></div>
-        </div>
-
-        <!-- Filtres -->
-        <div class="filters">
-            <form method="GET" action="{{ route('publications.index') }}" class="d-flex flex-wrap justify-content-center gap-2">
-                <input type="text" name="q" class="filter-input"
-                       placeholder="Tapez ce que vous voulez ..."
-                       value="{{ request('q') }}">
-                <select name="type" class="filter-select">
-                    <option value="">Tous les types</option>
-                    <option value="article" {{ request('type') == 'article' ? 'selected' : '' }}>Articles</option>
-                    <option value="fiche" {{ request('type') == 'fiche' ? 'selected' : '' }}>Fiches Techniques</option>
-                </select>
-                <button type="submit" class="submit-button">Rechercher</button>
-            </form>
-        </div>
-
+<section class="enseignants-section" aria-labelledby="enseignants-title">
+  <div class="container">
+    <div class="page-title">
+      <h1><span class="strong">PUBLICATIONS</span></h1>
+      <div class="underline"></div>
     </div>
-</section>
 
-<!-- ================== SECTION PUBLICATIONS ================== -->
-<section class="publications-section py-5">
-    <div class="container">
+    {{-- Formulaire de recherche --}}
+    <div class="filters">
+      <form method="GET" action="{{ route('publications.index') }}">
+        <input type="text" name="q" class="filter-input" placeholder="Tapez ce que vous voulez ..." value="{{ request('q') }}">
+        <select name="discipline" class="filter-select">
+          <option value="">Tous les types</option>
+          <option value="article" {{ request('discipline') === 'article' ? 'selected' : '' }}>Articles</option>
+          <option value="fiche" {{ request('discipline') === 'fiche' ? 'selected' : '' }}>Fiches Techniques</option>
+        </select>
+        <button type="submit" class="submit-button">Rechercher</button>
+      </form>
+    </div>
 
-        <h2 class="mb-4">
-            Publications <span class="badge bg-secondary">{{ $totalCount }}</span>
-        </h2>
+    <div class="page-publications-container d-flex flex-wrap">
 
-        @if($combined->count() > 0)
-            @foreach($combined as $item)
-                <div class="pub-item mb-4 pb-3 border-bottom">
-                    @if($item['type'] === 'article')
-                        <h5 class="type-title text-uppercase text-success">ARTICLE</h5>
-                        <h4 class="pub-title">
-                            @if($item['data']['url'])
-                                <a href="{{ $item['data']['url'] }}" target="_blank" class="text-decoration-none text-dark">
-                                    {{ $item['data']['titre'] }}
-                                </a>
-                            @else
-                                {{ $item['data']['titre'] }}
-                            @endif
-                        </h4>
-                        <div class="pub-authors"><strong>Auteur :</strong> {{ $item['data']['auteurs'] }}</div>
-                        @if(!empty($item['data']['co_auteurs']))
-                            <div class="pub-coauthors"><strong>Co-auteurs :</strong> {{ $item['data']['co_auteurs'] }}</div>
-                        @endif
-                        <div class="pub-journal">
-                            @if(!empty($item['data']['journal']))
-                                <strong>Journal :</strong> {{ $item['data']['journal'] }}
-                            @endif
-                            @if(!empty($item['data']['annee']))
-                                <span class="ms-2"><strong>Année :</strong> {{ $item['data']['annee'] }}</span>
-                            @endif
-                        </div>
-                        @if(!empty($item['data']['summary']))
-                            <p class="pub-summary mt-2">{{ $item['data']['summary'] }}</p>
-                        @endif
-                        @if(!empty($item['data']['url']))
-                            <a href="{{ $item['data']['url'] }}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">
-                                🔗 Consulter l’article
-                            </a>
-                        @endif
+      {{-- Colonne gauche : publications --}}
+      <div class="colonne-publications flex-grow-1 me-4">
+        <h2 class="section-title">Publications <span class="badge bg-secondary">{{ $combined->total() }}</span></h2>
 
-                    @elseif($item['type'] === 'fiche')
-                        <h5 class="type-title text-uppercase text-primary">FICHE TECHNIQUE</h5>
-                        <h4 class="pub-title">{{ $item['data']['titre'] }}</h4>
-                        <p class="pub-summary mt-2">{{ $item['data']['description'] }}</p>
-                        @isset($item['data']['prix'])
-                            <p><strong>Prix :</strong> {{ $item['data']['prix'] }} FCFA</p>
-                        @endisset
-                    @endif
+        @foreach($combined as $item)
+          @php $data = $item['data']; @endphp
 
-                    <small class="text-muted">Publié le {{ \Carbon\Carbon::parse($item['data']['created_at'])->format('d/m/Y') }}</small>
-                </div>
+          <div class="publication-item mb-4 p-3 shadow-sm">
+            {{-- Type de publication --}}
+            <h5 class="type-title text-uppercase {{ $item['type'] === 'article' ? 'text-success' : 'text-primary' }}">
+              {{ strtoupper($item['type']) }}
+            </h5>
+
+            {{-- Titre cliquable --}}
+            <h4 class="pub-title">
+              @if($item['type'] === 'article')
+                <a href="{{ route('articles_detail', $data->id) }}" class="link-article">
+                  {{ $data->title ?? 'Sans titre' }}
+                </a>
+              @elseif($item['type'] === 'fiche')
+                <a href="{{ route('fiches_detail', $data->id) }}" class="link-fiche">
+                  {{ $data->titre ?? 'Sans titre' }}
+                </a>
+              @endif
+            </h4>
+
+            {{-- Détails selon le type --}}
+            @if($item['type'] === 'article')
+              @if(!empty($data->auteurs)) <p><strong>Auteurs :</strong> {{ $data->auteurs }}</p> @endif
+              @if(!empty($data->co_auteurs)) <p><strong>Co-auteurs :</strong> {{ $data->co_auteurs }}</p> @endif
+              @if(!empty($data->journal)) 
+                <p><strong>Journal :</strong> {{ $data->journal }} @if(!empty($data->annee)) ({{ $data->annee }}) @endif</p>
+              @endif
+              @if(!empty($data->summary)) <p>{{ $data->summary }}</p> @endif
+            @elseif($item['type'] === 'fiche')
+              @if(!empty($data->description)) <p><strong>Détails :</strong> {{ $data->description }}</p> @endif
+              @if(!empty($data->responsable)) <p><strong>Responsable :</strong> {{ $data->responsable }}</p> @endif
+              @if(!empty($data->discipline)) <p><strong>Discipline :</strong> {{ $data->discipline }}</p> @endif
+            @endif
+
+            {{-- Date de création --}}
+            <small class="text-muted">{{ optional($data->created_at)->format('d/m/Y') }}</small>
+          </div>
+        @endforeach
+      </div>
+
+      {{-- Colonne droite : thématiques --}}
+      <div class="colonne-thematiques flex-shrink-0" style="width: 250px;">
+        <h3 class="titre-section">Thématiques</h3>
+        @if($thematiques->count() > 0)
+          <ul class="thematiques-list list-group">
+            @foreach($thematiques as $thematique)
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ $thematique->nom ?? 'Sans nom' }}
+                <span class="badge bg-secondary rounded-pill">
+                  {{ $thematique->publications_count ?? 0 }}
+                </span>
+              </li>
             @endforeach
-
-            <!-- Pagination Laravel -->
-            <div class="mt-4 d-flex justify-content-center">
-                {{ $combined->links() }}
-            </div>
+          </ul>
         @else
-            <p class="text-muted">Aucune publication disponible pour le moment.</p>
+          <p>Aucune thématique trouvée.</p>
         @endif
+      </div>
 
+    </div> {{-- fin page-publications-container --}}
+
+    {{-- Pagination en bas de page, centrée --}}
+    <div class="pagination-wrapper mt-4 mb-4 d-flex justify-content-center">
+      {{ $combined->links() }}
     </div>
+
+  </div>
 </section>
 
 @endsection

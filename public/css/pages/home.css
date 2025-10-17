@@ -1,28 +1,156 @@
+/* ==================== SECTION RECHERCHE ==================== */
+
+/* Section recherche avec fond */
+.section-recherche {
+  background: url('/images/fond-accueil.jpg') center/cover no-repeat;
+  position: relative;
+  min-height: 16rem;   
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 1.5rem; 
+  padding: 2rem 0;
+}
+
+.section-recherche::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+.text-white {
+    color: #ffffff !important;
+}
+
+
+.section-recherche .container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+/* Barre de recherche */
+.form-recherche {
+  width: 100%;
+}
+
+.search-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.1);
+  gap: 10px;
+}
+
+/* Icône loupe */
+.search-icon {
+  padding: 0 0.75rem;
+  font-size: 1.5rem;
+  color: #666;
+  text-align: center;
+}
+
+/* Champ texte */
+.input-recherche {
+  flex: 1 1 200px;
+  border: none;
+  outline: none;
+  padding: 0.85rem;
+  font-size: 1rem;
+  min-width: 150px;
+}
+
+/* Select (optionnel) */
+.select-recherche {
+  border: none;
+  outline: none;
+  padding: 0.85rem;
+  font-size: 1rem;
+  color: #444;
+  border-left: 1px solid #ddd;
+}
+
+/* Bouton rechercher */
+.btn-recherche {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 0.85rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  max-width: 200px;
+  transition: background 0.3s;
+  cursor: pointer;
+}
+
+.btn-recherche:hover {
+  background: #1b5e20;
+}
+
+/* ==================== PAGE ACCUEIL ==================== */
+
 /* Container général */
 .page-accueil {
-    display: flex;
-    justify-content: center;
+    width: 100%;
     padding: 30px 20px;
     font-family: 'Roboto', Arial, sans-serif;
     background-color: #f0f2f5;
+    box-sizing: border-box;
 }
 
+/* Container des colonnes */
 .accueil-container {
     display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
     gap: 25px;
     width: 100%;
     max-width: 1200px;
+    margin: 0 auto; 
 }
+.lien-titre {
+    text-decoration: none;
+    color: #0a0a0a;
+    transition: color 0.3s ease;
+}
+
+.lien-titre:hover {
+    color: #007b5e;
+    text-decoration: underline;
+}
+
 
 /* Bloc centre : publications récentes */
 .profil-centre {
-    flex: 3;
+    flex: 1 1 700px; 
+    min-width: 350px;
     background-color: #fff;
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    box-sizing: border-box;
 }
 
+/* Bloc droite : thématiques */
+.profil-droite {
+    flex: 0 1 250px; 
+    min-width: 200px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    box-sizing: border-box;
+    height: fit-content;
+}
+
+/* Titre section */
 .titre-section {
     font-size: 1.6rem;
     font-weight: 700;
@@ -67,63 +195,9 @@
     color: #6c757d;
 }
 
-/* Ligne de séparation entre publications */
-.publication-separator {
-    border: none;
-    border-top: 1px solid #e0e0e0;
-    margin: 15px 0;
-}
 
-/* Bloc droite : thématiques */
-.profil-droite {
-    flex: 1;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    height: fit-content;
-}
 
-.profil-droite .titre-section {
-    border-bottom: 3px solid #28a745;
-    padding-bottom: 5px;
-    margin-bottom: 15px;
-    color: #28a745;
-}
 
-.thematiques-list {
-    list-style: none;
-    padding: 0;
-}
-
-.thematique-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    font-size: 0.95rem;
-    color: #495057;
-    font-weight: 500;
-}
-
-.count-badge {
-    background-color: #28a745;
-    color: #fff;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 0.85rem;
-    font-weight: 700;
-}
-
-/* Responsive pour mobile */
-@media (max-width: 992px) {
-    .accueil-container {
-        flex-direction: column;
-    }
-
-    .profil-droite {
-        margin-top: 25px;
-    }
-}
 
 
 

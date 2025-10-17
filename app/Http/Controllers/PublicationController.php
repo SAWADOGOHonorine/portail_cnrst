@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Publication;
 use App\Models\Article;
 use App\Models\Fiche;
+use App\Models\Thematique;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class PublicationController extends Controller
@@ -15,12 +16,12 @@ class PublicationController extends Controller
      */
     public function index(Request $request)
     {
-        $query = $request->input('q');         // Recherche texte
-        $filterType = $request->input('type'); // Filtre type : article ou fiche
+        $query = $request->input('q');         
+        $filterType = $request->input('type'); 
 
         $combined = collect();
 
-        //  Articles publiés
+        // ---------------- Articles publiés ----------------
         $articlesQuery = Article::where('status', 'published')->latest();
 
         if ($query) {
@@ -31,7 +32,7 @@ class PublicationController extends Controller
         }
 
         if ($filterType && $filterType !== 'article') {
-            $articlesQuery = collect(); // ignore les articles si type != article
+            $articlesQuery = collect(); // ignore les articles si filtre différent
         } else {
             $articlesQuery = $articlesQuery->get();
         }
@@ -39,23 +40,11 @@ class PublicationController extends Controller
         foreach ($articlesQuery as $article) {
             $combined->push([
                 'type' => 'article',
-                'data' => [
-                    'id' => $article->id,
-                    'titre' => $article->title,
-                    'journal' => $article->journal,
-                    'annee' => $article->publication_year,
-                    'auteurs' => $article->author,
-                    'co_auteurs' => $article->co_authors,
-                    'summary' => $article->summary,
-                    'url' => $article->url,
-                    'fichier' => $article->fichier,
-                    'created_at' => $article->publication_date ?? $article->created_at,
-                    'status' => $article->status,
-                ]
+                'data' => $article  // <- garder objet Eloquent
             ]);
         }
 
-        //  Fiches validées
+        // ---------------- Fiches validées ----------------
         $fichesQuery = Fiche::where('status', 'validated')->latest();
 
         if ($query) {
@@ -66,7 +55,7 @@ class PublicationController extends Controller
         }
 
         if ($filterType && $filterType !== 'fiche') {
-            $fichesQuery = collect(); // ignore fiches si type != fiche
+            $fichesQuery = collect(); // ignore fiches si filtre différent
         } else {
             $fichesQuery = $fichesQuery->get();
         }
@@ -74,28 +63,15 @@ class PublicationController extends Controller
         foreach ($fichesQuery as $fiche) {
             $combined->push([
                 'type' => 'fiche',
-                'data' => [
-                    'id' => $fiche->id,
-                    'titre' => $fiche->record_type,
-                    'description' => $fiche->content,
-                    'responsable' => $fiche->responsible,
-                    'url' => $fiche->url,
-                    'fichier' => $fiche->fichier,
-                    'created_at' => $fiche->creation_date ?? $fiche->created_at,
-                ]
+                'data' => $fiche  
             ]);
         }
 
-        //  Trier par date descendante et réindexer
-        $combined = $combined->sortByDesc(function ($item) {
-            return $item['data']['created_at'];
-        })->values();
+        // ---------------- Trier par date descendante ----------------
+        $combined = $combined->sortByDesc(fn($item) => $item['data']->created_at)->values();
 
-        // 4️⃣ Compter le nombre total de publications
-        $totalCount = $combined->count();
-
-        // 5️⃣ Pagination manuelle (6 par page)
-        $perPage = 6;
+        // ---------------- Pagination manuelle (10 par page) ----------------
+        $perPage = 10;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $items = $combined->slice(($currentPage - 1) * $perPage, $perPage)->values();
 
@@ -106,22 +82,29 @@ class PublicationController extends Controller
             $currentPage,
             [
                 'path' => $request->url(),
-                'query' => $request->query(), // garde les filtres dans la pagination
+                'query' => $request->query(),
             ]
         );
 
-        // 6️⃣ Retourner la vue avec pagination et total
+        // ---------------- Récupérer les thématiques ----------------
+        $thematiques = Thematique::withCount('publications')->get();
+
+        // ---------------- Retourner la vue ----------------
         return view('publications.index', [
             'combined' => $paginated,
-            'totalCount' => $totalCount,
+            'totalCount' => $combined->count(),
+            'thematiques' => $thematiques,
         ]);
     }
+
+    /**
+     * Affichage d'une publication spécifique
+     */
     public function show($id)
     {
-        // Récupère la publication avec sa thématique
+        // On cherche l'article ou la fiche publiquement accessible
         $publication = Publication::with('thematique')->findOrFail($id);
 
-        // Retourne la vue show avec la publication
         return view('publications.show', compact('publication'));
     }
 }

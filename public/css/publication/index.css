@@ -1,104 +1,155 @@
-.container {
-    max-width: 900px;
-    margin: auto;
-    font-family: 'Segoe UI', sans-serif;
-    color: #2c2c2c;
-    padding: 0 15px;
+/* ==========================
+   SECTION RECHERCHE
+========================== */
+.search-section {
+    background-color: #f8f9fa;
 }
 
-h2 {
-    font-size: 1.6rem;
-    font-weight: 600;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 10px;
-    margin-bottom: 30px;
+.search-section .page-title h1 {
+    font-size: 2rem;
+    font-weight: 700;
 }
 
-.pub-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.search-section .underline {
+    width: 5rem;
+    height: 0.25rem;
+    background-color: #2e7d32;
+    margin-top: 0.5rem;
+    border-radius: 2px;
 }
 
-.pub-item {
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ddd;
+.filters {
+    margin-top: 1rem;
 }
 
-.pub-type {
+.filter-input,
+.filter-select,
+.submit-button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+}
+
+.submit-button {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #27632a;
+}
+
+/* ==========================
+   SECTION DEUX COLONNES
+========================== */
+.publications-thematiques-section .card {
+    border-radius: 0.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.publications-thematiques-section .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}
+
+.pub-card .card-body {
+    padding: 1rem 1.5rem;
+}
+
+.type-title {
     font-size: 0.85rem;
-    font-weight: bold;
-    color: #007B5E;
-    margin-bottom: 5px;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.type-title.text-success {
+    color: #2e7d32;
+}
+
+.type-title.text-primary {
+    color: #0d6efd;
 }
 
 .pub-title {
-    font-size: 1.2rem;
     font-weight: 600;
-    margin-bottom: 8px;
-    color: #1a1a1a;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 
-.pub-author {
+.pub-summary,
+.pub-authors,
+.pub-coauthors,
+.pub-journal {
     font-size: 0.95rem;
-    font-weight: 500;
-    color: #333;
+    color: #555;
+    margin-bottom: 0.3rem;
 }
 
-.pub-coauthors {
-    font-size: 0.9rem;
-    color: #666;
-}
-
-.pub-summary {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #2c2c2c;
-}
-
-.pub-meta {
+.pub-card .card-footer .btn-outline-primary {
     font-size: 0.85rem;
-    color: #888;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
 }
 
-/* Pagination centrée et responsive */
-.pagination-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
+/* ==========================
+   SECTION THÉMATIQUES
+========================== */
+.thematiques-section h2,
+.publications-thematiques-section h2 {
+    font-weight: 700;
 }
 
-.pagination {
-    flex-wrap: wrap;
-    gap: 5px;
-}
-
-.page-link {
-    color: #007B5E;
-    border: 1px solid #ccc;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 0.9rem;
+.thematiques-section .card,
+.publications-thematiques-section .card {
     background-color: #fff;
 }
 
-.page-link:hover {
-    background-color: #e6f2ef;
-    border-color: #007B5E;
+.thematiques-section .card-body {
+    padding: 1rem;
 }
 
-/* Responsive */
-@media (max-width: 576px) {
-    .pub-title {
-        font-size: 1.05rem;
-    }
+.thematiques-section .badge {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+}
 
-    .pub-summary {
-        font-size: 0.9rem;
-    }
+/* ==========================
+   FALLBACK / MESSAGE VIDE
+========================== */
+.text-muted {
+    font-style: italic;
+    color: #6c757d !important;
+}
 
-    .page-link {
-        padding: 5px 10px;
-        font-size: 0.85rem;
+.text-center.text-muted {
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+@media (max-width: 992px) {
+    .pub-title { font-size: 1.1rem; }
+}
+
+@media (max-width: 768px) {
+    .col-lg-8, .col-lg-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 2rem;
+    }
+    .filters form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filter-input, .filter-select, .submit-button {
+        width: 100%;
     }
 }
+

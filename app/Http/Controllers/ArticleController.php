@@ -9,25 +9,20 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class ArticleController extends Controller
 {
-    /**
-     * Affiche la liste des articles de l'utilisateur connecté (dashboard privé).
-     */
+    // Page principale avec formulaire (dashboard privé)
     public function index()
     {
-        // Pagination : 6 articles par page
         $articles = Article::where('user_id', auth()->id())->latest()->paginate(6);
-
         return view('mon_espace.articles', compact('articles'));
     }
-    // affiche le formulaire d'ajout d'un article
+
+    // Affiche le formulaire d'ajout
     public function create()
     {
         return view('mon_espace.article_create');
     }
 
-    /**
-     * Enregistre un nouvel article (dashboard privé).
-     */
+    // Enregistre un nouvel article
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -51,12 +46,18 @@ class ArticleController extends Controller
 
         Article::create($data);
 
-        return redirect()->route('articles.index')->with('success', '✅ Article enregistré avec succès !');
+        return redirect()->route('articles.listes')
+                         ->with('success', ' Article enregistré avec succès !');
     }
 
-    /**
-     * Affiche le formulaire de modification d'un article (dashboard privé).
-     */
+    // Page liste des articles (sans formulaire)
+    public function listes()
+    {
+        $articles = Article::where('user_id', auth()->id())->latest()->paginate(6);
+        return view('mon_espace.articles_listes', compact('articles'));
+    }
+
+    // Affiche le formulaire de modification
     public function edit($id)
     {
         $article = Article::findOrFail($id);
@@ -65,9 +66,7 @@ class ArticleController extends Controller
         return view('mon_espace.article_edit', compact('article'));
     }
 
-    /**
-     * Met à jour un article (dashboard privé).
-     */
+    // Met à jour un article
     public function update(Request $request, $id)
     {
         $article = Article::findOrFail($id);
@@ -92,12 +91,11 @@ class ArticleController extends Controller
 
         $article->update($validated);
 
-        return redirect()->route('articles.index')->with('success', '✏️ Article modifié avec succès !');
+        return redirect()->route('articles.listes')
+                         ->with('success', '✏️ Article modifié avec succès !');
     }
 
-    /**
-     * Supprime un article (dashboard privé).
-     */
+    // Supprime un article
     public function destroy($id)
     {
         $article = Article::findOrFail($id);
@@ -105,12 +103,11 @@ class ArticleController extends Controller
 
         $article->delete();
 
-        return redirect()->route('articles.index')->with('success', '🗑 Article supprimé avec succès !');
+        return redirect()->route('articles.listes')
+                         ->with('success', '🗑 Article supprimé avec succès !');
     }
 
-    /**
-     * Télécharge un fichier attaché (dashboard privé).
-     */
+    // Télécharge un fichier attaché
     public function download($id)
     {
         $article = Article::findOrFail($id);
@@ -122,41 +119,34 @@ class ArticleController extends Controller
         return response()->download(storage_path('app/public/' . $article->fichier));
     }
 
-    /**
-     * Affiche la liste publique combinée Articles + Fiches (site web public).
-     */
+    // Affiche la liste publique combinée Articles + Fiches
     public function publicIndex(Request $request)
     {
-        // Récupère les articles publiés
         $articles = Article::where('status', 'published')->latest()->get();
+        $fiches   = Fiche::latest()->get();
 
-        // Récupère toutes les fiches publiques
-        $fiches = Fiche::latest()->get();
-
-        // Combine les deux collections avec un type
         $combined = collect();
 
         foreach ($articles as $article) {
             $combined->push([
                 'type' => 'article',
-                'data' => $article
+                'data' => $article // <-- objet Eloquent
             ]);
         }
 
         foreach ($fiches as $fiche) {
             $combined->push([
                 'type' => 'fiche',
-                'data' => $fiche
+                'data' => $fiche // <-- objet Eloquent
             ]);
         }
 
-        // Tri par date de création décroissante
         $combined = $combined->sortByDesc(fn($item) => $item['data']->created_at);
 
-        // Pagination manuelle (6 items par page)
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $perPage = 6;
         $currentItems = $combined->slice(($currentPage - 1) * $perPage, $perPage)->values();
+
         $paginatedCombined = new LengthAwarePaginator(
             $currentItems,
             $combined->count(),
@@ -167,14 +157,23 @@ class ArticleController extends Controller
 
         return view('publications.index', ['combined' => $paginatedCombined]);
     }
-
-    /**
-     * Affiche un article individuel public
-     */
     public function show($id)
     {
-        $article = Article::where('status', 'published')->findOrFail($id);
-        return view('publications.show', compact('article'));
+        $article = Article::findOrFail($id);
+        return view('mon_espace.articles.show', compact('article'));
+    }
+
+
+    // Affiche un article individuel public
+    public function showPublic($id)
+    {
+        $article = Article::where('id', $id)
+                          ->where('status', 'published')
+                          ->firstOrFail();
+
+        return view('publications.articles_detail', compact('article'));
     }
 }
+
+
 

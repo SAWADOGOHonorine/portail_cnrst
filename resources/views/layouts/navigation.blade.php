@@ -18,14 +18,37 @@
       <!-- Menu principal -->
       <div class="menu-container" id="menuLinks">
         <ul class="menu-links">
-          <li class="{{ request()->is('chercheurs') ? 'active' : '' }}"><a href="{{ url('chercheurs') }}">CHERCHEURS</a></li>
-          <li class="{{ request()->is('publications') ? 'active' : '' }}"><a href="/publications">PUBLICATIONS</a></li>
-          <li class="{{ request()->is('laboratoires') ? 'active' : '' }}"><a href="/laboratoires">LABORATOIRES</a></li>
-          <li class="{{ request()->is('equipes') ? 'active' : '' }}"><a href="/equipes">ÉQUIPES</a></li>
-          <li class="{{ request()->is('evenements') ? 'active' : '' }}"><a href="/evenements">EVÉNEMENTS</a></li>
-          <li class="{{ request()->is('equipements') ? 'active' : '' }}"><a href="/equipements">ÉQUIPEMENTS</a></li>
-          <li class="{{ request()->is('valorisations') ? 'active' : '' }}"><a href="{{ url('valorisations') }}">VALORISATIONS</a></li>
-          <li class="{{ request()->is('partenaires') ? 'active' : '' }}"><a href="{{ url('/partenaires') }}">PARTENAIRES</a></li>
+          <li class="{{ request()->is('chercheurs') ? 'active' : '' }}">
+            <a href="{{ url('chercheurs') }}">CHERCHEURS</a>
+          </li>
+
+          <li class="{{ request()->is('publications') || request()->routeIs('fiches_detail') ? 'active' : '' }}">
+            <a href="{{ url('/publications') }}">PUBLICATIONS</a>
+          </li>
+
+          <li class="{{ request()->is('laboratoires') ? 'active' : '' }}">
+            <a href="{{ url('/laboratoires') }}">LABORATOIRES</a>
+          </li>
+
+          <li class="{{ request()->is('equipes') ? 'active' : '' }}">
+            <a href="{{ url('/equipes') }}">ÉQUIPES</a>
+          </li>
+
+          <li class="{{ request()->is('evenements') ? 'active' : '' }}">
+            <a href="{{ url('/evenements') }}">EVÉNEMENTS</a>
+          </li>
+
+          <li class="{{ request()->is('equipements') ? 'active' : '' }}">
+            <a href="{{ url('/equipements') }}">ÉQUIPEMENTS</a>
+          </li>
+
+          <li class="{{ request()->is('valorisations') ? 'active' : '' }}">
+            <a href="{{ url('valorisations') }}">VALORISATIONS</a>
+          </li>
+
+          <li class="{{ request()->is('partenaires') ? 'active' : '' }}">
+            <a href="{{ url('/partenaires') }}">PARTENAIRES</a>
+          </li>
         </ul>
 
         <!-- Connexion -->

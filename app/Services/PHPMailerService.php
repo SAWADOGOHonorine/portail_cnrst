@@ -16,12 +16,12 @@ class PHPMailerService
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'ton.email@gmail.com';
-            $mail->Password   = 'mot_de_passe_application';
+            $mail->Username   = 'honorinesawadogo07@gmail.com';
+            $mail->Password   = 'cbmqmuvjubrhbhjm';
             $mail->SMTPSecure = 'tls';
             $mail->Port       = 587;
 
-            $mail->setFrom('ton.email@gmail.com', 'Portail CNRST');
+            $mail->setFrom('honorinesawadogo07@gmail.com', 'Portail CNRST');
             $mail->addAddress($toEmail);
 
             $mail->isHTML(true);

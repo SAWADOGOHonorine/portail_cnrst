@@ -12,6 +12,8 @@
 @endpush
 
 @section('content')
+<!-- la section recherche -->
+
 <section class="enseignants-section" aria-labelledby="enseignants-title">
   <div class="container">
     <div class="page-title">
@@ -46,6 +48,7 @@
         <button type="submit" class="submit-button">Rechercher</button>
       </form>
     </div>
+    <!-- fin de la section recherche -->
 
     <p class="section-count"><strong>4 enseignants chercheurs trouvés</strong></p>
     <div class="cards">

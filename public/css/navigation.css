@@ -1,4 +1,18 @@
-/* HEADER STICKY EN HAUT */
+/* ===== HEADER STICKY EN HAUT ===== */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main, .content, .container {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.navbar {
+  margin-bottom: 0 !important;
+}
+
 .header-progres {
   position: fixed;
   top: 0;
@@ -8,23 +22,44 @@
   background-color: rgb(46, 125, 50);
   color: white;
   font-family: 'Segoe UI', sans-serif;
-  padding: 0.1rem 0.5rem;
+  padding: 0.2rem 0.5rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin: 0 !important;
+}
+.main-content {
+  padding-top: 84px; 
 }
 
-/* STRUCTURE FLEXIBLE */
+
+/* ===== STRUCTURE COMPACTE ===== */
+.header-progres,
+.menu-row,
+.menu-container,
+.logo-progres,
+.connexion-wrapper-below {
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  line-height: 1 !important;
+}
+
+/* ===== STRUCTURE FLEXIBLE ===== */
 .menu-row {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
-/* LOGO */
+/* ===== LOGO ===== */
 .logo-progres {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 0.1rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .logo-text {
@@ -55,12 +90,14 @@
   margin-top: 0.1rem;
 }
 
-/* MENU PRINCIPAL */
+/* ===== MENU PRINCIPAL ===== */
 .menu-container {
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
-  margin-top: 0.05rem;
+  gap: 0;
+  margin-top: 0;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .menu-links {
@@ -73,22 +110,28 @@
   padding: 0;
 }
 
+.menu-links li {
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+}
+
 .menu-links li a {
   color: white;
   text-decoration: none;
   font-weight: 600;
   text-transform: uppercase;
-  padding: 0.3rem 0.6rem;
+  padding: 0.2rem 0.6rem;
   font-size: 0.8rem;
   border-bottom: 3px solid transparent;
   display: inline-block;
+  margin-bottom: 0 !important;
 }
 
-/* les informations de l'utilisateur connecter */
-/*  Ligne rouge fixe pour l’élément actif */
+/* Élément actif */
 .menu-links li.active a {
   border-bottom: 3px solid #b30000;
   color: #b30000;
+  font-weight: bold;
 }
 
 /* Hover */
@@ -97,14 +140,16 @@
   color: #990000;
 }
 
-/* CONNEXION */
+/* ===== CONNEXION ===== */
 .connexion-wrapper-below {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding-right: 1rem;
   gap: 0.5rem;
-  margin-top: 0.1rem;
+  margin-top: 0;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .login-separator {
@@ -132,7 +177,7 @@
   background-color: #990000;
 }
 
-/* BOUTON BURGER MOBILE */
+/* ===== BOUTON BURGER MOBILE ===== */
 .menu-toggle {
   display: none;
   font-size: 1.5rem;
@@ -142,7 +187,7 @@
   cursor: pointer;
 }
 
-/* RESPONSIVE */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .menu-row {
     flex-direction: column;

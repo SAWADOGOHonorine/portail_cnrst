@@ -16,10 +16,10 @@
     <!-- CSS institutionnel -->
     <link href="{{ asset('css/navigation.css') }}" rel="stylesheet">
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/footer_top.css') }}" rel="stylesheet">
     <link href="{{ asset('css/formlogin.css') }}" rel="stylesheet">
     <link href="{{ asset('css/logout_success.css') }}" rel="stylesheet">
-      <link href="{{ asset('css/mon_espace/cv_form.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/mon_espace/cv_form.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/reset_password.css') }}">
 
     <!-- PDF CV (si utilisé dans une vue spécifique) -->
     @if(View::hasSection('cv_pdf'))
@@ -27,6 +27,13 @@
     @endif
 
     @stack('styles')
+
+    <!-- Correction CSS pour compenser le menu sticky -->
+    <style>
+        .main-content {
+            padding-top: 84px; /* valeur par défaut, ajustée dynamiquement ensuite */
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiased bg-gray-100 d-flex flex-column min-vh-100">
@@ -37,6 +44,7 @@
     @unless($hideNav)
         @include('layouts.navigation')
     @endunless
+
     @yield('home')
 
     <main class="main-content flex-grow-1">
@@ -53,29 +61,34 @@
         <i class="fas fa-arrow-up"></i>
     </a> -->
 
-    <!-- JS pour padding dynamique -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const header = document.querySelector("header");
-            const main = document.querySelector(".main-content");
-            if (header && main) {
-                main.style.paddingTop = header.offsetHeight + "px";
-            }
-        });
-    </script>
-
     <!-- Scripts institutionnels -->
     <script src="{{ asset('js/dashboard.js') }}"></script>
     <script src="{{ asset('js/about_direction.js') }}"></script>
     <script src="{{ asset('js/navigation.js') }}"></script>
     <script src="{{ asset('js/home.js') }}"></script>
 
-
+    <!-- Script dynamique pour compenser le menu sticky -->
+    @if(!$hideNav)
     <script>
-        document.querySelector('.scroll-top').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.addEventListener("DOMContentLoaded", function () {
+            const header = document.querySelector(".header-progres");
+            const main = document.querySelector(".main-content");
+            if (header && main) {
+                main.style.paddingTop = header.offsetHeight + "px";
+            }
         });
+    </script>
+    @endif
+
+    <!-- Scroll top JS -->
+    <script>
+        const scrollBtn = document.querySelector('.scroll-top');
+        if (scrollBtn) {
+            scrollBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
     </script>
 </body>
 </html>

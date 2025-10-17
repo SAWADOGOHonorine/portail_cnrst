@@ -53,10 +53,20 @@ class ForgotPasswordController extends Controller
         $mailer = new PHPMailerService();
         $sent = $mailer->sendResetLink($email, $token);
 
-        // Retour UX
-        return $sent
-            ? back()->with(['status' => 'Lien de réinitialisation envoyé avec succès.'])
-            : back()->withErrors(['email' => 'Échec de l’envoi du mail.']);
+        // Redirection vers page confirmation ou retour avec erreur
+        if ($sent) {
+            return redirect()->route('password.success');
+        } else {
+            return back()->withErrors(['email' => 'Échec de l’envoi du mail.']);
+        }
+    }
+
+    /**
+     * Page de confirmation après envoi du lien
+     */
+    public function success()
+    {
+        return view('auth.forgot_success');
     }
 }
 

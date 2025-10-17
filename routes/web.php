@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Http\Request;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CvController;
@@ -15,15 +15,15 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\LaboratoireController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
 
 //  les Pages statiques
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-
+Route::get('/publications/search', [HomeController::class, 'search'])->name('publications.search');
 // route pour partenaires
 Route::get('/partenaires', [PartenairesController::class, 'index'])->name('partenaires');
 Route::get('/partenaires/{id}', [PartenairesController::class, 'show'])->name('partenaire.show');
-
 
 Route::get('/valorisations', [ValorisationsController::class, 'index'])->name('valorisations');
 
@@ -72,35 +72,24 @@ Route::get('/logout_success', function () {
 
 //  route pour le mot de passe oublié 
 
-Route::get('/forgot-password', function () {
-    return view('auth.forgot-password'); 
-})->name('password.request');
+// Affiche le formulaire
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])
+    ->name('password.request');
 
-Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+// Traite le formulaire
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])
+    ->name('password.email');
 
+// Page de confirmation après envoi du mail
+Route::get('/forgot_success', [ForgotPasswordController::class, 'success'])
+    ->name('password.success');
+// Affiche le formulaire de réinitialisation
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])
+    ->name('password.reset');
 
-//  Réinitialisation du mot de passe
-Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('/reset-password', function (Request $request) {
-    $request->validate([
-        'token' => 'required',
-        'email' => 'required|email',
-        'password' => 'required|min:8|confirmed',
-    ]);
-
-    $status = Password::reset(
-        $request->only('email', 'password', 'password_confirmation', 'token'),
-        function ($user, $password) {
-            $user->forceFill([
-                'password' => bcrypt($password)
-            ])->save();
-        }
-    );
-
-    return $status === Password::PASSWORD_RESET
-        ? redirect()->route('login')->with('status', __($status))
-        : back()->withErrors(['email' => [__($status)]]);
-})->name('password.update');
+// Traite la soumission du nouveau mot de passe
+Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
+    ->name('password.update');
 
 // routes pour les pages supplémentaires du dashboard
 Route::get('/accueil', function () {
@@ -144,36 +133,60 @@ Route::middleware(['auth'])->group(function () {
     // ========================
     // Fiches
     // ========================
-Route::middleware(['auth'])->group(function () {
-    Route::get('/mon_espace/fiches', [FicheController::class, 'index'])->name('fiches.index');
-    Route::get('/mon_espace/fiches/create', [FicheController::class, 'create'])->name('fiches.create');
-    Route::get('/fiches/{id}', [FicheController::class, 'show'])->name('fiches.show');
-    Route::get('/mon_espace/fiches/{id}/edit', [FicheController::class, 'edit'])->name('fiches.edit');
-    Route::post('/mon_espace/fiches', [FicheController::class, 'store'])->name('fiches.store');
-    Route::put('/mon_espace/fiches/{id}', [FicheController::class, 'update'])->name('fiches.update');
-    // Supprimer une fiche
-    Route::delete('/mon_espace/fiches/{id}', [FicheController::class, 'destroy'])->name('fiches.destroy');
+
+// Routes privées (authentification requise)
+Route::middleware(['auth'])->prefix('mon_espace')->group(function () {
+    Route::get('/fiches', [FicheController::class, 'index'])->name('fiches.index');
+    Route::get('/fiches/create', [FicheController::class, 'create'])->name('fiches.create');
+    Route::post('/fiches', [FicheController::class, 'store'])->name('fiches.store');
+    Route::get('/fiches/{id}/edit', [FicheController::class, 'edit'])->name('fiches.edit');
+    Route::put('/fiches/{id}', [FicheController::class, 'update'])->name('fiches.update');
+    Route::delete('/fiches/{id}', [FicheController::class, 'destroy'])->name('fiches.destroy');
+    Route::get('/fiches_listes', [FicheController::class, 'listes'])->name('fiches.listes');
+    Route::post('/fiches_listes', [FicheController::class, 'listes'])->name('fiches.listes.post');
+
 });
 
+// Route publique pour afficher le détail d’une fiche
+Route::get('/publications/fiche/{id}/details', [FicheController::class, 'showPublic'])
+    ->name('fiches_detail');
 
-// Routes articles (dashboard privé)
+
+
+// les routes articles (dashboard privé)
+// Routes protégées (CRUD)
+// Routes protégées (CRUD)
 Route::middleware(['auth'])->prefix('mon_espace')->group(function () {
     Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
+    Route::get('articles/create', [ArticleController::class, 'create'])->name('articles.create');
+    Route::post('articles', [ArticleController::class, 'store'])->name('articles.store');
+    Route::get('articles_listes', [ArticleController::class, 'listes'])->name('articles.listes');
+
+    // **Route show pour afficher un article**
+    Route::get('articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
     Route::get('articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
     Route::put('articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
     Route::delete('articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
-    Route::get('articles/create', [ArticleController::class, 'create'])->name('articles.create');
-    Route::post('articles', [ArticleController::class, 'store'])->name('articles.store');
-    // Route::get('telecharger/{id}', [ArticleController::class, 'download'])->name('articles.download');
-    Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
 });
+
+// Route publique pour le détail d’un article
+Route::get('/publications/article/{id}/details', [ArticleController::class, 'showPublic'])
+     ->name('articles_detail');
 
 // route pour la page laboratoire
 Route::get('/laboratoires', [LaboratoireController::class, 'index'])->name('laboratoires.index');
 Route::get('/laboratoires/{id}', [LaboratoireController::class, 'show'])->name('laboratoires.show');
 
+// route de la section recherche page d'acceuil
+use App\Http\Controllers\RechercheController;
 
+Route::get('/recherche', [RechercheController::class, 'search'])->name('publications.search');
 
+// route pour les mails de test
+Route::get('/test-mail', function() {
+    Mail::to('honorinesawadogo07@gmail.com')->send(new TestMail('Ceci est un test'));
+    return 'Mail envoyé ! Vérifiez votre boîte de réception.';
+});
 
 
 

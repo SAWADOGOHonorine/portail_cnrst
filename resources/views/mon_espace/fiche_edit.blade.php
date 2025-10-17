@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="{{ asset('css/mon_espace/fiche_edit.css') }}">
 
+<link rel="stylesheet" href="{{ asset('css/mon_espace/fiche_edit.css') }}">
 <div class="container">
      @if(session('success'))
         <div class="alert-success">
@@ -10,7 +10,7 @@
     <h2>Modifier la fiche</h2>
 
     <!-- Bouton Retour à la liste -->
-    <a href="{{ route('fiches.index') }}" class="btn btn-secondary mb-3">↩️ Retour à la liste</a>
+    <a href="{{ route('fiches.listes') }}" class="btn btn-secondary mb-3">↩️ Retour à la liste</a>
 
     <form action="{{ route('fiches.update', $fiche->id) }}" method="POST" enctype="multipart/form-data">
         @csrf

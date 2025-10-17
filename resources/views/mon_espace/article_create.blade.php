@@ -12,7 +12,7 @@
         </div>
     @endif
 
-    <a href="{{ route('articles.index') }}" class="btn-outline-secondary">↩️ Retour à la liste</a>
+    <a href="{{ route('articles.listes') }}" class="btn-outline-secondary">↩️ Retour à la liste</a>
 
     <form method="POST" action="{{ route('articles.store') }}" enctype="multipart/form-data">
         @csrf

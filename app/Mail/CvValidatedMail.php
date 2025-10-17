@@ -3,11 +3,11 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable; // ✅ import correct
+use Illuminate\Mail\Mailable; 
 use Illuminate\Queue\SerializesModels;
 use App\Models\User;
 
-class CvValidatedMail extends Mailable // ✅ héritage correct
+class CvValidatedMail extends Mailable 
 {
     use Queueable, SerializesModels;
 

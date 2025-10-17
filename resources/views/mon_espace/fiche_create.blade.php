@@ -21,8 +21,10 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('fiches.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('fiches.listes') }}" enctype="multipart/form-data">
         @csrf
+
+        <input type="text" name="titre" placeholder="Titre de la fiche" class="form-control mt-2" required>
 
         <input type="text" name="record_type" value="{{ old('record_type') }}" placeholder="Type d’enregistrement" required class="form-control mt-2">
 

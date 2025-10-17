@@ -1,0 +1,190 @@
+/* ====================== Container général ====================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+
+/* ====================== Titres ====================== */
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2e7d32;
+}
+
+/* ====================== Wrapper cartes ====================== */
+.fiche-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 20px;
+}
+
+/* ====================== Cartes fiches ====================== */
+.fiche-card {
+    width: 100%;
+    max-width: 320px;
+    background-color: #fff;
+    border-radius: 12px;
+    border: 1px solid #e1e1e1;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    padding: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.fiche-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border-color: #28a745;
+}
+
+/* ====================== Titres des fiches ====================== */
+.fiche-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2e7d32;
+    margin-bottom: 0.5rem;
+}
+
+/* ====================== Contenu ====================== */
+.fiche-content {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+}
+
+/* ====================== Badges ====================== */
+.badge {
+    font-size: 0.85rem;
+    padding: 0.35em 0.65em;
+    border-radius: 0.25rem;
+}
+
+.bg-success {
+    background-color: #28a745 !important;
+    color: #fff !important;
+}
+
+.bg-primary {
+    background-color: #007bff !important;
+    color: #fff !important;
+}
+
+.bg-warning {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
+}
+
+.bg-secondary {
+    background-color: #6c757d !important;
+    color: #fff !important;
+}
+
+/* ====================== Boutons cartes ====================== */
+.fiche-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.fiche-actions .btn {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* Outline buttons */
+.btn-outline-primary {
+    color: #2e7d32;
+    border: 1px solid #2e7d32;
+}
+
+.btn-outline-primary:hover {
+    background-color: #2e7d32;
+    color: #fff;
+}
+
+.btn-outline-success {
+    color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.btn-outline-success:hover {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.btn-outline-danger {
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-outline-secondary {
+    color: #6c757d;
+    border: 1px solid #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+/* Bouton télécharger */
+.btn-download {
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+/* ====================== Bouton Ajouter fiche ====================== */
+.btn-ajouter {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #28a745;
+    color: #28a745;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-ajouter:hover {
+    background-color: #28a745;
+    color: #fff;
+}
+
+/* ====================== Alert success ====================== */
+.alert-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+/* ====================== Responsive ====================== */
+@media (max-width: 768px) {
+    .fiche-card {
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .fiche-actions {
+        flex-direction: column;
+    }
+}

@@ -61,7 +61,10 @@
     border-radius: 6px; 
     font-weight: 800; 
     font-size: 16px; 
-    cursor: pointer; }
+    cursor: pointer;
+    width: 180px; 
+    justify-self: start; 
+}
 
 .enseignants-section .container { 
     max-width: 1100px; 
@@ -218,7 +221,8 @@
     border-radius: 6px; 
     font-weight: 800; 
     font-size: 16px; 
-    cursor: pointer; }
+    cursor: pointer;
+    text-align: center;}
 
 .enseignants-section .container { 
     max-width: 1100px; 

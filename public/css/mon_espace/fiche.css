@@ -1,93 +1,191 @@
+/* ===============================
+   STYLE GLOBAL
+=============================== */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===============================
+   CONTAINER PRINCIPAL
+=============================== */
 .fiche-technique-wrapper {
-  background-color: #f5f5f5;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  font-family: 'Segoe UI', sans-serif;
+    max-width: 1000px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
+/* ===============================
+   TITRE
+=============================== */
 .fiche-technique-wrapper h2 {
-  color: #2e7d32;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #2e7d32;
-  padding-bottom: 0.5rem;
+    text-align: center;
+    color: #2e7d32;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
 }
 
-.form-group {
-  margin-bottom: 1.2rem;
+/* ===============================
+   FORMULAIRE
+=============================== */
+.form-fiche {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
 }
 
-.form-group label {
-  font-weight: bold;
-  color: #2e7d32;
-  font-size: 0.95rem;
-  display: block;
-  margin-bottom: 0.4rem;
+.form-fiche .form-control {
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 0.6rem;
+    width: 100%;
+    font-size: 1rem;
+    transition: 0.3s;
 }
 
-.form-control {
-  width: 100%;
-  padding: 0.6rem 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  background-color: white;
-  transition: border-color 0.2s ease;
+.form-fiche .form-control:focus {
+    border-color: #2e7d32;
+    outline: none;
 }
 
-.form-control:focus {
-  border-color: #2e7d32;
-  outline: none;
+.btn-enregistrer {
+    background-color: #2e7d32;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
-.btn-success {
-  background-color: #2e7d32;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  font-weight: bold;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.btn-enregistrer:hover {
+    background-color: #256228;
 }
 
-.btn-success:hover {
-  background-color: #27692c;
+/* ===============================
+   LISTE DES FICHES
+=============================== */
+.fiche-list {
+    margin-top: 2rem;
 }
 
 .fiche-card {
-  background-color: white;
-  border: 1px solid #ddd;
-  border-left: 4px solid #2e7d32;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 6px;
+    background: #ffffff;
+    border-left: 6px solid #2e7d32;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    transition: transform 0.2s ease;
 }
 
-.fiche-card h5 {
-  margin: 0 0 0.5rem;
-  color: #2e7d32;
+.fiche-card:hover {
+    transform: scale(1.01);
 }
 
-.fiche-card p {
-  font-size: 0.85rem;
-  color: #333;
+.fiche-title {
+    color: #2e7d32;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
 }
 
-.btn-outline-primary {
-  border: 1px solid #2e7d32;
-  color: #2e7d32;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.85rem;
-  border-radius: 4px;
-  text-decoration: none;
-  display: inline-block;
+.fiche-content {
+    color: #444;
+    margin-bottom: 1rem;
+    line-height: 1.5;
 }
 
-.btn-outline-primary:hover {
-  background-color: #2e7d32;
-  color: white;
+/* ===============================
+   ACTIONS (BOUTONS)
+=============================== */
+.fiche-actions {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-ajouter {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.btn-modifier {
+    background-color: #2196f3;
+    color: #fff;
+}
+
+.btn-supprimer {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.btn-ajouter:hover { background-color: #3c8e41; }
+.btn-modifier:hover { background-color: #0b7dda; }
+.btn-supprimer:hover { background-color: #d7322a; }
+
+.btn-link, .btn-download {
+    display: inline-block;
+    margin-top: 0.4rem;
+    color: #2e7d32;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-link:hover, .btn-download:hover {
+    text-decoration: underline;
+}
+
+/* ===============================
+   ALERTES
+=============================== */
+.alert {
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* ===============================
+   RESPONSIVE
+=============================== */
+@media (max-width: 768px) {
+    .fiche-technique-wrapper {
+        padding: 1.2rem;
+    }
+    .fiche-card {
+        padding: 1rem;
+    }
+    .fiche-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 

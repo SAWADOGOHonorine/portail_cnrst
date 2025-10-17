@@ -1,0 +1,79 @@
+/* Page entière */
+body {
+    background: linear-gradient(135deg, #f3f4f6, #e2e8f0);
+    font-family: "Poppins", Arial, sans-serif;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Conteneur principal */
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Carte principale */
+.form-login {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 40px 50px;
+    max-width: 450px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.form-login:hover {
+    transform: translateY(-5px);
+}
+
+/* Titre */
+.form-login h2 {
+    color: #16a34a; /* Vert doux */
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+/* Texte */
+.form-login p {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Bouton de retour */
+.button-login {
+    background-color: #16a34a;
+    color: white;
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-login:hover {
+    background-color: #15803d;
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .form-login {
+        padding: 30px 20px;
+    }
+
+    .form-login h2 {
+        font-size: 22px;
+    }
+
+    .form-login p {
+        font-size: 14px;
+    }
+}
