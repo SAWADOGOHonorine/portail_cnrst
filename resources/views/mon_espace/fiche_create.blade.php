@@ -1,16 +1,15 @@
-
-    <link rel="stylesheet" href="{{ asset('css/mon_espace/fiche_create.css') }}">
+<link rel="stylesheet" href="{{ asset('css/mon_espace/fiche_create.css') }}">
 
 <div class="container mt-4">
 
-    <h2> Ajouter une nouvelle fiche technique</h2>
+    <h2>➕ Ajouter une nouvelle fiche technique</h2>
 
     {{-- Bouton retour --}}
     <a href="{{ route('fiches.index') }}" class="btn btn-outline-secondary mb-3">
         ↩️ Retour à la liste
     </a>
 
-    {{-- Alert erreurs --}}
+    {{-- Alertes erreurs --}}
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul class="mb-0">
@@ -21,23 +20,51 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('fiches.listes') }}" enctype="multipart/form-data">
+    {{-- Formulaire d’ajout --}}
+    <form method="POST" action="{{ route('fiches.store') }}" enctype="multipart/form-data">
         @csrf
 
-        <input type="text" name="titre" placeholder="Titre de la fiche" class="form-control mt-2" required>
+        <div class="form-group mb-3">
+            <label for="titre">Titre de la fiche :</label>
+            <input type="text" name="titre" id="titre" value="{{ old('titre') }}" class="form-control" required>
+        </div>
 
-        <input type="text" name="record_type" value="{{ old('record_type') }}" placeholder="Type d’enregistrement" required class="form-control mt-2">
+        <div class="form-group mb-3">
+            <label for="record_type">Type d’enregistrement :</label>
+            <input type="text" name="record_type" id="record_type" value="{{ old('record_type') }}" class="form-control" required>
+        </div>
 
-        <textarea name="content" placeholder="Contenu technique" required class="form-control mt-2" rows="4">{{ old('content') }}</textarea>
+        <div class="form-group mb-3">
+            <label for="content">Contenu technique :</label>
+            <textarea name="content" id="content" class="form-control" rows="4" required>{{ old('content') }}</textarea>
+        </div>
 
-        <input type="date" name="creation_date" value="{{ old('creation_date') }}" class="form-control mt-2">
+        <div class="form-group mb-3">
+            <label for="creation_date">Date de création :</label>
+            <input type="date" name="creation_date" id="creation_date" value="{{ old('creation_date') }}" class="form-control">
+        </div>
 
-        <input type="url" name="url" value="{{ old('url') }}" placeholder="Lien externe" class="form-control mt-2">
+        <div class="form-group mb-3">
+            <label for="url">Lien externe :</label>
+            <input type="url" name="url" id="url" value="{{ old('url') }}" placeholder="https://exemple.com" class="form-control">
+        </div>
 
-        <input type="text" name="responsible" value="{{ old('responsible') }}" placeholder="Responsable" class="form-control mt-2">
+        <div class="form-group mb-3">
+            <label for="responsible">Responsable :</label>
+            <input type="text" name="responsible" id="responsible" value="{{ old('responsible') }}" class="form-control">
+        </div>
 
-        <label class="mt-2">📄 Fichier joint (optionnel)</label>
-        <input type="file" name="fichier" class="form-control">
+        {{-- ✅ Bloc ajouté : document PDF ou DOC --}}
+        <div class="form-group mb-3">
+            <label for="document">📄 Document (PDF ou DOC) :</label>
+            <input type="file" name="document" id="document" class="form-control" accept=".pdf,.doc,.docx">
+        </div>
+
+        {{-- Champ fichier supplémentaire (optionnel) --}}
+        <div class="form-group mb-3">
+            <label for="fichier">📎 Fichier joint (optionnel) :</label>
+            <input type="file" name="fichier" id="fichier" class="form-control">
+        </div>
 
         <button type="submit" class="btn btn-success mt-3">📥 Enregistrer la fiche</button>
     </form>

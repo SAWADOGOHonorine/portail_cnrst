@@ -1,0 +1,67 @@
+/* Containers et padding */
+.container {
+    width: 100%;
+    padding: 15px;
+}
+
+/* Titres centrés et adaptés */
+h1, h3, h4 {
+    word-wrap: break-word;
+}
+
+/* Cartes statistiques */
+.card {
+    width: 100%;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Tableaux adaptatifs */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Dropdowns et selects */
+.form-select {
+    width: 100%;
+}
+
+/* Notifications */
+.list-group-item {
+    word-break: break-word;
+}
+
+/* Media queries pour mobiles */
+@media (max-width: 768px) {
+    .row > [class*='col-'] {
+        margin-bottom: 15px;
+    }
+
+    /* Ajustement des cartes */
+    .card {
+        font-size: 0.9rem;
+    }
+
+    /* Tableau scroll horizontal */
+    .table-responsive {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h3, h4 {
+        font-size: 1.2rem;
+    }
+
+    .btn {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+}

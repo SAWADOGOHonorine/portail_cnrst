@@ -4,10 +4,8 @@
       
       <!-- Logo ProGRES -->
       <div class="logo-progres">
-        <div class="logo-text">
-          <span class="logo-red">Pr</span>
-          <span class="logo-icon"><i class="bi bi-search"></i></span>
-          <span class="logo-black">GRES</span>
+        <div class="logo-image">
+          <img src="{{ asset('images/CNRST.png') }}" alt="Logo du CNRST" class="logo-cnrst">
         </div>
         <div class="logo-slogan">Suivi – Traçabilité de la Recherche</div>
       </div>
@@ -30,17 +28,19 @@
             <a href="{{ url('/laboratoires') }}">LABORATOIRES</a>
           </li>
 
-          <li class="{{ request()->is('equipes') ? 'active' : '' }}">
-            <a href="{{ url('/equipes') }}">ÉQUIPES</a>
+          <li class="{{ request()->is('construction') ? 'active' : '' }}">
+              <a href="{{ route('construction') }}">ÉQUIPES</a>
           </li>
 
-          <li class="{{ request()->is('evenements') ? 'active' : '' }}">
-            <a href="{{ url('/evenements') }}">EVÉNEMENTS</a>
+
+          <li class="{{ request()->is('construction') ? 'active' : '' }}">
+              <a href="{{ route('construction') }}">EVÉNEMENTS</a>
           </li>
 
-          <li class="{{ request()->is('equipements') ? 'active' : '' }}">
-            <a href="{{ url('/equipements') }}">ÉQUIPEMENTS</a>
+          <li class="{{ request()->is('construction') ? 'active' : '' }}">
+              <a href="{{ route('construction') }}">ÉQUIPEMENTS</a>
           </li>
+
 
           <li class="{{ request()->is('valorisations') ? 'active' : '' }}">
             <a href="{{ url('valorisations') }}">VALORISATIONS</a>

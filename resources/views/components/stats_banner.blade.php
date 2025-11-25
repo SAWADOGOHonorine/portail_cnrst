@@ -1,25 +1,35 @@
+<link rel="stylesheet" href="{{ asset('css/pages/banniere.css') }}">
 <section class="stats-banner">
   <div class="stats-banner__inner">
-    <div class="stats-banner__item">
+
+    <!-- CHERCHEURS -->
+    <a href="#" class="stats-banner__item">
       <i class="bi bi-people-fill"></i>
       <div class="stats-banner__value">{{ $nbEnseignants ?? 0 }}</div>
-      <div class="stats-banner__label">ENSEIGNANTS_<br>CHERCHEURS</div>
-    </div>
-    <div class="stats-banner__item">
+      <div class="stats-banner__label">CHERCHEURS</div>
+    </a>
+
+    <!-- PUBLICATIONS -->
+    <a href="{{ route('publications.index') }}" class="stats-banner__item">
       <i class="bi bi-journal-bookmark-fill"></i>
       <div class="stats-banner__value">{{ $nbPublications ?? 0 }}</div>
       <div class="stats-banner__label">PUBLICATIONS</div>
-    </div>
-    <div class="stats-banner__item">
+    </a>
+
+    <!-- LABORATOIRES -->
+    <a href="{{ route('laboratoires.index') }}" class="stats-banner__item">
       <i class="bi bi-flask"></i>
       <div class="stats-banner__value">{{ $nbLaboratoires ?? 0 }}</div>
       <div class="stats-banner__label">LABORATOIRES</div>
-    </div>
-    <div class="stats-banner__item">
+    </a>
+
+    <!-- PROJETS -->
+    <a href="#" class="stats-banner__item">
       <i class="bi bi-globe2"></i>
       <div class="stats-banner__value">{{ $nbProjets ?? 0 }}</div>
       <div class="stats-banner__label">PROJETS</div>
-    </div>
+    </a>
+
   </div>
 </section>
 

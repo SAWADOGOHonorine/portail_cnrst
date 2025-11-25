@@ -19,8 +19,8 @@
             </nav>
 
             <div class="footer-text">
-                <p>ProGRES &copy; 2025 - 2026 &middot; Tous droits réservés &middot; Centre National de la Recherche Scientifique et Technologique</p>
-                <p>ProGRES 2.0 plus Simple, plus Flexible, plus Robuste</p>
+                <p>CNRST &copy; 2025 - 2026 &middot; Tous droits réservés &middot; Centre National de la Recherche Scientifique et Technologique</p>
+                <p>CNRST plus Simple, plus Flexible, plus Robuste</p>
             </div>
         </div>
     </div>

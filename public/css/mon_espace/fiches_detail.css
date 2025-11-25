@@ -33,10 +33,10 @@
 
 /* Aligne le titre avec la carte de détails */
 .page-title {
-  max-width: 1000px;      /* même largeur que .detail-card */
-  margin: 0 auto 10px;    /* centre horizontalement + espace en bas */
-  text-align: left !important; /* remet le texte à gauche */
-  padding-left: 4px;     /* même retrait que .detail-card */
+  max-width: 1000px;     
+  margin: 0 auto 10px;    
+  text-align: left !important; 
+  padding-left: 4px;     
   box-sizing: border-box;
 }
 
@@ -91,22 +91,42 @@
 .btn-retour {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #28a745; /* vert */
-    color: #fff; /* texte blanc */
+    background-color: #28a745; 
+    color: #fff; 
     font-weight: 600;
     font-size: 14px;
-    border-radius: 8px; /* coins arrondis */
+    border-radius: 8px; 
     text-decoration: none;
     transition: background-color 0.3s, transform 0.2s;
 }
 
 .btn-retour:hover {
-    background-color: #218838; /* vert plus foncé au survol */
+    background-color: #218838; 
     transform: translateY(-2px); /* effet léger de soulèvement */
     text-decoration: none;
 }
 
 .btn-retour:active {
-    background-color: #1e7e34; /* vert encore plus foncé quand cliqué */
+    background-color: #1e7e34; 
     transform: translateY(0);
+}
+
+/* Bouton document */
+.btn-document {
+    border-radius: 50px !important;   
+    padding: 10px 25px !important;    
+    font-weight: 500 !important;      
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    background-color: #28a745 !important;  
+    color: #fff !important;                 
+    border: none !important;
+    transition: all 0.3s;
+}
+
+.btn-document:hover {
+    background-color: #218838 !important;  
+    color: #fff !important;
+    text-decoration: none !important;
 }

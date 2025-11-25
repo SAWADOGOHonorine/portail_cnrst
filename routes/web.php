@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Http\Request;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +16,7 @@ use App\Http\Controllers\FicheController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\LaboratoireController;
+use App\Http\Controllers\ChercheurController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
@@ -45,8 +48,74 @@ Route::get('/search', function () {
     return view('pages.search');
 })->name('search');
 
-//  Dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+// Dashboard & admin
+Route::middleware(['auth', 'role:admin|super_admin|directeur|directeur_institut|chef_departement|DG|DGA'])->prefix('admin')->name('admin.')->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    // Activer / désactiver
+    Route::post('/users/{user}/activate', [AdminController::class, 'activateUser'])->name('users.activate');
+    Route::delete('/users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
+
+    // Gestion des utilisateurs
+    Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::post('/users/{id}/make-admin', [AdminController::class, 'makeAdmin'])->name('makeAdmin');
+    Route::put('/users/{id}/update-role', [AdminController::class, 'updateRole'])->name('updateRole');
+
+    // Gestion des CVs
+    Route::get('/cvs', [AdminController::class, 'cvs'])->name('cvs');
+    // Page d'aperçu du CV (HTML)
+Route::get('/mon-espace/cv/{id}', [CvController::class, 'cv_show'])
+    ->name('mon_espace.cv_show');
+
+// Voir / télécharger le fichier CV
+Route::get('/cv/fichier/{id}', [CvController::class, 'show'])
+    ->name('cv.show');
+
+Route::get('admin/cv/{id}', [CvController::class, 'showAdmin'])->name('admin.cv.show');
+
+
+    // Notifications
+    Route::post('/notifications/mark-read', [AdminController::class, 'markNotificationsAsRead'])->name('notifications.read');
+    Route::post('/notifications/mark-as-read', [AdminController::class, 'markNotificationsAsRead'])->name('notifications.markAsRead');
+
+    // Profil admin
+    Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
+    Route::get('/profile/edit', [AdminController::class, 'editProfile'])->name('editProfile');
+    Route::post('/profile/update', [AdminController::class, 'updateProfile'])->name('updateProfile');
+    Route::get('/profile/change-password', [AdminController::class, 'changePassword'])->name('changePassword');
+    Route::post('/profile/update-password', [AdminController::class, 'updatePassword'])->name('updatePassword');
+    // Modifier un utilisateur
+    Route::get('/admin/users/{user}/edit', [adminController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}', [adminController::class, 'update'])->name('admin.users.update');
+    Route::get('/users/{user}/edit', [AdminController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [AdminController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
+    
+    // Activer un utilisateur
+
+    // Désactiver un utilisateur
+    Route::delete('/admin/users/{user}', [adminController::class, 'destroy'])->name('admin.users.destroy');
+
+    // Créer un utilisateur
+     Route::get('/users/create', [AdminController::class, 'create'])->name('users.create');
+     // Stockage nouvel utilisateur
+    Route::post('/users', [AdminController::class, 'store'])->name('users.store');
+    // Route::get('/users/activate/{token}', [AdminController::class, 'activateUser'])->name('users.activate');
+});
+Route::get('/users/activate/{token}', [AdminController::class, 'activateUser'])->name('users.activate');
+
+
+// Route::middleware(['auth', 'role:user'])
+//     ->prefix('user')->name('user.')->group(function () {
+//         Route::get('/dashboard', [adminController::class, 'dashboard'])->name('dashboard');
+        
+//     });
+
+//  Dashboard user
+Route::middleware(['auth'])->get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+Route::get('/cv/{id}/pdf', [CvController::class, 'showPdf'])->name('cv.pdf');
+
 
 // route pour la page d'accès refusé du dashboard
 Route::get('/access-dashboard-refuse', function () {
@@ -104,16 +173,29 @@ Route::get('/documentation/{section}', function ($section) {
     return view("partials.documentation.$section");
 })->name('documentation.section');
 
-
 // les routes pour le dossier mon_espace
 
-// pour le cv
-Route::get('/cv', [CvController::class, 'create'])->name('cv_form');
-Route::post('/cv', [CvController::class, 'store'])->name('cv.store');
-Route::get('/cv/download', [CvController::class, 'downloadPdf'])->name('cv.download');
-Route::get('/mon_espace/cv_form', function () {
-    return view('mon_espace.cv_form');
+Route::middleware(['auth'])->group(function () {
+
+    // Page "Mon CV" → GET
+    Route::get('/mon_espace/cv', [CvController::class, 'monCv'])->name('cv.index');
+
+    // Enregistrement du CV → POST
+    Route::post('/mon_espace/cv', [CvController::class, 'store'])->name('cv.store');
+
+    // Afficher le CV spécifique → GET
+    Route::get('/mon_espace/cv/{id}', [CvController::class, 'show'])->name('cv.show');
+
+    // Afficher le fichier PDF/DOC → GET
+    Route::get('/mon_espace/cv/fichier/{id}', [CvController::class, 'viewFile'])->name('cv.file');
+    // Route::get('/cv/view/{id}', [CvController::class, 'viewPdfFpdf'])->name('cv.view');
+    Route::get('/cv/view/{id}', [CvController::class, 'viewFile'])->name('cv.view');
+    // Route::get('/cv/pdf/view/{id}', [CvController::class, 'viewPdf'])->name('cv.view');
+    Route::get('/cv/pdf/download/{id}', [CvController::class, 'downloadPdf'])->name('cv.download');
+
+
 });
+
 
 // ----------------------------
 // Page publique (GET)
@@ -150,12 +232,9 @@ Route::middleware(['auth'])->prefix('mon_espace')->group(function () {
 // Route publique pour afficher le détail d’une fiche
 Route::get('/publications/fiche/{id}/details', [FicheController::class, 'showPublic'])
     ->name('fiches_detail');
-
-
+    Route::get('/fiche/document/{id}', [FicheController::class, 'showDocument'])->name('fiche.document');
 
 // les routes articles (dashboard privé)
-// Routes protégées (CRUD)
-// Routes protégées (CRUD)
 Route::middleware(['auth'])->prefix('mon_espace')->group(function () {
     Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
     Route::get('articles/create', [ArticleController::class, 'create'])->name('articles.create');
@@ -180,7 +259,7 @@ Route::get('/laboratoires/{id}', [LaboratoireController::class, 'show'])->name('
 // route de la section recherche page d'acceuil
 use App\Http\Controllers\RechercheController;
 
-Route::get('/recherche', [RechercheController::class, 'search'])->name('publications.search');
+// Route::get('/recherche', [RechercheController::class, 'search'])->name('publications.search');
 
 // route pour les mails de test
 Route::get('/test-mail', function() {
@@ -189,8 +268,18 @@ Route::get('/test-mail', function() {
 });
 
 
+Route::get('/test-mail', function() {
+    Mail::raw('Ceci est un test', function($message){
+        $message->to('tonmail@gmail.com')
+                ->subject('Test');
+    });
+    return "Mail envoyé !";
+});
 
-
+Route::get('/chercheurs', [ChercheurController::class, 'index'])->name('chercheurs.index');
+Route::get('/construction', function () {
+    return view('construction');
+})->name('construction');
 
 
 

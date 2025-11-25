@@ -12,6 +12,27 @@
     max-width: 1200px;
     margin: 0 auto;
     gap: 20px;
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+.stats-banner__item,
+.stats-banner__item * {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+.stats-banner__item:hover,
+.stats-banner__item:focus {
+    text-decoration: none !important;
+    border-bottom: none !important;
+}
+
+
+.stats-banner__item div,
+.stats-banner__item i {
+    text-decoration: none !important;
 }
 
 .stats-banner__item {

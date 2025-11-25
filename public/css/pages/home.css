@@ -4,7 +4,7 @@
 .section-recherche {
   background: url('/images/fond-accueil.jpg') center/cover no-repeat;
   position: relative;
-  min-height: 16rem;   
+  min-height: 5rem;   
   display: flex;
   align-items: center;
   justify-content: center;

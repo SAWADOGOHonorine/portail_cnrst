@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('cv', function (Blueprint $table) {
             $table->id();
+            
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('photo')->nullable();
             $table->text('diplomas')->nullable();
@@ -23,7 +24,6 @@ return new class extends Migration
             $table->string('website')->nullable();
             $table->timestamps();
         });
-        
         
     }
 

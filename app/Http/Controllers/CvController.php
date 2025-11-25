@@ -4,95 +4,224 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Cv;
+use Barryvdh\DomPDF\Facade\Pdf; 
+use FPDF;
+use App\Models\User;
+
+
+
 
 class CvController extends Controller
 {
     /**
-     * Affiche le formulaire CV
+     *  Affiche le formulaire de création du CV
      */
     public function create()
     {
-        $cvs = Cv::where('user_id', auth()->id())->latest()->get();
-        return view('mon_espace.cv_form', compact('cvs'));
-    }
-    /**
- * Affiche le fichier CV dans le navigateur (sans layout)
- */
-    public function show($id)
-    {
-        $cv = Cv::findOrFail($id);
-        $path = storage_path('app/public/' . $cv->cv_path);
-
-        if (file_exists($path)) {
-            return response()->file($path); 
-        }
-
-        return back()->with('error', 'Fichier introuvable.');
+        return view('mon_espace.cv_form');
     }
 
-
     /**
-     * Enregistre les données du CV en session + base + fichier
+     * 💾 Enregistre le CV et redirige vers la page HTML d’affichage (cv_show)
      */
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'full_name'    => ['required', 'string', 'max:255'],
-            'job_title'    => ['nullable', 'string', 'max:255'],
-            'email'        => ['required', 'email', 'max:255'],
-            'phone'        => ['nullable', 'string', 'max:50'],
-            'city'         => ['nullable', 'string', 'max:100'],
-            'linkedin'     => ['nullable', 'url', 'max:255'],
-            'github'       => ['nullable', 'url', 'max:255'],
-            'summary'      => ['nullable', 'string', 'max:2000'],
-            'skills'       => ['nullable', 'string', 'max:2000'],
-            'experiences'  => ['nullable', 'string', 'max:4000'],
-            'educations'   => ['nullable', 'string', 'max:2000'],
-            'languages'    => ['nullable', 'string', 'max:1000'],
-            'interests'    => ['nullable', 'string', 'max:1000'],
-            'cv_file'      => ['required', 'file', 'mimes:pdf,doc,docx', 'max:2048'],
+            'nom'             => 'required|string|max:255',
+            'prenom'          => 'required|string|max:255',
+            'email'           => 'required|email|max:255',
+            'telephone'       => 'nullable|string|max:50',
+            'whatsapp'        => 'nullable|string|max:20',
+            'adresse'         => 'nullable|string|max:255',
+            'ville'           => 'nullable|string|max:255',
+            'pays'            => 'required|string|max:255',
+            'departement'     => 'required|string|max:255',
+            'institut'        => 'required|string|max:255',
+            'specialite'      => 'nullable|string|max:255',
+            'domaine'         => 'nullable|string|max:255',
+            'mot_cle'         => 'nullable|string|max:255',
+            'date_naissance'  => 'nullable|date',
+            'lieu_naissance'  => 'nullable|string|max:255',
+            'detaille_scientifique' => 'nullable|string',
+            'projet_recherche'      => 'nullable|string',
+            'genre'                 => 'nullable|in:homme,femme,autre',
+            'thematique_recherche'  => 'nullable|string',
+
+            'cv_file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
-        // 📁 Stockage du fichier avec nom unique
+        // Upload du fichier
         if ($request->hasFile('cv_file')) {
             $file = $request->file('cv_file');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $path = $file->storeAs('cvs', $filename, 'public');
-            $validated['cv_path'] = 'cvs/' . $filename;
-
-            unset($validated['cv_file']);
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+            $validated['cv_path'] = $file->storeAs('cvs', $filename, 'public');
         }
 
-        // 💾 Enregistrement en base
-        Cv::create([
-            'user_id' => auth()->id(),
-            'cv_path' => $validated['cv_path'],
-        ]);
+        // Enregistrement ou mise à jour du CV
+        $cv = Cv::updateOrCreate(
+            ['user_id' => auth()->id()],
+            $validated
+        );
 
-        // 💾 Enregistrement en session
-        $request->session()->put('cv_data', $validated);
-
-        return redirect()->route('cv_form')->with('status', 'CV enregistré avec succès.');
+        return redirect()
+            ->route('cv.show', $cv->id)
+            ->with('status', 'CV sauvegardé avec succès !');
     }
 
     /**
-     * Génère le PDF du CV actif
+     * 🧾 Affiche la page HTML du CV
      */
-    public function downloadPdf(Request $request)
+    public function show($id)
     {
-        $cvData = $request->session()->get('cv_data');
+        $cv = Cv::findOrFail($id);
+        return view('mon_espace.cv_show', compact('cv'));
+    }
 
-        if (!$cvData) {
-            return back()->withErrors(['cv' => "Veuillez d'abord remplir et enregistrer votre CV."]);
+    /**
+     * 📂 Visionnage inline du fichier PDF/DOC uploadé
+     */
+    public function viewFile($id)
+    {
+        $cv = Cv::findOrFail($id);
+
+        if (!$cv->cv_path || !Storage::disk('public')->exists($cv->cv_path)) {
+            abort(404, "Fichier introuvable.");
         }
 
-        $pdf = Pdf::loadView('mon_espace.cv_pdf', ['cv' => $cvData]);
-        $fileName = 'CV_' . preg_replace('/[^A-Za-z0-9_-]+/', '_', $cvData['full_name']) . '.pdf';
+        $extension = pathinfo($cv->cv_path, PATHINFO_EXTENSION);
+        $mimeTypes = [
+            'pdf'  => 'application/pdf',
+            'doc'  => 'application/msword',
+            'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        ];
+        $mime = $mimeTypes[$extension] ?? 'application/octet-stream';
 
-        return $pdf->download($fileName);
+        return response()->file(storage_path('app/public/' . $cv->cv_path), [
+            'Content-Type'        => $mime,
+            'Content-Disposition' => 'inline; filename="' . basename($cv->cv_path) . '"'
+        ]);
     }
+    // ...
+
+    public function generatePdf($id)
+    {
+        $cv = Cv::findOrFail($id);
+
+        $pdf = new FPDF();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial','B',16);
+
+        // Titre
+        $pdf->Cell(0,10,'CV de '.$cv->nom.' '.$cv->prenom,0,1,'C');
+
+        $pdf->Ln(5); // Saut de ligne
+
+        // Informations personnelles
+        $pdf->SetFont('Arial','',12);
+        $pdf->Cell(50,8,'Nom:',0,0);
+        $pdf->Cell(0,8,$cv->nom,0,1);
+
+        $pdf->Cell(50,8,'Prénom:',0,0);
+        $pdf->Cell(0,8,$cv->prenom,0,1);
+
+        $pdf->Cell(50,8,'Email:',0,0);
+        $pdf->Cell(0,8,$cv->email,0,1);
+
+        $pdf->Cell(50,8,'Téléphone:',0,0);
+        $pdf->Cell(0,8,$cv->telephone ?? '-',0,1);
+
+        $pdf->Cell(50,8,'WhatsApp:',0,0);
+        $pdf->Cell(0,8,$cv->whatsapp ?? '-',0,1);
+
+        $pdf->Cell(50,8,'Adresse:',0,0);
+        $pdf->Cell(0,8,$cv->adresse ?? '-',0,1);
+
+        $pdf->Cell(50,8,'Ville:',0,0);
+        $pdf->Cell(0,8,$cv->ville ?? '-',0,1);
+
+        $pdf->Cell(50,8,'Pays:',0,0);
+        $pdf->Cell(0,8,$cv->pays,0,1);
+
+        $pdf->Cell(50,8,'Institut:',0,0);
+        $pdf->Cell(0,8,$cv->institut,0,1);
+
+        $pdf->Cell(50,8,'Département:',0,0);
+        $pdf->Cell(0,8,$cv->departement,0,1);
+
+        $pdf->Cell(50,8,'Spécialité:',0,0);
+        $pdf->Cell(0,8,$cv->specialite ?? '-',0,1);
+
+        $pdf->Cell(50,8,'Domaine:',0,0);
+        $pdf->Cell(0,8,$cv->domaine ?? '-',0,1);
+
+        $pdf->Cell(50,8,'Mot clé:',0,0);
+        $pdf->Cell(0,8,$cv->mot_cle ?? '-',0,1);
+
+        $pdf->Cell(50,8,'Date de naissance:',0,0);
+        $pdf->Cell(0,8,$cv->date_naissance ?? '-',0,1);
+
+        $pdf->Cell(50,8,'Lieu de naissance:',0,0);
+        $pdf->Cell(0,8,$cv->lieu_naissance ?? '-',0,1);
+
+        $pdf->Cell(50,8,'Détail scientifique:',0,0);
+        $pdf->MultiCell(0,8,$cv->detaille_scientifique ?? '-');
+
+        $pdf->Cell(50,8,'Projet de recherche:',0,0);
+        $pdf->MultiCell(0,8,$cv->projet_recherche ?? '-');
+
+        $pdf->Cell(50,8,'Genre:',0,0);
+        $pdf->Cell(0,8,$cv->genre ?? '-',0,1);
+
+        $pdf->Cell(50,8,'Thématique de recherche:',0,0);
+        $pdf->MultiCell(0,8,$cv->thematique_recherche ?? '-');
+
+        $pdf->Output('I','CV_'.$cv->nom.'_'.$cv->prenom.'.pdf');
+        exit;
+    }
+
+    /**
+     * 📌 Page "Mon CV" dans le dashboard
+     */
+    public function monCv()
+    {
+        $cv = Cv::where('user_id', auth()->id())->first();
+        return $cv ? view('mon_espace.cv_show', compact('cv')) : view('mon_espace.cv_form');
+    }
+
+
+public function downloadPdf($id)
+{
+    $cv = Cv::findOrFail($id);
+
+    // Génère le PDF à partir d'une vue Blade
+    $pdf = Pdf::loadView('mon_espace.cv_pdf', compact('cv'));
+
+    // Télécharge le PDF avec un nom personnalisé
+    return $pdf->download("CV_{$cv->nom}_{$cv->prenom}.pdf");
+}
+
+
+public function showPdf($id)
+{
+    $cv = Cv::findOrFail($id);
+
+    // Génère le PDF à partir d'une vue Blade
+    $pdf = Pdf::loadView('mon_espace.cv_pdf', compact('cv'));
+
+    // Télécharge le PDF avec un nom personnalisé
+    return $pdf->stream("CV_{$cv->nom}_{$cv->prenom}.pdf");
+}
+
+public function showAdmin($id)
+{
+    $user = User::findOrFail($id);
+    $cv = Cv::where('user_id', $id)->first();
+
+    return view('admin.cv_show', compact('user', 'cv'));
+}
+
+
 }
 
 

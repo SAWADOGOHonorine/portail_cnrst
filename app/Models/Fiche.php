@@ -31,6 +31,7 @@ class Fiche extends Model
         'responsible',
         'status',
         'fichier',
+        'document',
     ];
 
     /**

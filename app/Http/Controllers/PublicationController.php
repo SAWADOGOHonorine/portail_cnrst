@@ -40,7 +40,7 @@ class PublicationController extends Controller
         foreach ($articlesQuery as $article) {
             $combined->push([
                 'type' => 'article',
-                'data' => $article  // <- garder objet Eloquent
+                'data' => $article  
             ]);
         }
 

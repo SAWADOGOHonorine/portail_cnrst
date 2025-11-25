@@ -152,4 +152,50 @@
         width: 100%;
     }
 }
+/* Bouton Lire plus */
+.publication-item .btn {
+    padding: 6px 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.publication-item .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+}
+
+.publication-item .btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.publication-item .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+.publication-item .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Optionnel : aligner le bouton à droite sur mobile */
+@media (max-width: 576px) {
+    .publication-item .d-flex.justify-content-between {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .publication-item .btn {
+        margin-top: 8px;
+    }
+}
+
 

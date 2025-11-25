@@ -7,22 +7,24 @@ use App\Models\Fiche;
 use App\Models\Article;
 use App\Models\Thematique;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Str;
 
 class FicheController extends Controller
 {
-        // Page principale avec formulaire (dashboard privé)
+    // Page principale (dashboard privé)
     public function index()
     {
         $fiches = Fiche::where('user_id', auth()->id())->latest()->paginate(6);
-        $thematiques = Thematique::all(); // <- ajoute cette ligne
+        $thematiques = Thematique::all();
+
         return view('mon_espace.fiches', compact('fiches', 'thematiques'));
     }
 
-    // Affiche le formulaire d’ajout
+    // Formulaire d’ajout
     public function create()
     {
         $thematiques = Thematique::all();
-        return view('mon_espace.fiche_create', compact('thematiques')); 
+        return view('mon_espace.fiche_create', compact('thematiques'));
     }
 
     // Enregistre une nouvelle fiche
@@ -36,11 +38,12 @@ class FicheController extends Controller
             'auteurs'       => 'nullable|string|max:255',
             'annee'         => 'nullable|string|max:10',
             'discipline'    => 'nullable|string|max:255',
-            'thematique'  => 'nullable|string|max:255',
+            'thematique'    => 'nullable|string|max:255',
             'mots_cles'     => 'nullable|string|max:255',
             'source'        => 'nullable|string',
             'url'           => 'nullable|url',
-            'fichier'       => 'nullable|file',
+            'fichier'       => 'nullable|file|mimes:pdf,doc,docx|max:4096',
+            'document'      => 'nullable|file|mimes:pdf,doc,docx|max:4096',
         ]);
 
         $data['user_id'] = auth()->id();
@@ -48,9 +51,16 @@ class FicheController extends Controller
 
         if ($request->hasFile('fichier')) {
             $file = $request->file('fichier');
-            $filename = time().'_'.$file->getClientOriginalName();
+            $filename = time() . '_' . $file->getClientOriginalName();
             $file->storeAs('fiches', $filename, 'public');
-            $data['fichier'] = $filename;
+            $data['fichier'] = 'fiches/' . $filename;
+        }
+
+        if ($request->hasFile('document')) {
+            $document = $request->file('document');
+            $documentName = time() . '_' . $document->getClientOriginalName();
+            $document->storeAs('documents', $documentName, 'public');
+            $data['document'] = 'documents/' . $documentName;
         }
 
         Fiche::create($data);
@@ -59,14 +69,14 @@ class FicheController extends Controller
                          ->with('success', '✔ Fiche enregistrée avec succès !');
     }
 
-    // Page liste des fiches (sans formulaire)
+    // Liste des fiches
     public function listes()
     {
         $fiches = Fiche::where('user_id', auth()->id())->latest()->paginate(6);
         return view('mon_espace.fiches_listes', compact('fiches'));
     }
 
-    // Affiche le formulaire de modification
+    // Formulaire d’édition
     public function edit($id)
     {
         $fiche = Fiche::findOrFail($id);
@@ -74,30 +84,39 @@ class FicheController extends Controller
         return view('mon_espace.fiche_edit', compact('fiche', 'thematiques'));
     }
 
-    // Met à jour une fiche
+    // Mise à jour d’une fiche
     public function update(Request $request, $id)
     {
         $fiche = Fiche::findOrFail($id);
 
         $validated = $request->validate([
+            'record_type'   => 'required|string|max:255',
             'titre'         => 'required|string|max:255',
             'resume'        => 'nullable|string',
             'description'   => 'nullable|string',
             'auteurs'       => 'nullable|string|max:255',
             'annee'         => 'nullable|string|max:10',
             'discipline'    => 'nullable|string|max:255',
-            'thematique'  => 'nullable|string|max:255',
+            'thematique'    => 'nullable|string|max:255',
             'mots_cles'     => 'nullable|string|max:255',
             'source'        => 'nullable|string',
             'url'           => 'nullable|url',
-            'fichier'       => 'nullable|file',
+            'fichier'       => 'nullable|file|mimes:pdf,doc,docx|max:4096',
+            'document'      => 'nullable|file|mimes:pdf,doc,docx|max:4096',
         ]);
 
         if ($request->hasFile('fichier')) {
             $file = $request->file('fichier');
-            $filename = time().'_'.$file->getClientOriginalName();
+            $filename = time() . '_' . $file->getClientOriginalName();
             $file->storeAs('fiches', $filename, 'public');
-            $validated['fichier'] = $filename;
+            $validated['fichier'] = 'fiches/' . $filename;
+        }
+
+        if ($request->hasFile('document')) {
+            $document = $request->file('document');
+            $documentName = time() . '_' . $document->getClientOriginalName();
+            $document->storeAs('documents', $documentName, 'public');
+            $validated['document'] = 'documents/' . $documentName;
         }
 
         $fiche->update($validated);
@@ -116,26 +135,42 @@ class FicheController extends Controller
                          ->with('success', '🗑 Fiche supprimée avec succès !');
     }
 
-    // Affiche une fiche publique validée
+    // Affiche une fiche publique avec **toutes les informations**
     public function showPublic($id)
     {
-        $fiche = Fiche::with('thematique', 'user')
-                    ->where('id', $id)
-                    ->where('status', 'validated')
-                    ->firstOrFail();
+        $fiche = Fiche::findOrFail($id); // On récupère directement par ID
 
-        $fiche->resume      = $fiche->resume ?? \Str::limit($fiche->description ?? '', 150);
-        $fiche->auteurs     = $fiche->auteurs ?? ($fiche->user->name ?? 'Inconnu');
+        // Fallbacks si certains champs sont vides
+        $fiche->resume      = $fiche->resume ?? Str::limit($fiche->description ?? '', 150);
+        $fiche->auteurs     = $fiche->auteurs ?? ($fiche->user?->name ?? 'Inconnu');
         $fiche->discipline  = $fiche->discipline ?? 'Non précisée';
         $fiche->mots_cles   = $fiche->mots_cles ?? 'Non renseignés';
         $fiche->description = $fiche->description ?? 'Aucune description disponible';
         $fiche->type        = $fiche->titre ?? 'Fiche Technique';
         $fiche->source      = $fiche->source ?? $fiche->url ?? null;
+        // Ajout du document (avec fallback)
+        $fiche->document    = $fiche->document ?? 'Document non disponible';
+
 
         return view('publications.fiches_detail', compact('fiche'));
     }
 
-    // Affiche la liste publique combinée Articles + Fiches
+public function showDocument($id)
+{
+    $fiche = Fiche::findOrFail($id);
+
+    // Vérifie si le document existe
+    if ($fiche->document && file_exists(storage_path('app/public/' . $fiche->document))) {
+        // Si c'est un PDF → on peut l'afficher dans la vue
+        return view('publications.fiche_document', compact('fiche'));
+    }
+
+    // Si document inexistant → on retourne une vue avec message
+    return view('publications.fiche_document_non_disponible', compact('fiche'));
+}
+
+    
+    // Liste publique combinée Articles + Fiches
     public function indexPublic(Request $request)
     {
         $articles = Article::where('status', 'published')->latest()->get();
@@ -144,11 +179,11 @@ class FicheController extends Controller
         $combined = collect();
 
         foreach ($articles as $article) {
-            $combined->push(['type'=>'article','data'=>$article]);
+            $combined->push(['type' => 'article', 'data' => $article]);
         }
 
         foreach ($fiches as $fiche) {
-            $combined->push(['type'=>'fiche','data'=>$fiche]);
+            $combined->push(['type' => 'fiche', 'data' => $fiche]);
         }
 
         $combined = $combined->sortByDesc(fn($item) => $item['data']->created_at);
@@ -162,13 +197,13 @@ class FicheController extends Controller
             $combined->count(),
             $perPage,
             $currentPage,
-            ['path'=>$request->url(),'query'=>$request->query()]
+            ['path' => $request->url(), 'query' => $request->query()]
         );
 
-        return view('publications.index', ['combined'=>$paginatedCombined]);
+        return view('publications.index', ['combined' => $paginatedCombined]);
     }
 
-    // Affiche une fiche individuelle
+    // Fiche individuelle (privée)
     public function show($id)
     {
         $fiche = Fiche::findOrFail($id);

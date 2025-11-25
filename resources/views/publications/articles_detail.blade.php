@@ -1,3 +1,5 @@
+
+
 @extends('layouts.app')
 
 @section('title', 'Détail de l’article')
@@ -17,6 +19,7 @@
             </h2>
             <div class="underline" style="width: 50px; height: 4px; background-color: #28a745; margin-top: 5px;"></div>
         </div>
+
         <div class="detail-card">
 
             {{-- Header --}}
@@ -71,6 +74,28 @@
                         <p>{{ ucfirst($article->status) }}</p>
                     </div>
                 @endif
+
+                {{-- Mots-clés --}}
+                @if(!empty($article->keywords))
+                    <div class="detail-section">
+                        <h5>Mots-clés :</h5>
+                        <p>{{ $article->keywords }}</p>
+                    </div>
+                @endif
+
+                {{-- Document --}}
+                @if(!empty($article->document))
+                    <div class="detail-section">
+                        <h5>Document :</h5>
+                        <p>
+                            <a href="{{ asset('storage/documents/' . $article->document) }}" 
+                               target="_blank" 
+                               class="btn btn-success btn-document">
+                               <i class="bi bi-file-earmark-pdf"></i> Voir / Télécharger
+                            </a>
+                        </p>
+                    </div>
+                @endif
             </div>
 
             {{-- Footer --}}
@@ -81,3 +106,4 @@
     </div>
 </section>
 @endsection
+

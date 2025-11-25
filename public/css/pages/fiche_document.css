@@ -1,0 +1,46 @@
+/* Container centré */
+.document-unavailable-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    text-align: center;
+    padding: 50px 15px;
+    background-color: #f8f9fa; /* fond léger */
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Titre */
+.document-unavailable-container h2 {
+    font-size: 2rem;
+    color: #dc3545; /* rouge Bootstrap pour erreur */
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Texte descriptif */
+.document-unavailable-container p {
+    font-size: 1.1rem;
+    color: #6c757d; /* gris Bootstrap */
+    margin-bottom: 25px;
+}
+
+/* Bouton retour */
+.document-unavailable-container .btn {
+    padding: 10px 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+
+.document-unavailable-container .btn:hover {
+    background-color: #218838; /* vert foncé au survol */
+    color: #fff;
+    text-decoration: none;
+}

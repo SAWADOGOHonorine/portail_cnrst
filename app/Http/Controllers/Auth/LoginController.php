@@ -15,24 +15,37 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        // Validation des champs
         $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required']
+            'password' => ['required'],
         ]);
 
-        // Tentative de connexion
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
-            return redirect()->intended('/dashboard')
-                ->with('status', 'Connexion réussie.');
+            return $this->authenticated($request, Auth::user());
         }
 
-        // Échec de connexion
         return back()->withErrors([
             'email' => 'Identifiants incorrects.',
         ])->onlyInput('email');
     }
-}
 
+    public function logout(Request $request)
+     
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
+    }
+
+    protected function authenticated($user)
+    {
+        if ($user->role === 'user') {
+            return redirect()->route('user.dashboard');
+        }
+
+        return redirect()->route('admin.dashboard');
+    }
+}

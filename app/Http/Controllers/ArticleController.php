@@ -33,6 +33,7 @@ class ArticleController extends Controller
             'summary'           => 'nullable|string',
             'author'            => 'nullable|string|max:255',
             'co_authors'        => 'nullable|string|max:255',
+            'keywords'          => 'nullable|string|max:255',
             'publication_date'  => 'nullable|date',
             'status'            => 'required|in:submitted,accepted,published',
             'fichier'           => 'nullable|file|mimes:pdf,doc,docx|max:2048'
@@ -47,7 +48,7 @@ class ArticleController extends Controller
         Article::create($data);
 
         return redirect()->route('articles.listes')
-                         ->with('success', ' Article enregistré avec succès !');
+                         ->with('success', '✏️ Article enregistré avec succès !');
     }
 
     // Page liste des articles (sans formulaire)
@@ -80,6 +81,7 @@ class ArticleController extends Controller
             'summary'           => 'nullable|string',
             'author'            => 'nullable|string|max:255',
             'co_authors'        => 'nullable|string|max:255',
+            'keywords'          => 'nullable|string|max:255',
             'publication_date'  => 'nullable|date',
             'status'            => 'required|in:submitted,accepted,published',
             'fichier'           => 'nullable|file|mimes:pdf,doc,docx|max:2048'
@@ -116,6 +118,10 @@ class ArticleController extends Controller
             abort(403);
         }
 
+        if (!$article->fichier) {
+            abort(404, 'Aucun fichier disponible pour cet article.');
+        }
+
         return response()->download(storage_path('app/public/' . $article->fichier));
     }
 
@@ -130,14 +136,14 @@ class ArticleController extends Controller
         foreach ($articles as $article) {
             $combined->push([
                 'type' => 'article',
-                'data' => $article // <-- objet Eloquent
+                'data' => $article 
             ]);
         }
 
         foreach ($fiches as $fiche) {
             $combined->push([
                 'type' => 'fiche',
-                'data' => $fiche // <-- objet Eloquent
+                'data' => $fiche 
             ]);
         }
 
@@ -157,12 +163,13 @@ class ArticleController extends Controller
 
         return view('publications.index', ['combined' => $paginatedCombined]);
     }
+
+    // Affiche un article individuel privé
     public function show($id)
     {
         $article = Article::findOrFail($id);
         return view('mon_espace.articles.show', compact('article'));
     }
-
 
     // Affiche un article individuel public
     public function showPublic($id)
@@ -174,6 +181,5 @@ class ArticleController extends Controller
         return view('publications.articles_detail', compact('article'));
     }
 }
-
 
 

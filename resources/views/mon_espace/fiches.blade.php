@@ -1,33 +1,76 @@
 <link rel="stylesheet" href="{{ asset('css/mon_espace/fiche.css') }}">
 
 <div class="fiche-technique-wrapper">
-    <h2>Mes fiches techniques</h2>
+    <h2>📄 Mes fiches techniques</h2>
 
     {{-- Formulaire d’ajout --}}
     <form method="POST" action="{{ route('fiches.store') }}" enctype="multipart/form-data" class="form-fiche mt-4">
         @csrf
-        <input type="text" name="record_type" placeholder="Type d’enregistrement" class="form-control mt-2" required>
-        <input type="text" name="titre" placeholder="Titre de la fiche" class="form-control mt-2" required>
-        <textarea name="resume" placeholder="Résumé synthétique" class="form-control mt-2" rows="3"></textarea>
-        <textarea name="description" placeholder="Description complète" class="form-control mt-2" rows="5"></textarea>
 
-        <input type="text" name="auteurs" placeholder="Auteurs" class="form-control mt-2">
-        <input type="text" name="annee" placeholder="Année / Version" class="form-control mt-2">
+        <div class="mb-3">
+            <label for="record_type" class="form-label">Type d’enregistrement</label>
+            <input type="text" id="record_type" name="record_type" class="form-control" required>
+        </div>
 
-        {{-- Discipline --}}
-        <input type="text" name="discipline" placeholder="Discipline" class="form-control mt-2">
+        <div class="mb-3">
+            <label for="titre" class="form-label">Titre de la fiche</label>
+            <input type="text" id="titre" name="titre" class="form-control" required>
+        </div>
 
-        {{-- Thématique --}}
-        <input type="text" name="thematique" placeholder="Thématique" class="form-control mt-2">
+        <div class="mb-3">
+            <label for="resume" class="form-label">Résumé synthétique</label>
+            <textarea id="resume" name="resume" class="form-control" rows="3"></textarea>
+        </div>
 
-        <input type="text" name="mots_cles" placeholder="Mots clés" class="form-control mt-2">
-        <textarea name="source" placeholder="Ouvrage / Source / Références" class="form-control mt-2" rows="3"></textarea>
-        <input type="url" name="url" placeholder="Lien externe" class="form-control mt-2">
-        <input type="file" name="fichier" class="form-control mt-2">
+        <div class="mb-3">
+            <label for="description" class="form-label">Description complète</label>
+            <textarea id="description" name="description" class="form-control" rows="5"></textarea>
+        </div>
 
-        <button type="submit" class="btn-enregistrer mt-3">Enregistrer</button>
+        <div class="mb-3">
+            <label for="auteurs" class="form-label">Auteurs</label>
+            <input type="text" id="auteurs" name="auteurs" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="annee" class="form-label">Année / Version</label>
+            <input type="text" id="annee" name="annee" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="discipline" class="form-label">Discipline</label>
+            <input type="text" id="discipline" name="discipline" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="thematique" class="form-label">Thématique</label>
+            <input type="text" id="thematique" name="thematique" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="mots_cles" class="form-label">Mots clés</label>
+            <input type="text" id="mots_cles" name="mots_cles" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="source" class="form-label">Ouvrage / Source / Références</label>
+            <textarea id="source" name="source" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="url" class="form-label">Lien externe</label>
+            <input type="url" id="url" name="url" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="fichier" class="form-label">Fichier (PDF, Word...)</label>
+            <input type="file" id="fichier" name="fichier" class="form-control">
+        </div>
+
+        <button type="submit" class="btn-enregistrer mt-3">💾 Enregistrer</button>
     </form>
 </div>
+
 
    
 

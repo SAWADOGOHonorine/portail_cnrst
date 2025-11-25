@@ -31,8 +31,14 @@
                 </a>
                 <div class="collapse ms-4" id="monEspaceMenu">
                     <ul>
-                        <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/cv_form')">
-                            <i class="bi bi-file-earmark-person me-2"></i> Mon CV</a></li>
+                <li>
+    <a class="nav-link" href="#" onclick="loadContent('mon_espace/cv')">
+        <i class="bi bi-file-earmark-person me-2"></i> Mon CV
+    </a>
+</li>
+
+
+
                         <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/fiches')">
                             <i class="bi bi-journal-text me-2"></i> Mes fiches Techniques </a></li>
                         <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/articles')">
@@ -44,11 +50,11 @@
             </li>
 
             <!-- Tableau de bord -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="#" class="nav-link text-white" onclick="loadContent('dashboard')">
                     <i class="bi bi-speedometer2 me-2"></i> Tableau de bord
                 </a>
-            </li>
+            </li> -->
 
             <!-- Accueil -->
             <li class="nav-item">
@@ -168,9 +174,17 @@
         </nav>
         <!-- Zone de contenu dynamique -->
         <div class="container-fluid mt-4" id="content-area">
-            <h2>Bienvenue sur le Dashboard</h2>
-            <p>Sélectionnez un menu à gauche.</p>
+            @if($messageType == 'welcome')
+                <h2>Bienvenue sur votre espace</h2>
+                <p>Vous êtes maintenant connecté.</p>
+            @elseif($messageType == 'from_cv')
+                <h2>Merci pour votre CV !</h2>
+                <p>Vous pouvez continuer à explorer votre espace.</p>
+            @endif
         </div>
+
+
+
     </div>
 
     <!-- Scripts -->

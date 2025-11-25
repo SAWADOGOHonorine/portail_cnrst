@@ -311,5 +311,37 @@
     }
 }
 
+/* Bouton Lire plus uniforme rouge */
+.publication-item .btn-lireplus {
+    background-color: #dc3545; 
+    border-color: #dc3545;
+    color: #fff;
+    padding: 6px 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.publication-item .btn-lireplus:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+    transform: translateY(-2px);
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Alignement mobile optionnel */
+@media (max-width: 576px) {
+    .publication-item .d-flex.justify-content-between {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .publication-item .btn-lireplus {
+        margin-top: 8px;
+    }
+}
+
 
 

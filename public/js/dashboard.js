@@ -74,9 +74,27 @@ function loadContent(page) {
         .catch(error => {
             console.error('Erreur de chargement :', error);
         });
+        const sidebar = document.getElementById('sidebar');
+const toggleBtn = document.getElementById('toggleBtn');
+const content = document.getElementById('content');
+
+// Ouvrir / fermer le sidebar via bouton
+toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // empêcher la propagation vers le contenu
+    sidebar.classList.toggle('closed');
+});
+
+// Fermer le sidebar si on clique sur le contenu
+content.addEventListener('click', () => {
+    if (!sidebar.classList.contains('closed')) {
+        sidebar.classList.add('closed');
+    }
+});
+
 
         
 }
+
 
         // Optionnel : refermer si clic en dehors
         

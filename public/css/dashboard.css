@@ -6,6 +6,7 @@ body {
   font-family: 'Segoe UI', sans-serif;
   display: flex;
   background-color: #f0f0f0;
+  overflow-x: hidden;
 }
 
 /* Sidebar */
@@ -13,12 +14,26 @@ body {
   width: 250px;
   height: 100vh;
   background-color: rgb(50, 168, 82);
-  position: fixed;
+  position:fixed;
   left: 0;
   top: 0;
   transition: width 0.3s;
   overflow-y: auto;
 }
+#sidebar.collapsed {
+  width: 70px;
+}
+
+#sidebar.collapsed .link-text {
+  display: none;
+}
+
+.content {
+    flex: 1;
+    padding: 1rem;
+    transition: margin-left 0.3s ease;
+}
+
 #sidebar.collapsed {
   width: 70px;
 }
@@ -373,6 +388,21 @@ body {
     margin-left: 0;
     width: 100%;
   }
+  #main.overlay {
+    pointer-events: none;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+  }
+  #main.overlay::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 999;
+  }
 }
 @media (max-width: 576px) {
   #adminDropdown {
@@ -383,7 +413,16 @@ body {
   }
 }
 
-
+@media (max-width: 768px) {
+    .sidebar {
+        position: absolute;
+        height: 100vh;
+        z-index: 1000;
+    }
+    .content {
+        position: relative;
+    }
+}
 
 
 

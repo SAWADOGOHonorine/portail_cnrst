@@ -17,7 +17,7 @@
         <form action="{{ route('publications.search') }}" method="GET" class="form-recherche mx-auto">
             <div class="search-box">
                 <span class="search-icon">🔍</span>
-                <input type="text" name="q" class="input-recherche" placeholder="Enseignant, Publication, Laboratoire ..." value="{{ request('q') }}">
+                <input type="text" name="q" class="input-recherche" placeholder="Chercheurs, Publications, Laboratoires ..." value="{{ request('q') }}">
                 <button type="submit" class="btn-recherche">Rechercher</button>
             </div>
         </form>

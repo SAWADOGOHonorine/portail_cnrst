@@ -1,54 +1,74 @@
-
 <link rel="stylesheet" href="{{ asset('css/mon_espace/article.css') }}">
 
 <div class="container mt-4">
-    <h2 class="mb-4"> Mes articles</h2>
+    <h2 class="mb-4">📝 Mes articles</h2>
 
     {{-- Formulaire d'ajout --}}
     <form method="POST" action="{{ route('articles.store') }}" class="mb-5" enctype="multipart/form-data">
         @csrf
         <div class="row g-3">
+
             <div class="col-md-6">
-                <input type="text" name="title" placeholder="Titre de l'article" required class="form-control">
+                <label for="title" class="form-label">Titre de l'article</label>
+                <input type="text" id="title" name="title" required class="form-control">
             </div>
+
             <div class="col-md-6">
-                <input type="text" name="journal" placeholder="Journal" class="form-control">
+                <label for="journal" class="form-label">Journal</label>
+                <input type="text" id="journal" name="journal" class="form-control">
             </div>
+
             <div class="col-md-4">
-                <input type="number" name="publication_year" placeholder="Année de publication" class="form-control">
+                <label for="publication_year" class="form-label">Année de publication</label>
+                <input type="number" id="publication_year" name="publication_year" class="form-control">
             </div>
+
             <div class="col-md-4">
-                <input type="date" name="publication_date" class="form-control">
+                <label for="publication_date" class="form-label">Date de publication</label>
+                <input type="date" id="publication_date" name="publication_date" class="form-control">
             </div>
+
             <div class="col-md-4">
-                <input type="url" name="url" placeholder="Lien URL" class="form-control">
+                <label for="url" class="form-label">Lien URL</label>
+                <input type="url" id="url" name="url" class="form-control">
             </div>
+
             <div class="col-md-6">
-                <input type="text" name="author" placeholder="Auteur principal" class="form-control">
+                <label for="author" class="form-label">Auteur principal</label>
+                <input type="text" id="author" name="author" class="form-control">
             </div>
+
             <div class="col-md-6">
-                <input type="text" name="co_authors" placeholder="Co-auteurs" class="form-control">
+                <label for="co_authors" class="form-label">Co-auteurs</label>
+                <input type="text" id="co_authors" name="co_authors" class="form-control">
             </div>
+
             <div class="col-12">
-                <textarea name="summary" placeholder="Résumé" class="form-control" rows="3"></textarea>
+                <label for="summary" class="form-label">Résumé</label>
+                <textarea id="summary" name="summary" class="form-control" rows="3"></textarea>
             </div>
+
             <div class="col-12">
-                <select name="status" class="form-control">
+                <label for="status" class="form-label">Statut</label>
+                <select id="status" name="status" class="form-control">
                     <option value="submitted">Soumis</option>
                     <option value="accepted">Accepté</option>
                     <option value="published">Publié</option>
                 </select>
             </div>
+
             <div class="col-12">
-                <input type="file" name="fichier" class="form-control mt-2">
+                <label for="fichier" class="form-label">Fichier (PDF, Word...)</label>
+                <input type="file" id="fichier" name="fichier" class="form-control mt-2">
             </div>
+
             <div class="col-12">
-                <button type="submit" class="btn btn-success mt-2">📥 Enregistrer</button>
+                <button type="submit" class="btn btn-success mt-3">📥 Enregistrer</button>
             </div>
         </div>
     </form>
+</div>
 
-   
 
 
 

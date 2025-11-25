@@ -9,15 +9,15 @@
 
 @section('content')
 <section class="section-detail-fiche py-5">
-    <div class="container">
+    <div class="container"> 
 
-        {{-- Titre de la page --}}
+        <!-- Titre de la page -->
         <div class="page-title mb-4 text-center">
             <h2 class="text-uppercase">
                 <span class="strong">DÉTAILS</span> PUBLICATION
             </h2>
             <div class="underline mx-auto" style="width: 50px; height: 4px; background-color: #28a745; margin-top: 5px;"></div>
-        </div>
+        </div> 
 
         <div class="detail-card card p-4">
             <div class="detail-header mb-3">
@@ -34,79 +34,100 @@
                         <span class="detail-date"><i class="bi bi-clock"></i> {{ $fiche->created_at->format('d/m/Y') }}</span>
                     @endif
                 </div>
-            </div>
+            </div> 
 
-            <div class="detail-body">
+            <div class="detail-body"> 
 
-                {{-- Lien cliquable vers la fiche --}}
+                <!-- Lien cliquable vers la fiche -->
                 @if($fiche->url)
                 <div class="detail-section mb-3">
                     <h5>Lien de la fiche :</h5>
-                    <p>
-                        <a href="{{ $fiche->url }}" target="_blank" class="text-primary">{{ $fiche->url }}</a>
-                    </p>
+                    <p><a href="{{ $fiche->url }}" target="_blank" class="text-primary">{{ $fiche->url }}</a></p>
                 </div>
-                @endif
+                @endif 
 
-                {{-- Discipline --}}
+                <!-- Discipline -->
                 @if($fiche->discipline)
                 <div class="detail-section mb-3">
                     <h5>Discipline :</h5>
                     <p>{{ $fiche->discipline }}</p>
                 </div>
-                @endif
+                @endif 
 
-                {{-- Auteur(s) --}}
+                <!-- Auteur(s) -->
                 @if($fiche->auteurs)
                 <div class="detail-section mb-3">
                     <h5>Auteur(s) :</h5>
                     <p>{{ $fiche->auteurs }}</p>
                 </div>
-                @endif
+                @endif 
 
-                {{-- Résumé --}}
+                <!-- Résumé -->
                 @if($fiche->resume)
                 <div class="detail-section mb-3">
                     <h5>Résumé :</h5>
                     <p>{{ $fiche->resume }}</p>
                 </div>
-                @endif
+                @endif 
 
-                {{-- Description complète --}}
+                <!-- Description complète -->
                 @if($fiche->description)
                 <div class="detail-section mb-3">
                     <h5>Description complète :</h5>
                     <p>{{ $fiche->description }}</p>
                 </div>
-                @endif
+                @endif 
 
-                {{-- Mots-clés --}}
+                <!-- Mots-clés -->
                 @if($fiche->mots_cles)
                 <div class="detail-section mb-3">
                     <h5>Mots-clés :</h5>
-                    <p>{{ $fiche->mots_cles }}</p>
+                    <div class="keywords">
+                        @foreach(explode(',', $fiche->mots_cles) as $mot)
+                            <span class="badge bg-success text-white me-1">{{ trim($mot) }}</span>
+                        @endforeach
+                    </div>
                 </div>
-                @endif
+                @endif 
 
-                {{-- Thématique --}}
+                <!-- Document -->
+<div class="detail-section mb-3">
+    <h5>Document :</h5>
+
+    @if($fiche->document)
+        <p><strong>{{ $fiche->document }}</strong></p> <!-- Nom du document -->
+
+        <a href="{{ route('fiche.document', $fiche->id) }}" 
+           class="btn btn-success btn-document">
+           <i class="bi bi-file-earmark-pdf"></i> Voir / Télécharger
+        </a>
+
+        <!-- Aperçu PDF si applicable -->
+        @if(Str::endsWith($fiche->document, ['.pdf']))
+        <iframe src="{{ asset('storage/' . $fiche->document) }}" 
+                width="100%" height="500px" 
+                class="document-preview mt-3"></iframe>
+        @endif
+    @endif
+</div>
+
+
+                <!-- Thématique -->
                 @if($fiche->thematique)
                 <div class="detail-section mb-3">
                     <h5>Thématique :</h5>
                     <p>{{ $fiche->thematique?->nom ?? 'Non renseignée' }}</p>
                 </div>
                 @endif
+            </div> 
 
-            </div>
-
-            {{-- Bouton retour --}}
+            <!-- Bouton retour -->
             <div class="detail-footer text-center mt-4">
-                <a href="{{ route('publications.index') }}" class="btn-retour">
-                    Retour
-                </a>
-
+                <a href="{{ route('publications.index') }}" class="btn-retour">Retour</a>
             </div>
+
+
         </div>
     </div>
 </section>
 @endsection
-

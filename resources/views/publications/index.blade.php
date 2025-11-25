@@ -38,7 +38,7 @@
         @foreach($combined as $item)
           @php $data = $item['data']; @endphp
 
-          <div class="publication-item mb-4 p-3 shadow-sm">
+          <div class="publication-item mb-4 p-3 shadow-sm d-flex flex-column">
             {{-- Type de publication --}}
             <h5 class="type-title text-uppercase {{ $item['type'] === 'article' ? 'text-success' : 'text-primary' }}">
               {{ strtoupper($item['type']) }}
@@ -59,20 +59,62 @@
 
             {{-- Détails selon le type --}}
             @if($item['type'] === 'article')
-              @if(!empty($data->auteurs)) <p><strong>Auteurs :</strong> {{ $data->auteurs }}</p> @endif
-              @if(!empty($data->co_auteurs)) <p><strong>Co-auteurs :</strong> {{ $data->co_auteurs }}</p> @endif
+              @if(!empty($data->auteurs)) <p><strong>Auteurs :</strong> {{ Str::limit($data->auteurs, 50) }}</p> @endif
+              @if(!empty($data->co_auteurs)) <p><strong>Co-auteurs :</strong> {{ Str::limit($data->co_auteurs, 50) }}</p> @endif
               @if(!empty($data->journal)) 
                 <p><strong>Journal :</strong> {{ $data->journal }} @if(!empty($data->annee)) ({{ $data->annee }}) @endif</p>
               @endif
-              @if(!empty($data->summary)) <p>{{ $data->summary }}</p> @endif
+              @if(!empty($data->summary)) <p>{{ Str::limit($data->summary, 150) }}</p> @endif
             @elseif($item['type'] === 'fiche')
-              @if(!empty($data->description)) <p><strong>Détails :</strong> {{ $data->description }}</p> @endif
-              @if(!empty($data->responsable)) <p><strong>Responsable :</strong> {{ $data->responsable }}</p> @endif
-              @if(!empty($data->discipline)) <p><strong>Discipline :</strong> {{ $data->discipline }}</p> @endif
+
+                {{-- Titre --}}
+                @if(!empty($data->titre))
+                    <p><strong>Titre :</strong> {{ Str::limit($data->titre, 150) }}</p>
+                @endif
+
+                {{-- Auteur --}}
+                @if(!empty($data->auteur))
+                    <p><strong>Auteur :</strong> {{ Str::limit($data->auteur, 100) }}</p>
+                @endif
+
+                {{-- Année de publication --}}
+                @if(!empty($data->annee))
+                    <p><strong>Année de publication :</strong> {{ $data->annee }}</p>
+                @endif
+                @if(!empty($data->resume))
+                    <p><strong>Résumé :</strong> {{ Str::limit($data->resume, 200) }}</p>
+                @endif
+
+                {{-- Discipline --}}
+                @if(!empty($data->discipline))
+                    <p><strong>Discipline :</strong> {{ $data->discipline }}</p>
+                @endif
+
+                <!-- {{-- Bouton Lire plus (rouge comme demandé) --}}
+                <a href="{{ url('/fiche/' . $data->id) }}" 
+                  class="btn btn-danger mt-2"
+                  style="padding: 6px 14px; font-size: 14px; border-radius: 6px; font-weight: bold;">
+                    Lire plus
+                </a> -->
+
             @endif
 
-            {{-- Date de création --}}
-            <small class="text-muted">{{ optional($data->created_at)->format('d/m/Y') }}</small>
+
+            <div class="d-flex justify-content-between align-items-center mt-2">
+              {{-- Date de création --}}
+              <small class="text-muted">{{ optional($data->created_at)->format('d/m/Y') }}</small><br><br>
+
+              <!-- button voir plus -->
+             <div class="d-flex justify-content-between align-items-center mt-2">
+                  <!-- <small class="text-muted">{{ optional($data->created_at)->format('d/m/Y') }}</small> -->
+
+                  <a href="{{ $item['type'] === 'article' ? route('articles_detail', $data->id) : route('fiches_detail', $data->id) }}" 
+                    class="btn btn-lireplus btn-sm">
+                    Lire plus
+                  </a>
+              </div>
+
+            </div>
           </div>
         @endforeach
       </div>
@@ -107,6 +149,5 @@
 </section>
 
 @endsection
-
 
 

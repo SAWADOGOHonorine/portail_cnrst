@@ -1,9 +1,9 @@
-@extends('layouts.app')
+ @extends('layouts.app') 
 
 <link rel="stylesheet" href="{{ asset('css/troisformulaire.css') }}">
 <link rel="stylesheet" href="{{ asset('css/formlogin.css') }}">
 
-@section('content')
+ @section('content') 
 <div class="form-wrapper">
     <div class="form-login">
         <h2>Connectez à votre compte</h2>
@@ -44,5 +44,5 @@
         </form>
     </div>
 </div>
-@endsection
+ @endsection 
 

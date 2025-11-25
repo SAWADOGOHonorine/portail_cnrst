@@ -22,10 +22,12 @@ class User extends Authenticatable
         'adresse',
         'role',
         'password',
+        'activation_token',
+        'is_active',
     ];
 
     /**
-     * Les attributs à cacher lors de la sérialisation (ex. API JSON)
+     * Les attributs à cacher lors de la sérialisation
      */
     protected $hidden = [
         'password',
@@ -49,18 +51,30 @@ class User extends Authenticatable
     }
 
     /**
-     * Vérifie si l'utilisateur est administrateur
+     * Vérifie si l'utilisateur a un rôle spécifique
      */
-    public function isAdmin()
+    public function hasRole($role)
     {
-        return $this->role === 'admin';
+        return $this->role === $role;
     }
 
     /**
-     * Vérifie si l'utilisateur est visiteur
+     * Vérifie si l'utilisateur a l'un des rôles donnés (tableau)
      */
-    public function isVisiteur()
+    public function hasAnyRole(array $roles)
     {
-        return $this->role === 'visiteur';
+        return in_array($this->role, $roles);
     }
+
+    /**
+     * Raccourcis de lecture pour les rôles communs
+     */
+    public function isAdmin()   { return $this->role === 'admin'; }
+    public function isSuperAdmin()   { return $this->role === 'super_admin'; }
+    public function isDG()      { return $this->role === 'DG'; }
+    public function isDGA()     { return $this->role === 'DGA'; }
+    public function isDirecteur() { return $this->role === 'directeur'; }
+    public function isDirecteurinstitut() { return $this->role === 'Directeur_institut'; }
+    public function isChefdepartement()  { return $this->role === 'Chef_departement'; }
+    public function isVisiteur()  { return $this->role === 'visiteur'; }
 }
