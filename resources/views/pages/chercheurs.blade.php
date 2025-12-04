@@ -17,7 +17,7 @@
 <section class="enseignants-section" aria-labelledby="enseignants-title">
   <div class="container">
     <div class="page-title">
-      <h1><span class="strong">ENSEIGNANTS</span> CHERCHEURS</h1>
+      <h1>CHERCHEURS</h1>
       <div class="underline"></div>
     </div>
 
