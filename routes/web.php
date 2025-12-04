@@ -116,6 +116,12 @@ Route::get('/users/activate/{token}', [AdminController::class, 'activateUser'])-
 Route::middleware(['auth'])->get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 Route::get('/cv/{id}/pdf', [CvController::class, 'showPdf'])->name('cv.pdf');
 
+// Formulaire de modification du CV
+Route::get('cv/{id}/edit', [CvController::class, 'edit'])->name('cv.edit');
+
+// Mise à jour du CV
+Route::put('cv/{id}', [CvController::class, 'update'])->name('cv.update');
+
 
 // route pour la page d'accès refusé du dashboard
 Route::get('/access-dashboard-refuse', function () {
@@ -276,10 +282,15 @@ Route::get('/test-mail', function() {
     return "Mail envoyé !";
 });
 
-Route::get('/chercheurs', [ChercheurController::class, 'index'])->name('chercheurs.index');
+// Route::get('/chercheurs', [ChercheurController::class, 'index'])->name('chercheurs.index');
 Route::get('/construction', function () {
     return view('construction');
 })->name('construction');
+// chercheur
+Route::prefix('chercheur')->name('chercheur.')->group(function () {
+    Route::get('/', [ChercheurController::class, 'index'])->name('index');
+});
+
 
 
 

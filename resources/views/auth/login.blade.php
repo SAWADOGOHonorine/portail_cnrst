@@ -3,29 +3,44 @@
 <link rel="stylesheet" href="{{ asset('css/troisformulaire.css') }}">
 <link rel="stylesheet" href="{{ asset('css/formlogin.css') }}">
 
+      <div style="display:flex; justify-content:center;">
+    @if (session('success'))
+        <div id="alert-message" class="custom-success" style="width:50%; text-align:center; background-color: #28a745; color: white; padding: 10px; border-radius: 5px;">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if($errors->any())
+        <div id="alert-message" class="alert alert-danger" style="width:50%; text-align:center;">
+            <ul class="mb-0">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+        </div>
+    @endif
+</div>
+
+<script>
+    // Sélectionne tous les messages d'alerte
+    const alerts = document.querySelectorAll('#alert-message');
+
+    alerts.forEach(alertMsg => {
+        setTimeout(() => {
+            alertMsg.style.transition = 'opacity 0.5s';
+            alertMsg.style.opacity = '0';
+            setTimeout(() => alertMsg.remove(), 400);
+        }, 5000); // 5 secondes
+    });
+</script>
+
+
  @section('content') 
 <div class="form-wrapper">
     <div class="form-login">
         <h2>Connectez à votre compte</h2>
 
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('login.attempt') }}">
+        <form method="POST" action="{{ route('login.attempt') }}" autocomplete="off">
             @csrf
             <div class="form-content">
                     <label for="email">Adresse e-mail:</label>

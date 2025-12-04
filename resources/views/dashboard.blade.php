@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,12 +12,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 <body>
+
     <!-- Sidebar -->
     <div id="sidebar">
         <div class="sidebar-header p-3 text-white fw-bold">
             Mon Admin
         </div>
-
         <ul class="nav flex-column">
             <!-- Mon espace -->
             <li class="nav-item">
@@ -27,34 +25,18 @@
                    data-bs-toggle="collapse" href="#monEspaceMenu" role="button" aria-expanded="false"
                    aria-controls="monEspaceMenu">
                     <span><i class="bi bi-person-circle me-2"></i> Mon espace</span>
-                    <i class="bi bi-chevron-down"></i>
+                    <i class="bi bi-chevron-down rotate-icon"></i>
                 </a>
-                <div class="collapse ms-4" id="monEspaceMenu">
+                <div class="collapse ms-3" id="monEspaceMenu">
                     <ul>
-                <li>
-    <a class="nav-link" href="#" onclick="loadContent('mon_espace/cv')">
-        <i class="bi bi-file-earmark-person me-2"></i> Mon CV
-    </a>
-</li>
-
-
-
-                        <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/fiches')">
-                            <i class="bi bi-journal-text me-2"></i> Mes fiches Techniques </a></li>
-                        <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/articles')">
-                            <i class="bi bi-file-earmark-richtext me-2"></i> Mes articles</a></li>
-                        <li><a class="nav-link" href="#" onclick="loadContent('documentation/autre')">
-                            <i class="bi bi-three-dots me-2"></i> Autres</a></li>
+                        <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/cv')"><i class="bi bi-file-earmark-person me-2"></i> Mon CV</a></li>
+                        <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/fiches')"><i class="bi bi-journal-text me-2"></i> Mes fiches Techniques</a></li>
+                        <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/articles')"><i class="bi bi-file-earmark-richtext me-2"></i> Mes articles</a></li>
+                        <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/articles')"><i class="bi bi-file-earmark-richtext me-2"></i> Documents de vulgarisation</a></li>
+                        <li><a class="nav-link" href="#" onclick="loadContent('documentation/autre')"><i class="bi bi-three-dots me-2"></i> Autres</a></li>
                     </ul>
                 </div>
             </li>
-
-            <!-- Tableau de bord -->
-            <!-- <li class="nav-item">
-                <a href="#" class="nav-link text-white" onclick="loadContent('dashboard')">
-                    <i class="bi bi-speedometer2 me-2"></i> Tableau de bord
-                </a>
-            </li> -->
 
             <!-- Accueil -->
             <li class="nav-item">
@@ -76,35 +58,16 @@
                    data-bs-toggle="collapse" href="#documentationMenu" role="button" aria-expanded="false"
                    aria-controls="documentationMenu">
                     <span><i class="bi bi-journal-bookmark me-2"></i> Documentation</span>
-                    <i class="bi bi-chevron-down"></i>
+                    <i class="bi bi-chevron-down rotate-icon"></i>
                 </a>
-             <div class="collapse ms-4" id="documentationMenu">
-                <ul>
-                    {{--  Lien vers le formulaire dans le dashboard --}}
-                    <li>
-                        <a class="nav-link" href="{{ route('publications.create') }}">
-                            <i class="bi bi-file-earmark-person me-2"></i> Laboratoires
-                        </a>
-                    </li>
-
-                    {{--  Liens vers les vues publiques chargées via JavaScript --}}
-                    <li>
-                        <a class="nav-link" href="#" onclick="loadContent('documentation/fiches')">
-                            <i class="bi bi-journal-text me-2"></i> Equipements
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="#" onclick="loadContent('documentation/articles')">
-                            <i class="bi bi-file-earmark-richtext me-2"></i> Equipes
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="#" onclick="loadContent('documentation/autre')">
-                            <i class="bi bi-three-dots me-2"></i> Autres
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                <div class="collapse ms-3" id="documentationMenu">
+                    <ul>
+                        <li><a class="nav-link" href="{{ route('publications.create') }}"><i class="bi bi-file-earmark-person me-2"></i> Laboratoires</a></li>
+                        <li><a class="nav-link" href="#" onclick="loadContent('documentation/fiches')"><i class="bi bi-journal-text me-2"></i> Equipements</a></li>
+                        <li><a class="nav-link" href="#" onclick="loadContent('documentation/articles')"><i class="bi bi-file-earmark-richtext me-2"></i> Equipes</a></li>
+                        <li><a class="nav-link" href="#" onclick="loadContent('documentation/autre')"><i class="bi bi-three-dots me-2"></i> Autres</a></li>
+                    </ul>
+                </div>
             </li>
         </ul>
     </div>
@@ -136,17 +99,12 @@
             </div>
 
             <!-- Admin dropdown -->
-           <div class="admin-logo-container">
+            <div class="admin-logo-container">
                 <i class="bi bi-person-circle fs-4 text-white" id="adminLogo" style="cursor: pointer;"></i>
-
                 <div class="admin-dropdown hidden mt-3" id="adminDropdown">
-                     <!-- Email en haut, hors du bloc profil  -->
                     <span class="admin-email">{{ Auth::user()->email }}</span>
-
                     <hr class="admin-separator">
-
                     <a href="#" class="admin-link" id="toggleProfile">👤 Mon profil</a>
-
                     <div class="user-profile-details hidden mt-2" id="profileDetails">
                         <p><strong>Nom :</strong> {{ Auth::user()->name }}</p>
                         <p><strong>Email :</strong> {{ Auth::user()->email }}</p>
@@ -154,25 +112,19 @@
                         <p><strong>Inscrit le :</strong> {{ Auth::user()->created_at->format('d/m/Y') }}</p>
                         <a href="#" class="admin-link">🔐 Modifier le mot de passe</a>
                     </div>
-
-                    <!-- Lien Paramètres en dehors du dropdown  -->
                     <div class="admin-settings-link mt-2">
                         <a href="#" class="admin-link">⚙️ Paramètres</a>
                     </div>
-
                     <hr class="admin-separator">
-
-                     <!-- Bouton Déconnexion toujours visible  -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="logout-btn">🚪 Déconnexion</button>
                     </form>
                 </div>
             </div>
-           
-
         </nav>
-        <!-- Zone de contenu dynamique -->
+
+        <!-- Contenu dynamique -->
         <div class="container-fluid mt-4" id="content-area">
             @if($messageType == 'welcome')
                 <h2>Bienvenue sur votre espace</h2>
@@ -182,47 +134,65 @@
                 <p>Vous pouvez continuer à explorer votre espace.</p>
             @endif
         </div>
-
-
-
     </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function loadContent(viewName) {
+        const toggleSidebar = document.getElementById('toggleSidebar');
+        const sidebar = document.getElementById('sidebar');
+        const main = document.getElementById('main');
+
+        toggleSidebar.addEventListener('click', () => {
+            if(window.innerWidth > 992){
+                sidebar.classList.toggle('collapsed');
+                main.classList.toggle('collapsed');
+            } else {
+                sidebar.classList.toggle('show');
+                main.classList.toggle('shifted');
+            }
+        });
+
+        // Profile toggle
+        document.getElementById('toggleProfile').addEventListener('click', function(e){
+            e.preventDefault();
+            document.getElementById('profileDetails').classList.toggle('hidden');
+        });
+
+        // Content loader
+        function loadContent(viewName){
             fetch('/' + viewName)
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('content-area').innerHTML = html;
-                })
-                .catch(error => {
-                    console.error('Erreur lors du chargement :', error);
-                    document.getElementById('content-area').innerHTML = '<div class="alert alert-danger">Erreur de chargement du contenu.</div>';
-                });
+            .then(r => r.text())
+            .then(html => { document.getElementById('content-area').innerHTML = html; })
+            .catch(err => { console.error(err); });
         }
     </script>
     <script>
-        function loadContent(viewName) {
-            fetch(`/load-view/${viewName}`)
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('main-content').innerHTML = html;
-                })
-                .catch(error => {
-                    console.error('Erreur de chargement :', error);
-                });
-        }
-    </script>
+    // Toggle le dropdown admin
+    const adminLogo = document.getElementById('adminLogo');
+    const adminDropdown = document.getElementById('adminDropdown');
 
-    <script src="{{ asset('js/dashboard.js') }}"></script>
-   <script>
-    document.getElementById('toggleProfile').addEventListener('click', function (e) {
-        e.preventDefault();
-        const profileBlock = document.getElementById('profileDetails');
-        profileBlock.classList.toggle('hidden');
+    adminLogo.addEventListener('click', () => {
+        adminDropdown.classList.toggle('hidden');
     });
-    </script>
+
+    // Toggle le bloc profil à l'intérieur du dropdown
+    const toggleProfile = document.getElementById('toggleProfile');
+    const profileDetails = document.getElementById('profileDetails');
+
+    toggleProfile.addEventListener('click', (e) => {
+        e.preventDefault();
+        profileDetails.classList.toggle('hidden');
+    });
+
+    // Optionnel : fermer le dropdown si on clique en dehors
+    document.addEventListener('click', (e) => {
+        if (!adminLogo.contains(e.target) && !adminDropdown.contains(e.target)) {
+            adminDropdown.classList.add('hidden');
+            profileDetails.classList.add('hidden');
+        }
+    });
+</script>
 
 </body>
 </html>

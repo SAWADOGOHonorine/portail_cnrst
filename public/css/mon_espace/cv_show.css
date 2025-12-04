@@ -1,6 +1,6 @@
 /* Container général */
 .container {
-    max-width: 900px;
+    max-width: 500px;
     margin: 40px auto;
     padding: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -76,7 +76,7 @@ h4 {
 }
 
 .btn-success {
-    background-color: #2ecc71;
+    background-color: #2e7d32;
     color: #fff;
 }
 

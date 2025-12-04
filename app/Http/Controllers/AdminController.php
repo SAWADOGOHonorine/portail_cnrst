@@ -115,7 +115,7 @@ class AdminController extends Controller
 
     public function destroy(User $user)
     {
-        $user->status = 0; // Désactivé
+        $user->status = 0; 
         $user->save();
 
         return redirect()->route('admin.users')

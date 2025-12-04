@@ -1,8 +1,7 @@
 
 /* le css de la navigation cnrst */
 .logo-image img.logo-cnrst {
-  width: 2.75rem;   
-  /* height: auto; */
+  width: 3rem;   
 }
 
 .logo-slogan {
@@ -145,7 +144,7 @@ main, .content, .container {
 /* Élément actif */
 .menu-links li.active a {
   border-bottom: 3px solid #b30000;
-  color: #b30000;
+  /* color: #b30000; */
   font-weight: bold;
 }
 

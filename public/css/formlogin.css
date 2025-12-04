@@ -10,6 +10,17 @@ body {
     min-height: 100vh;
 }
 
+/* Message de succès personnalisé vert */
+.custom-success {
+    background-color: #e9f7ef;  /* vert clair */
+    border-left: 5px solid #198754; /* vert foncé */
+    color: #198754; /* texte vert foncé */
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
 /* le conteneur principal du formulaire */
 .form-wrapper {
     display: flex;

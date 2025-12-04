@@ -40,12 +40,12 @@
                 <div class="d-flex justify-content-center flex-wrap gap-2 mb-3">
                     <!-- Voir le CV en PDF dans le navigateur -->
                     <a href="{{ route('cv.pdf', $cv->id) }}" class="btn btn-primary btn-sm" target="_blank">
-                        📄 Voir le CV (PDF)
+                         Voir le fichier CV 
                     </a>
 
                     <!-- Télécharger le CV -->
                     <a href="{{ route('cv.pdf', $cv->id) }}" class="btn btn-success btn-sm" download>
-                        ⬇ Télécharger le CV
+                        ⬇ Télécharger le fichier CV
                     </a>
                 </div>
             @else
@@ -57,15 +57,47 @@
             Vous n'avez pas encore de CV enregistré. 
             <a href="{{ route('cv.index') }}">Cliquez ici pour le créer</a>.
         </div>
-    @endif
+    @endif <br>
 
     <!-- Bouton Retour centré -->
-    <div class="d-flex justify-content-center mt-3">
-        <a href="{{ route('dashboard', ['from' => 'cv']) }}" class="btn btn-secondary btn-sm">
+    <div class="d-flex justify-content-center gap-2 mt-3">
+        <!-- Bouton Retour vert -->
+        <a href="{{ route('dashboard', ['from' => 'cv']) }}" class="btn btn-success btn-sm custom-retour">
             ⬅ Retour
         </a>
+
+        <!-- Bouton Modifier le CV -->
+        <a href="{{ route('cv.edit', $cv->id) }}" class="btn btn-warning btn-sm custom-modifier">
+            Modifier le CV
+        </a>
     </div>
+
 </div>
+
+<style>
+/* Bouton Retour : vert normal, vert foncé au hover */
+.custom-retour {
+    background-color: #28a745; /* vert Bootstrap */
+    border-color: #28a745;
+    color: #fff;
+}
+.custom-retour:hover {
+    background-color: #218838; /* vert foncé */
+    border-color: #1e7e34;
+}
+
+/* Bouton Modifier : jaune/orange normal, bleu au hover */
+.custom-modifier {
+    background-color: #ffc107; /* jaune Bootstrap */
+    border-color: #ffc107;
+    color: #212529;
+}
+.custom-modifier:hover {
+    background-color: #007bff; /* bleu */
+    border-color: #007bff;
+    color: #fff;
+}
+</style>
 
 
         

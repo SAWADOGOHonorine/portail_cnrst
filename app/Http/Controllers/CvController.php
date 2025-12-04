@@ -9,9 +9,6 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use FPDF;
 use App\Models\User;
 
-
-
-
 class CvController extends Controller
 {
     /**
@@ -35,9 +32,9 @@ class CvController extends Controller
             'whatsapp'        => 'nullable|string|max:20',
             'adresse'         => 'nullable|string|max:255',
             'ville'           => 'nullable|string|max:255',
-            'pays'            => 'required|string|max:255',
-            'departement'     => 'required|string|max:255',
-            'institut'        => 'required|string|max:255',
+            'pays'            => 'nullable|string|max:255',
+            'institut'        => 'nullable|string|max:255',
+            'departement'     => 'nullable|string|max:255',
             'specialite'      => 'nullable|string|max:255',
             'domaine'         => 'nullable|string|max:255',
             'mot_cle'         => 'nullable|string|max:255',
@@ -47,7 +44,6 @@ class CvController extends Controller
             'projet_recherche'      => 'nullable|string',
             'genre'                 => 'nullable|in:homme,femme,autre',
             'thematique_recherche'  => 'nullable|string',
-
             'cv_file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
@@ -102,13 +98,12 @@ class CvController extends Controller
             'Content-Disposition' => 'inline; filename="' . basename($cv->cv_path) . '"'
         ]);
     }
-    // ...
 
     public function generatePdf($id)
     {
         $cv = Cv::findOrFail($id);
 
-        $pdf = new FPDF();
+        $pdf = new FPDF('L', 'mm', 'A4');
         $pdf->AddPage();
         $pdf->SetFont('Arial','B',16);
 
@@ -141,13 +136,13 @@ class CvController extends Controller
         $pdf->Cell(0,8,$cv->ville ?? '-',0,1);
 
         $pdf->Cell(50,8,'Pays:',0,0);
-        $pdf->Cell(0,8,$cv->pays,0,1);
+        $pdf->Cell(0,8,$cv->pays ?? '-',0,1);
 
         $pdf->Cell(50,8,'Institut:',0,0);
-        $pdf->Cell(0,8,$cv->institut,0,1);
+        $pdf->Cell(0,8,$cv->institut ?? '-',0,1);
 
         $pdf->Cell(50,8,'Département:',0,0);
-        $pdf->Cell(0,8,$cv->departement,0,1);
+        $pdf->Cell(0,8,$cv->departement ?? '-',0,1);
 
         $pdf->Cell(50,8,'Spécialité:',0,0);
         $pdf->Cell(0,8,$cv->specialite ?? '-',0,1);
@@ -189,39 +184,83 @@ class CvController extends Controller
         return $cv ? view('mon_espace.cv_show', compact('cv')) : view('mon_espace.cv_form');
     }
 
+    public function downloadPdf($id)
+    {
+        $cv = Cv::findOrFail($id);
 
-public function downloadPdf($id)
-{
-    $cv = Cv::findOrFail($id);
+        $pdf = Pdf::loadView('mon_espace.cv_pdf', compact('cv'));
 
-    // Génère le PDF à partir d'une vue Blade
-    $pdf = Pdf::loadView('mon_espace.cv_pdf', compact('cv'));
+        return $pdf->download("CV_{$cv->nom}_{$cv->prenom}.pdf");
+    }
 
-    // Télécharge le PDF avec un nom personnalisé
-    return $pdf->download("CV_{$cv->nom}_{$cv->prenom}.pdf");
-}
+    public function showPdf($id)
+    {
+        $cv = Cv::findOrFail($id);
 
+        $pdf = Pdf::loadView('mon_espace.cv_pdf', compact('cv'));
 
-public function showPdf($id)
-{
-    $cv = Cv::findOrFail($id);
+        return $pdf->stream("CV_{$cv->nom}_{$cv->prenom}.pdf");
+    }
 
-    // Génère le PDF à partir d'une vue Blade
-    $pdf = Pdf::loadView('mon_espace.cv_pdf', compact('cv'));
+    public function showAdmin($id)
+    {
+        $user = User::findOrFail($id);
+        $cv = Cv::where('user_id', $id)->first();
 
-    // Télécharge le PDF avec un nom personnalisé
-    return $pdf->stream("CV_{$cv->nom}_{$cv->prenom}.pdf");
-}
+        return view('admin.cv_show', compact('user', 'cv'));
+    }
 
-public function showAdmin($id)
-{
-    $user = User::findOrFail($id);
-    $cv = Cv::where('user_id', $id)->first();
+    /**
+     * Formulaire d'édition du CV (pré-rempli)
+     */
+    public function edit($id)
+    {
+        $cv = Cv::findOrFail($id);
 
-    return view('admin.cv_show', compact('user', 'cv'));
-}
+        return view('mon_espace.cv_form', compact('cv'));
+    }
 
+    /**
+     * Mise à jour du CV
+     */
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'nom'             => 'required|string|max:255',
+            'prenom'          => 'required|string|max:255',
+            'email'           => 'required|email|max:255',
+            'telephone'       => 'nullable|string|max:50',
+            'whatsapp'        => 'nullable|string|max:20',
+            'adresse'         => 'nullable|string|max:255',
+            'ville'           => 'nullable|string|max:255',
+            'pays'            => 'nullable|string|max:255',
+            'institut'        => 'nullable|string|max:255',
+            'departement'     => 'nullable|string|max:255',
+            'specialite'      => 'nullable|string|max:255',
+            'domaine'         => 'nullable|string|max:255',
+            'mot_cle'         => 'nullable|string|max:255',
+            'date_naissance'  => 'nullable|date',
+            'lieu_naissance'  => 'nullable|string|max:255',
+            'detaille_scientifique' => 'nullable|string',
+            'projet_recherche'      => 'nullable|string',
+            'genre'                 => 'nullable|in:homme,femme,autre',
+            'thematique_recherche'  => 'nullable|string',
+            'cv_file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        ]);
 
+        $cv = Cv::findOrFail($id);
+
+        if ($request->hasFile('cv_file')) {
+            $file = $request->file('cv_file');
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+            $validated['cv_path'] = $file->storeAs('cvs', $filename, 'public');
+        }
+
+        $cv->update($validated);
+
+        return redirect()->route('cv.show', $cv->id)
+                         ->with('status', 'CV mis à jour avec succès !');
+    }
 }
 
 
