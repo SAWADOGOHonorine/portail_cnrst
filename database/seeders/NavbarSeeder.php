@@ -13,12 +13,6 @@ class NavbarSeeder extends Seeder
      */
     public function run(): void
     {
-        Navbar::insert([
-        ['name' => 'Accueil', 'route' => 'home', 'ordering' => 1],
-        ['name' => 'Articles', 'route' => 'articles.index', 'ordering' => 2],
-        ['name' => 'Contact', 'route' => 'contact', 'ordering' => 3],
-        ['name' => 'Connexion', 'route' => 'login', 'ordering' => 4],
-
-    ]);
+    
     }
 }

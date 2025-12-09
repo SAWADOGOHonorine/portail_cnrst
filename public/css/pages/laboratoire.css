@@ -1,0 +1,65 @@
+/* ================== FORMULAIRES LABORATOIRES ================== */
+.filters form {
+    display: flex;
+    flex-wrap: wrap;          /* permet aux champs de passer à la ligne sur petit écran */
+    gap: 10px;                /* espace entre les champs */
+    justify-content: flex-start; /* garde aligné à gauche */
+}
+
+.filters input.filter-input,
+.filters select.filter-select,
+.filters button.submit-button {
+    flex: 1 1 200px;           /* largeur flexible avec minimum de 200px */
+    max-width: 100%;           /* ne dépasse jamais le conteneur */
+    box-sizing: border-box;    /* inclut padding et bordure */
+}
+
+.filters button.submit-button {
+    flex: 0 0 auto;            /* bouton garde sa largeur minimale */
+}
+
+/* Bordures uniformes pour champs et bouton */
+.filters input.filter-input,
+.filters select.filter-select {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.filters input.filter-input:focus,
+.filters select.filter-select:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(45, 191, 98, 0.14);
+}
+
+.filters button.submit-button {
+    border: 1px solid var(--green);
+    border-radius: 6px;
+    background-color: #1ea152;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease, border-color 0.15s ease;
+}
+
+.filters button.submit-button:hover {
+    background-color: #1ea152;
+    border-color: #1ea152;
+}
+
+/* MEDIA QUERIES pour écrans très petits */
+@media(max-width:576px) {
+    .filters form {
+        flex-direction: column; /* champs empilés */
+        align-items: stretch;   /* prennent toute la largeur */
+    }
+    .filters input.filter-input,
+    .filters select.filter-select,
+    .filters button.submit-button {
+        width: 100%;
+        max-width: 100%;
+    }
+}

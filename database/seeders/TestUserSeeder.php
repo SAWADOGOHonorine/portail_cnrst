@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
@@ -14,35 +13,50 @@ class TestUserSeeder extends Seeder
     public function run(): void
     {
         User::create([
+            'first_name' => 'Fati',
+            'last_name' => 'Ouedraogo',
             'email' => 'ouredraogofati@gmail.com',
             'password' => bcrypt('Ouedraogo@21'),
-            'last_name' => 'Ouedraogo', 
-            'first_name' => 'Fati',
-            
+            'role' => 'user',
+            'status' => 1,
+            'is_active' => 1,
+            'adresse' => 'Ouagadougou',
+            'phone' => '0000000000',
+            'photo' => null,
+            'activation_token' => null,
+            'remember_token' => null,
         ]);
 
-        User::create([
-            'email' => 'honorinesawadogo07@gmail.com',
-            'password' => bcrypt('Etudiant@2022'),
-            'last_name' => 'SAWADOGO', 
-            'first_name' => 'Honorine',
-            
-        ]);
+        
 
         User::create([
+            'first_name' => 'Flora',
+            'last_name' => 'KAFANDO',
             'email' => 'florakafando@gmail.com',
             'password' => bcrypt('Kafando@21'),
-            'last_name' => 'KAFANDO', 
-            'first_name' => 'Flora',
-            
+            'role' => 'user',
+            'status' => 1,
+            'is_active' => 1,
+            'adresse' => 'Ouagadougou',
+            'phone' => '0000000000',
+            'photo' => null,
+            'activation_token' => null,
+            'remember_token' => null,
         ]);
 
         User::create([
+            'first_name' => 'Constantin',
+            'last_name' => 'SAWADOGO',
             'email' => 'constantinsawadogo@gmail.com',
             'password' => bcrypt('Constantin@22'),
-            'last_name' => 'SAWADOGO', 
-            'first_name' => 'Constantin',
-            
+            'role' => 'user',
+            'status' => 1,
+            'is_active' => 1,
+            'adresse' => 'Ouagadougou',
+            'phone' => '0000000000',
+            'photo' => null,
+            'activation_token' => null,
+            'remember_token' => null,
         ]);
     }
 }

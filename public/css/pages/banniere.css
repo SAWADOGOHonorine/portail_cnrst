@@ -61,3 +61,33 @@
     margin-top: 5px;
     text-transform: uppercase;
 }
+@media (max-width: 768px) {
+    .stats-banner {
+        padding: 30px 0;
+    }
+    .stats-banner__item i {
+        font-size: 2rem;
+    }
+    .stats-banner__value {
+        font-size: 1.8rem;
+    }
+    .stats-banner__label {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-banner {
+        padding: 20px 0;
+    }
+    .stats-banner__item i {
+        font-size: 1.5rem;
+    }
+    .stats-banner__value {
+        font-size: 1.5rem;
+    }
+    .stats-banner__label {
+        font-size: 0.8rem;
+    }
+}
+

@@ -5,9 +5,9 @@
 }
 
 .logo-slogan {
-  font-size: 0.9rem;
+  font-size: 0.5rem;
   color: #333;
-  margin-top: 0.4rem;
+  margin-top: 0.05rem;
   font-weight: 500;
   text-align: center;
 }
@@ -36,7 +36,7 @@ main, .content, .container {
   background-color: rgb(46, 125, 50);
   color: white;
   font-family: 'Segoe UI', sans-serif;
-  padding: 0.2rem 0.5rem;
+  padding: 0.1rem 0.5rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   margin: 0 !important;
 }
@@ -112,6 +112,8 @@ main, .content, .container {
   margin-top: 0;
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
+  padding: 0;   /* enlève les paddings internes */
+  margin: 0;    /* enlève les marges externes */
 }
 
 .menu-links {
@@ -134,7 +136,7 @@ main, .content, .container {
   text-decoration: none;
   font-weight: 600;
   text-transform: uppercase;
-  padding: 0.2rem 0.6rem;
+  padding: 0.15rem 0.5rem;
   font-size: 0.8rem;
   border-bottom: 3px solid transparent;
   display: inline-block;
@@ -175,14 +177,14 @@ main, .content, .container {
 .btn-connexion {
   background-color: #b30000;
   color: white;
-  padding: 0.4rem 0.8rem;
+  padding: 0.3rem 0.6rem;
   border-radius: 4px;
   text-decoration: none;
   font-weight: bold;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: background-color 0.2s ease;
 }
@@ -215,6 +217,7 @@ main, .content, .container {
 
   .menu-container {
     display: none;
+    padding-top: 70px;
   }
 
   .menu-container.open {
@@ -229,6 +232,10 @@ main, .content, .container {
   .connexion-wrapper-below {
     justify-content: flex-start;
     padding-left: 1rem;
+  }
+  .menu-links li a {
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
   }
 }
 

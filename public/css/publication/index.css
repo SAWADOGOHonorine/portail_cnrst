@@ -1,8 +1,21 @@
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    overflow-x: hidden; /* empêche tout scroll horizontal */
+}
 /* ==========================
    SECTION RECHERCHE
 ========================== */
 .search-section {
     background-color: #f8f9fa;
+}
+.container {
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
 }
 
 .search-section .page-title h1 {
@@ -131,6 +144,14 @@
     border-radius: 0.5rem;
 }
 
+.publications-thematiques-section .card,
+.thematiques-section .card,
+.pub-card .card-body {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
 /* ==========================
    RESPONSIVE
 ========================== */
@@ -191,10 +212,11 @@
 @media (max-width: 576px) {
     .publication-item .d-flex.justify-content-between {
         flex-direction: column;
-        align-items: flex-start;
+        align-items:  stretch;
     }
     .publication-item .btn {
         margin-top: 8px;
+        width: 100%;
     }
 }
 

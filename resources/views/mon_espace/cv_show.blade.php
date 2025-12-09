@@ -70,6 +70,7 @@
         <a href="{{ route('cv.edit', $cv->id) }}" class="btn btn-warning btn-sm custom-modifier">
             Modifier le CV
         </a>
+        
     </div>
 
 </div>
