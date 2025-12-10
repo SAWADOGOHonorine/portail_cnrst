@@ -40,7 +40,12 @@
                         <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/fiches')"><i class="bi bi-journal-text me-2"></i> Mes fiches Techniques</a></li>
                         <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/articles')"><i class="bi bi-file-earmark-richtext me-2"></i> Mes articles</a></li>
                         <li><a class="nav-link" href="#" onclick="loadContent('mon_espace/articles')"><i class="bi bi-file-earmark-richtext me-2"></i> Documents de vulgarisation</a></li>
-                        <li><a class="nav-link" href="#" onclick="loadContent('documentation/autre')"><i class="bi bi-three-dots me-2"></i> Autres</a></li>
+                        <li>
+    <a class="nav-link" href="#" onclick="loadContentWithPrevent('mon_espace/autre', event)">
+        <i class="bi bi-three-dots me-2"></i> Autres
+    </a>
+</li>
+
                     </ul>
                 </div>
             </li>
@@ -69,9 +74,24 @@
                 </a>
                 <div class="collapse ms-3" id="documentationMenu">
                     <ul>
-                        <li><a class="nav-link" href="{{ route('publications.create') }}"><i class="bi bi-file-earmark-person me-2"></i> Laboratoires</a></li>
-                        <li><a class="nav-link" href="#" onclick="loadContent('documentation/fiches')"><i class="bi bi-journal-text me-2"></i> Equipements</a></li>
-                        <li><a class="nav-link" href="#" onclick="loadContent('documentation/articles')"><i class="bi bi-file-earmark-richtext me-2"></i> Equipes</a></li>
+                        <li>
+    <a class="nav-link" href="{{ route('construction') }}">
+        <i class="bi bi-file-earmark-person me-2"></i> Laboratoires
+    </a>
+</li>
+
+<li>
+    <a class="nav-link" href="{{ route('construction') }}">
+        <i class="bi bi-journal-text me-2"></i> Equipements
+    </a>
+</li>
+
+<li>
+    <a class="nav-link" href="{{ route('construction') }}">
+        <i class="bi bi-file-earmark-richtext me-2"></i> Equipes
+    </a>
+</li>
+
                         <li>
     <a class="nav-link" href="#" onclick="loadContentWithPrevent('documentation/autre', event)">
         <i class="bi bi-three-dots me-2"></i> Autres
@@ -204,6 +224,7 @@
             profileDetails.classList.add('hidden');
         }
     });
+    
 </script>
 
 </body>

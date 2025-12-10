@@ -5,6 +5,8 @@ body {
     display: flex;
     background-color: #f0f0f0;
     overflow-x: hidden;
+    font-size: 1rem; 
+
 }
 
 /* Sidebar */
@@ -19,6 +21,60 @@ body {
     transition: width 0.3s, left 0.3s;
     z-index: 1000;
 }
+
+
+/* Sous-menus */
+#sidebar ul ul {
+    list-style-type: none;      /* plus de puces */
+    padding-left: 0;            /* enlever l'indentation par défaut */
+    background-color: #ffffff;  
+    border-radius: 8px;         
+    margin: 5px 10px;           
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+    z-index: 10;                
+    position: relative;          
+}
+
+/* Liens des sous-menus */
+#sidebar ul ul li a {
+     color: #288c41 !important;           
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Hover sur les sous-menus */
+#sidebar ul ul li a:hover {
+    background-color: #f0f0f0;  
+     color: #fff !important;             
+    text-decoration: none;
+}
+
+/* Décalage visuel pour les icônes */
+#sidebar ul ul li a i {
+    margin-right: 8px;
+    font-size: 1.1rem; /* texte plus grand */
+}
+#topbar {
+    font-size: 1.1rem;
+}
+#topbar .position-relative i {
+    font-size: 1.3rem;
+}
+.admin-dropdown {
+    font-size: 1rem;
+}
+#sidebar .sidebar-header {
+    font-size: 1.3rem; 
+}
+
+#sidebar .nav-link {
+    font-size: 1.1rem; 
+    padding: 10px 15px;
+}
+
 #sidebar.collapsed { width: 70px; }
 #sidebar.show { left: 0; }
 
