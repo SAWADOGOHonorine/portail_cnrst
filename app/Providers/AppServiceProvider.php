@@ -41,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
 
         $view->with([
             'nbPublications' => $nbPublications,
-            'nbEnseignants' => Chercheur::count(),
+            // 'nbEnseignants' => Chercheur::count(),
             'nbLaboratoires' => Laboratoire::count(),
             'nbProjets' => Projet::count(),
         ]);

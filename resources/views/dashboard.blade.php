@@ -19,6 +19,13 @@
             Mon Admin
         </div>
         <ul class="nav flex-column">
+
+        <!-- Accueil -->
+            <li class="nav-item">
+                <a href="#" class="nav-link text-white" onclick="loadContent('accueil')">
+                    <i class="bi bi-house-door me-2"></i> Accueil
+                </a>
+            </li>
             <!-- Mon espace -->
             <li class="nav-item">
                 <a class="nav-link text-white d-flex justify-content-between align-items-center"
@@ -39,11 +46,11 @@
             </li>
 
             <!-- Accueil -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="#" class="nav-link text-white" onclick="loadContent('accueil')">
                     <i class="bi bi-house-door me-2"></i> Accueil
                 </a>
-            </li>
+            </li> -->
 
             <!-- Infos -->
             <li class="nav-item">
@@ -65,7 +72,12 @@
                         <li><a class="nav-link" href="{{ route('publications.create') }}"><i class="bi bi-file-earmark-person me-2"></i> Laboratoires</a></li>
                         <li><a class="nav-link" href="#" onclick="loadContent('documentation/fiches')"><i class="bi bi-journal-text me-2"></i> Equipements</a></li>
                         <li><a class="nav-link" href="#" onclick="loadContent('documentation/articles')"><i class="bi bi-file-earmark-richtext me-2"></i> Equipes</a></li>
-                        <li><a class="nav-link" href="#" onclick="loadContent('documentation/autre')"><i class="bi bi-three-dots me-2"></i> Autres</a></li>
+                        <li>
+    <a class="nav-link" href="#" onclick="loadContentWithPrevent('documentation/autre', event)">
+        <i class="bi bi-three-dots me-2"></i> Autres
+    </a>
+</li>
+
                     </ul>
                 </div>
             </li>

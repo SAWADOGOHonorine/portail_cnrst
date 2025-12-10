@@ -3,32 +3,36 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\User; // vérifie le namespace de ton modèle User
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 
 class SuperAdminSeeder extends Seeder
 {
     public function run(): void
     {
-        // Récupère les informations depuis .env ou utilise des valeurs par défaut
-        $email = env('ADMIN_EMAIL', 'admin@example.com');
-        $password = env('ADMIN_PASSWORD', 'MotDePasseTresSecurise123!');
-        $role = env('ADMIN_ROLE', 'super_admin'); // ici super_admin
+        $name     = env('ADMIN_NAME', 'SuperAdmin');
+        $email    = env('ADMIN_EMAIL', 'honorinesawadogo07@gmail.com');
+        $password = env('ADMIN_PASSWORD', 'Etudiant@2022');
+        $role     = env('ADMIN_ROLE', 'super_admin');
 
-        // Crée l’utilisateur seulement s’il n’existe pas déjà
-        User::firstOrCreate(
-    ['email' => $email],
-    [
-        'first_name' => 'Super',    // si tu as first_name
-        'last_name'  => 'Admin',    // important !
-        'email'      => $email,
-        'password'   => Hash::make($password),
-        'role'       => $role,
-        'status'     => 1,          // si tu as ce champ
-        'is_active' => 1,          // si tu as ce champ
-    ]
-);
+        $nameParts = explode(' ', $name);
+        $firstName = $nameParts[0];
+        $lastName  = $nameParts[1] ?? '';
 
+        // updateOrCreate : met à jour si trouvé, sinon crée
+        User::updateOrCreate(
+            ['role' => $role], // critère pour identifier le super admin
+            [
+                'first_name' => $firstName,
+                'last_name'  => $lastName,
+                'email'      => $email,
+                'password'   => Hash::make($password),
+                'role'       => $role,
+                'status'     => Schema::hasColumn('users', 'status') ? 1 : null,
+                'is_active'  => Schema::hasColumn('users', 'is_active') ? 1 : null,
+            ]
+        );
     }
 }
 

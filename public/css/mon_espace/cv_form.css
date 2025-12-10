@@ -1,63 +1,73 @@
-/* ===== Conteneur principal ===== */
-.dashboard-container {
-    max-width: 550px;
-    margin: 30px auto;
-    padding: 30px 40px;
-    background-color: #ffffff;
+/* ===============================
+   STYLE GLOBAL
+=============================== */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===============================
+   CONTENEUR PRINCIPAL
+=============================== */
+.fiche-technique-wrapper {
+    max-width: 1000px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* ===== En-tête ===== */
-.dashboard-header h1 {
+/* ===============================
+   TITRE
+=============================== */
+.fiche-technique-wrapper h2 {
     text-align: center;
-    margin-bottom: 35px;
-    font-size: 30px;
-    font-weight: 700;
-    color: #198754;
+    color: #2e7d32;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
 }
 
-/* ===== Champs du formulaire ===== */
-form .form-control,
-form textarea,
-form select,
-form input[type="text"],
-form input[type="email"],
-form input[type="tel"],
-form input[type="date"] {
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 15px;
-    transition: all 0.3s ease;
-    background-color: #fefefe;
-    margin-bottom: 15px; /* <-- espace entre les champs */
+/* ===============================
+   FORMULAIRE
+=============================== */
+.form-fiche {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
 }
 
-/* Focus sur les champs */
-form .form-control:focus,
-form textarea:focus,
-form select:focus,
-form input:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 8px rgba(13,110,253,0.3);
+.form-fiche .form-control {
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 0.6rem;
+    width: 100%;
+    font-size: 1rem;
+    transition: 0.3s;
+    margin-bottom: 1rem;
+}
+
+.form-fiche .form-control:focus {
+    border-color: #2e7d32;
     outline: none;
 }
 
-/* Textarea pour projet et thématique */
-textarea.form-control {
+/* Textarea */
+.form-fiche textarea.form-control {
     min-height: 100px;
     resize: vertical;
-    padding-top: 10px;
+    padding-top: 0.5rem;
 }
 
 /* Labels */
-form label {
+.form-fiche label {
     font-weight: 500;
     color: #495057;
     display: block;
-    margin-bottom: 5px; /* espace label -> champ */
+    margin-bottom: 0.5rem;
 }
 
 /* Champs obligatoires */
@@ -66,68 +76,91 @@ form label {
     font-weight: 500;
 }
 
-/* ===== Groupe de boutons ===== */
-.btn-group {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-top: 25px;
-}
-
-/* ===== Boutons ===== */
+/* ===============================
+   BOUTONS
+=============================== */
 .btn {
-    padding: 10px 22px;
-    font-size: 15px;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
     border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    border: none;
     cursor: pointer;
-    text-align: center;
+    transition: background 0.3s;
 }
 
-/* Bouton Réinitialiser */
 .btn-secondary {
-    background-color: #198754; /* Vert */
+    background-color: #2e7d32;
     color: #fff;
-    border: 1px solid #198754;
 }
 
 .btn-secondary:hover {
-    background-color: #145c32;
-    border-color: #145c32;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(20,92,50,0.3);
+    background-color: #256228;
 }
 
-/* Bouton Enregistrer / Modifier */
 .btn-primary {
-    background-color: #0d6efd; /* Bleu */
+    background-color: #2e7d32;
     color: #fff;
-    border: 1px solid #0d6efd;
 }
 
 .btn-primary:hover {
-    background-color: #084298;
-    border-color: #084298;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(8,66,152,0.3);
+    background-color: #256228;
 }
 
-/* ===== Messages d'erreur ===== */
-.alert-danger {
-    border-left: 5px solid #dc3545;
-    background-color: #f8d7da;
-    color: #842029;
-    padding: 15px 20px;
+/* Groupe de boutons */
+.btn-group {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+.form-fiche .form-control:focus,
+#cv_file:focus,
+form select:focus {
+    border-color: #2e7d32; /* vert */
+    box-shadow: none;       /* supprime l'ombre bleue */
+    outline: none;
+}
+
+
+/* ===============================
+   MESSAGES D'ALERTE
+=============================== */
+.alert {
     border-radius: 6px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
 }
 
-/* ===== File input ===== */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* ===============================
+   FILE INPUT
+=============================== */
 #cv_file {
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    padding: 8px 12px;
-    margin-bottom: 15px; /* espace sous le champ fichier */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0.6rem;
+    width: 100%;
+    font-size: 1rem;
+    transition: 0.3s;
+    margin-bottom: 0.5rem;
+}
+
+#cv_file:focus {
+    border-color: #2e7d32;
+    outline: none;
 }
 
 #file-name {
@@ -137,32 +170,16 @@ form label {
     color: #6c757d;
 }
 
-/* ===== Success / message existant ===== */
-.success-message {
-    background-color: #e9f7ef;
-    border-left: 5px solid #198754;
-    padding: 15px 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-.success-message h3 {
-    color: #198754;
-    margin-bottom: 10px;
-}
-
-/* ===== Responsive ===== */
+/* ===============================
+   RESPONSIVE
+=============================== */
 @media (max-width: 768px) {
-    .row .col-md-6,
-    .row .col-md-4 {
-        flex: 0 0 100%;
-        max-width: 100%;
+    .fiche-technique-wrapper {
+        padding: 1.2rem;
     }
-
     .btn-group {
         flex-direction: column;
     }
-
     .btn {
         width: 100%;
     }

@@ -1,11 +1,11 @@
-@extends('layouts.app')
 
-@push('styles')
+
+
 <link rel="stylesheet" href="{{ asset('css/troisformulaire.css') }}">
 <link rel="stylesheet" href="{{ asset('css/register.css') }}">
-@endpush
 
-@section('content')
+
+
 <div class="form-wrapper">
     <div class="form-login">
         <h2>Créer mon compte</h2>
@@ -61,5 +61,4 @@
         </form>
     </div>
 </div>
-@endsection
 

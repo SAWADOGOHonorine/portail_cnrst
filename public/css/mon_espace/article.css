@@ -8,10 +8,18 @@ body {
     padding: 0;
 }
 
+.form-article .form-control:focus,
+#article_file:focus,
+form select:focus {
+    border-color: #2e7d32; /* vert */
+    box-shadow: none;       /* supprime l'ombre bleue */
+    outline: none;
+}
+
 /* ===============================
    CONTAINER PRINCIPAL
 =============================== */
-.fiche-technique-wrapper {
+.article-wrapper {
     max-width: 1000px;
     margin: 2rem auto;
     background: #fff;
@@ -23,7 +31,7 @@ body {
 /* ===============================
    TITRE
 =============================== */
-.fiche-technique-wrapper h2 {
+.article-wrapper h2 {
     text-align: center;
     color: #2e7d32;
     font-weight: bold;
@@ -33,14 +41,14 @@ body {
 /* ===============================
    FORMULAIRE
 =============================== */
-.form-fiche {
+.form-article {
     background: #f9f9f9;
     border-radius: 10px;
     padding: 1.5rem;
     border: 1px solid #e0e0e0;
 }
 
-.form-fiche .form-control {
+.form-article .form-control {
     border-radius: 6px;
     border: 1px solid #ccc;
     padding: 0.6rem;
@@ -49,7 +57,7 @@ body {
     transition: 0.3s;
 }
 
-.form-fiche .form-control:focus {
+.form-article .form-control:focus {
     border-color: #2e7d32;
     outline: none;
 }
@@ -69,13 +77,13 @@ body {
 }
 
 /* ===============================
-   LISTE DES FICHES
+   LISTE DES ARTICLES
 =============================== */
-.fiche-list {
+.article-list {
     margin-top: 2rem;
 }
 
-.fiche-card {
+.article-card {
     background: #ffffff;
     border-left: 6px solid #2e7d32;
     border-radius: 10px;
@@ -84,26 +92,26 @@ body {
     transition: transform 0.2s ease;
 }
 
-.fiche-card:hover {
+.article-card:hover {
     transform: scale(1.01);
 }
 
-.fiche-title {
+.article-title {
     color: #2e7d32;
     font-weight: 600;
     margin-bottom: 0.8rem;
 }
 
-.fiche-content {
+.article-content {
     color: #444;
     margin-bottom: 1rem;
     line-height: 1.5;
 }
 
 /* ===============================
-   ACTIONS (BOUTONS)
+   ACTIONS
 =============================== */
-.fiche-actions {
+.article-actions {
     margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
@@ -161,6 +169,7 @@ body {
     margin-top: 1rem;
 }
 
+
 .alert-success {
     background-color: #d4edda;
     color: #155724;
@@ -177,13 +186,13 @@ body {
    RESPONSIVE
 =============================== */
 @media (max-width: 768px) {
-    .fiche-technique-wrapper {
+    .article-wrapper {
         padding: 1.2rem;
     }
-    .fiche-card {
+    .article-card {
         padding: 1rem;
     }
-    .fiche-actions {
+    .article-actions {
         flex-direction: column;
         align-items: flex-start;
     }

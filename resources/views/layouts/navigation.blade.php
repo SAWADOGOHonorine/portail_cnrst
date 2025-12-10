@@ -7,7 +7,7 @@
         <div class="logo-image">
           <img src="{{ asset('images/CNRST.png') }}" alt="Logo du CNRST" class="logo-cnrst">
         </div>
-        <div class="logo-slogan">Suivi – Traçabilité de la Recherche</div>
+        <div class="logo-slogan">EVEXPRO</div>
       </div>
 
       <!-- Bouton burger (mobile) -->
