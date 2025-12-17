@@ -29,11 +29,11 @@
       <form method="GET" action="{{ route('chercheurs') }}">
         <input type="text" name="q" class="filter-input" placeholder="Tapez ce que vous voulez ...">
         <select name="ufr" class="filter-select">
-          <option value="">Toutes les UFR</option>
-          <option value=""> UFR/IFOAD</option>
-          <option value=""> UFR/SH</option>
-          <option value=""> UFR/SEA</option>
-          <option value=""> UFR/SDS</option>
+          <option value="">Toutes les instituts</option>
+          <option value=""> INERA</option>
+          <option value=""> IRSAT</option>
+          <option value=""> IRSS</option>
+          <option value="">INSS</option>
         </select>
         <select name="discipline" class="filter-select">
           <option value="">Toutes les disciplines</option>
@@ -50,22 +50,22 @@
     </div>
     <!-- fin de la section recherche -->
 
-    <p class="section-count"><strong>4 enseignants chercheurs trouvés</strong></p>
+    <p class="section-count"><strong>4 Chercheurs trouvés</strong></p>
     <div class="cards">
       <!-- Carte 1 -->
-      <article class="card">
+      <!-- <article class="card">
         <img src="#" alt="image1" class="avatar">
         <div class="title-row">
           <span class="badge badge--dr">Dr</span>
           <h3 class="name">YAMBA</h3>
         </div>
-        <p class="role">Enseigants chercheurs</p>
+        <p class="role"> chercheurs</p>
         <p class="meta">Electroniciens</p>
         <p class="ufr">UFR/SEA</p>
-      </article>
+      </article> -->
 
       <!-- Carte 2 -->
-      <article class="card">
+      <!-- <article class="card">
         <img src="#" alt="image2" class="avatar">
         <div class="title-row">
           <span class="badge badge--dr">Dr</span>
@@ -74,30 +74,30 @@
         <p class="role">Maître-Assistant</p>
         <p class="meta">Histoire et archéologie</p>
         <p class="ufr">UFR/SH</p>
-      </article>
+      </article> -->
 
       <!-- Carte 3 -->
       <article class="card">
         <img src="#" alt="image3" class="avatar">
         <div class="title-row">
           <span class="badge badge--dr">Dr</span>
-          <h3 class="name">BADO Dibié</h3>
+          <h3 class="name"></h3>
         </div>
-        <p class="role">Maître-Assistant</p>
-        <p class="meta">Lettres modernes</p>
-        <p class="ufr">UFR/LAC</p>
+        <p class="role"></p>
+        <p class="meta"></p>
+        <p class="ufr"></p>
       </article>
 
       <!-- Carte 4 -->
       <article class="card">
         <img src="#" alt="image4" class="avatar">
         <div class="title-row">
-          <span class="badge badge--dr">Dr</span>
-          <h3 class="name">BADO Nébom</h3>
+          <span class="badge badge--dr"></span>
+          <h3 class="name"></h3>
         </div>
-        <p class="role">Maître-Assistant</p>
-        <p class="meta">Physique</p>
-        <p class="ufr">UFR/SEA</p>
+        <p class="role"></p>
+        <p class="meta"></p>
+        <p class="ufr"></p>
       </article>
     </div>
   </div>

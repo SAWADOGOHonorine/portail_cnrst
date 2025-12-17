@@ -1,228 +1,159 @@
-
-/* le css de la navigation cnrst */
-.logo-image img.logo-cnrst {
-  width: 3.1rem;   
+/* ===================== RESET & GLOBAL ===================== */
+* {
+  box-sizing: border-box;
 }
 
-.logo-slogan {
-  font-size: 1.5rem;
-  color:  white;
-  margin-top: 0.05rem;
-  font-weight: 500;
-  text-align: center;
-}
-
-/* ===== HEADER STICKY EN HAUT ===== */
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-main, .content, .container {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
+/* Espace sous le header */
+main,
+.main-content,
+.content,
+.container {
+  padding-top: 90px;
 }
 
-.navbar {
-  margin-bottom: 0 !important;
-  /* padding-top: 5px; 
-  padding-bottom: 5px; */
-}
-
-.navbar ul {
-    margin-top: 0; /* réduit l'espace au-dessus */
-}
+/* ===================== HEADER ===================== */
 .header-progres {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
+  height: 90px;
   background-color: rgb(46, 125, 50);
   color: white;
-  font-family: 'Segoe UI', sans-serif;
-  padding: 0.1rem 0.5rem;
+  z-index: 1000;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  margin: 0 !important;
-}
-.main-content {
-  padding-top: 84px; 
 }
 
-
-/* ===== STRUCTURE COMPACTE ===== */
-.header-progres,
-.menu-row,
-.menu-container,
-.logo-progres,
-.connexion-wrapper-below {
-  margin: 0 !important;
-  padding: 0 !important;
-  gap: 0 !important;
-  line-height: 1 !important;
+/* ===================== NAV STRUCTURE ===================== */
+.nav-progres {
+  height: 100%;
 }
 
-/* ===== STRUCTURE FLEXIBLE ===== */
 .menu-row {
   display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
+  align-items: center;           /* LOGO + TEXTE + BURGER alignés */
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 1rem;
 }
 
-/* ===== LOGO ===== */
+/* ===================== LOGO ===================== */
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .logo-progres {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.logo-text {
-  font-size: 1.1rem;
-  font-weight: bold;
-  display: flex;
   align-items: center;
-  gap: 0.1rem;
+  gap: 0.6rem;
 }
 
-.logo-red {
-  color: #b30000;
-}
-
-.logo-black {
-  color: white;
-}
-
-.logo-icon i {
-  font-size: 1.2rem;
-  color: #b30000;
-  transform: translateY(1px);
+.logo-image img.logo-cnrst {
+  width: 78px;
+  border: 1px solid #fff;
 }
 
 .logo-slogan {
-  font-size: 0.55rem;
-  color: #e0e0e0;
-  margin-top: 0.1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: 1px solid #fff;
+  padding: 0.2rem 0.4rem;
 }
 
-/* ===== MENU PRINCIPAL ===== */
+/* ===================== MENU ===================== */
 .menu-container {
+  flex: 1;
   display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin-top: 0;
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-  padding: 0;   
-  margin: 0;    
+  align-items: center;
+  margin-left: 1rem;
 }
 
+/* Liens */
 .menu-links {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   list-style: none;
-  gap: 0.4rem;
+  gap: 1rem;
   margin: 0;
   padding: 0;
-}
-
-.menu-links li {
-  margin-bottom: 0 !important;
-  padding: 0 !important;
 }
 
 .menu-links li a {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  text-transform: uppercase;
-  padding: 0.15rem 0.5rem;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   border-bottom: 3px solid transparent;
-  display: inline-block;
-  margin-bottom: 0 !important;
 }
 
-/* Élément actif */
-.menu-links li.active a {
-  border-bottom: 3px solid #b30000;
-  /* color: #b30000; */
-  font-weight: bold;
-}
-
-/* Hover */
 .menu-links li a:hover {
-  border-bottom: 2px solid #b30000;
-  /* color: #990000; */
+  background-color: #ffffff;
+  color: rgb(46, 125, 50);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  /* border-bottom-color: #b30000; */
 }
 
-/* ===== CONNEXION ===== */
+/* ===================== BOUTON CONNEXION ===================== */
 .connexion-wrapper-below {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-right: 1rem;
-  gap: 0.5rem;
-  margin-top: 0;
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-.login-separator {
-  width: 2px;
-  height: 24px;
-  background-color: #ccc;
+  position: absolute;
+  right: 1rem;
+  bottom: 0.2rem;
 }
 
 .btn-connexion {
-  background-color: #b30000;
+  background-color: #f77070;
   color: white;
-  padding: 0.3rem 0.6rem;
+  padding: 0.35rem 0.8rem;
   border-radius: 4px;
-  text-decoration: none;
   font-weight: bold;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.8rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: background-color 0.2s ease;
+  font-size: 0.85rem;
 }
 
 .btn-connexion:hover {
-  background-color: #990000;
+  background-color: #ffffff;
+  color: rgb(46, 125, 50);
+  border: 1px solid rgb(46, 125, 50);
 }
 
-/* ===== BOUTON BURGER MOBILE ===== */
+/* ===================== BURGER ===================== */
 .menu-toggle {
   display: none;
-  font-size: 1.5rem;
   background: none;
   border: none;
   color: white;
   cursor: pointer;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===================== MOBILE ===================== */
 @media (max-width: 768px) {
-  .menu-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 
+  /* ☰ BURGER visible */
   .menu-toggle {
     display: block;
-    margin-top: 0.5rem;
+    margin-left: auto;     /* à droite sur la même ligne */
+    font-size: 1.8rem;
+    z-index: 1200;
   }
 
+  /* Menu mobile */
   .menu-container {
     display: none;
-    padding-top: 70px;
+    position: absolute;
+    top: 90px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 90px);
+    background-color: rgb(46, 125, 50);
+    padding: 1rem;
+    flex-direction: column;
+    z-index: 1100;
   }
 
   .menu-container.open {
@@ -231,21 +162,16 @@ main, .content, .container {
 
   .menu-links {
     flex-direction: column;
-    align-items: flex-start;
+    gap: 0.8rem;
   }
 
+  /* Connexion en bas du menu mobile */
   .connexion-wrapper-below {
-    justify-content: flex-start;
-    padding-left: 1rem;
-  }
-  .menu-links li a {
-    font-size: 0.9rem;
-    padding: 0.5rem 0;
+    position: static;
+    margin-top: auto;
+    align-self: flex-end;
   }
 }
-
-
-
 
 
 

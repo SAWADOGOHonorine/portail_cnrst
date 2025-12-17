@@ -6,6 +6,15 @@
     border-top: 1px solid #198754;
 }
 
+/* logo cliquable */
+.footer-logo a {
+    display: inline-block;
+}
+
+.footer-logo img {
+    cursor: pointer;
+}
+
 .footer-wrapper {
     max-width: 960px;
     margin: 0 auto;

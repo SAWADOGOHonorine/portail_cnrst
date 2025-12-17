@@ -31,35 +31,58 @@
     <!-- Correction CSS pour compenser le menu sticky -->
     <style>
         .main-content {
-            padding-top: 84px; /* valeur par défaut, ajustée dynamiquement ensuite */
+            padding-top: 84px; /* ajusté automatiquement par JS */
         }
     </style>
 </head>
 
 <body class="font-sans antialiased bg-gray-100 d-flex flex-column min-vh-100">
-    @php
-        $hideNav = Request::is('login') || Request::is('register') || Request::is('forgot-password') || Request::is('logout_success');
-    @endphp
 
+    {{-- ===============================
+        CONDITION DE MASQUAGE DU MENU
+        (COMMENTÉE POUR TOUJOURS AFFICHER LE MENU)
+    =============================== --}}
+    {{--
+    @php
+        $hideNav = Request::is('login')
+                || Request::is('register')
+                || Request::is('forgot-password')
+                || Request::is('logout_success');
+    @endphp
+    --}}
+
+    {{-- ===============================
+        MENU DE NAVIGATION (AFFICHÉ PARTOUT)
+    =============================== --}}
+    {{--
     @unless($hideNav)
         @include('layouts.navigation')
     @endunless
+    --}}
+    @include('layouts.navigation')
 
     @yield('home')
 
     <main class="main-content flex-grow-1">
         @yield('content')
-        @include('components.stats_banner')
+        @if(!isset($hideFooter))
+    @include('components.stats_banner')
+@endif
+
     </main>
 
+    {{-- ===============================
+        FOOTER (AFFICHÉ PARTOUT)
+    =============================== --}}
+    {{--
     @unless($hideNav)
         @include('components.footer')
     @endunless
+    --}}
+   @if(!isset($hideFooter))
+    @include('components.footer')
+@endif
 
-    <!-- Scroll to top -->
-    <!-- <a href="#" class="scroll-top" aria-label="Retour en haut">
-        <i class="fas fa-arrow-up"></i>
-    </a> -->
 
     <!-- Scripts institutionnels -->
     <script src="{{ asset('js/dashboard.js') }}"></script>
@@ -67,8 +90,12 @@
     <script src="{{ asset('js/navigation.js') }}"></script>
     <script src="{{ asset('js/home.js') }}"></script>
 
-    <!-- Script dynamique pour compenser le menu sticky -->
+    {{-- ===============================
+        SCRIPT STICKY HEADER (SANS CONDITION)
+    =============================== --}}
+    {{--
     @if(!$hideNav)
+    --}}
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const header = document.querySelector(".header-progres");
@@ -78,7 +105,9 @@
             }
         });
     </script>
+    {{--
     @endif
+    --}}
 
     <!-- Scroll top JS -->
     <script>
@@ -90,6 +119,7 @@
             });
         }
     </script>
+
 </body>
 </html>
 

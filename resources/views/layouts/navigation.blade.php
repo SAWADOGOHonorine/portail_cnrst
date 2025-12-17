@@ -3,12 +3,15 @@
     <div class="menu-row">
       
       <!-- Logo ProGRES -->
-      <div class="logo-progres">
+      <a href="/" class="logo-link">
+    <div class="logo-progres">
         <div class="logo-image">
-          <img src="{{ asset('images/CNRST.png') }}" alt="Logo du CNRST" class="logo-cnrst">
+            <img src="{{ asset('images/CNRST.png') }}" alt="Logo du CNRST" class="logo-cnrst">
         </div>
-        <div class="logo-slogan">EVEXPRO</div>
-      </div>
+        <div class="logo-slogan">SEVEXPRO</div>
+    </div>
+</a>
+
 
       <!-- Bouton burger (mobile) -->
       <button class="menu-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('menuLinks').classList.toggle('open')">☰</button>
@@ -28,16 +31,16 @@
             <a href="{{ url('/laboratoires') }}">LABORATOIRES</a>
           </li>
 
-          <li class="{{ request()->is('construction') ? 'active' : '' }}">
+          <li class="{{ request()->is('construction') ?  : '' }}">
               <a href="{{ route('construction') }}">ÉQUIPES</a>
           </li>
 
 
-          <li class="{{ request()->is('construction') ? 'active' : '' }}">
+          <li class="{{ request()->is('construction') ?  : '' }}">
               <a href="{{ route('construction') }}">EVÉNEMENTS</a>
           </li>
 
-          <li class="{{ request()->is('construction') ? 'active' : '' }}">
+          <li class="{{ request()->is('construction') ?  : '' }}">
               <a href="{{ route('construction') }}">ÉQUIPEMENTS</a>
           </li>
 

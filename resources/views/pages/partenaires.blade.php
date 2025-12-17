@@ -61,23 +61,22 @@
     <!-- Carte 1 -->
     <article class="agreement-card">
       <a class="agreement-title" href="#">
-        Accord cadre de coopération entre l'Université Joseph KI‑ZERBO
-        et l'Université ABDELMALEK ESSAÂDI de Tétouan
+
+        
       </a>
       <p class="agreement-meta">
         Domaine:
-        <span class="tag">Enseignement</span>
-        <span class="tag">Recherche</span>
-        <span class="tag">Mobilité</span>
-        <span class="tag">Expertise</span>
+        <span class="tag">domaine</span>
+        <span class="tag">domaine</span>
+        <span class="tag">domaine</span>
+        <span class="tag">domaine</span>
       </p>
     </article>
 
     <!-- Carte 2 -->
-    <article class="agreement-card">
+    <!-- <article class="agreement-card">
       <a class="agreement-title" href="#">
-        Accord cadre de coopération entre l'Université Joseph KI‑ZERBO
-        et l’Ecole Nationale d’Administration et de Magistrature
+       
       </a>
       <p class="agreement-meta">
         Domaine:
@@ -86,10 +85,10 @@
         <span class="tag">Renforcement de capacité</span>
         <span class="tag">Expertise</span>
       </p>
-    </article>
+    </article> -->
 
     <!-- Carte 3 -->
-    <article class="agreement-card">
+    <!-- <article class="agreement-card">
       <a class="agreement-title" href="#">
         Accord cadre de coopération interuniversitaire entre l'Université
         Catholique de Louvain et l'Université Joseph KI‑ZERBO
@@ -101,10 +100,10 @@
         <span class="tag">Mobilité</span>
         <span class="tag">Renforcement de capacité</span>
       </p>
-    </article>
+    </article> -->
 
     <!-- Carte 4 -->
-    <article class="agreement-card">
+    <!-- <article class="agreement-card">
       <a class="agreement-title" href="#">
         Accord cadre de coopération interuniversitaire entre l'Université
         Saint Thomas d’Aquin et l’Université Joseph KI‑ZERBO
@@ -113,7 +112,7 @@
         Domaine:
         <span class="tag">Recherche</span>
       </p>
-    </article>
+    </article> -->
   </div>
 </section>
 

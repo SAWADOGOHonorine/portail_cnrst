@@ -23,8 +23,9 @@ html, body {
   justify-content: center;
   text-align: center;
   margin-top: 1.5rem;
-  padding: 2rem 0;
-   padding-top: 68px;
+  padding: 1rem 0;
+   padding-top: 0.05rem;
+   margin-top: 0.05rem;
 }
 
 .section-recherche::before {

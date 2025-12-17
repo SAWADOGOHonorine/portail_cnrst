@@ -24,12 +24,12 @@
       <form method="GET" action="{{ route('laboratoires.index') }}" class="d-flex gap-2 flex-wrap">
         <input type="text" name="q" class="filter-input form-control" placeholder="Tapez ce que vous voulez ..." value="{{ request('q') }}">
         
-        <select name="ufr" class="filter-select form-control">
-          <option value="">Toutes les UFR/Établissements</option>
-          <option value="IFoad" {{ request('ufr')=='IFoad' ? 'selected' : '' }}>UFR/IFOAD</option>
-          <option value="SH" {{ request('ufr')=='SH' ? 'selected' : '' }}>UFR/SH</option>
-          <option value="SEA" {{ request('ufr')=='SEA' ? 'selected' : '' }}>UFR/SEA</option>
-          <option value="SDS" {{ request('ufr')=='SDS' ? 'selected' : '' }}>UFR/SDS</option>
+        <select name="institut" class="filter-select form-control">
+          <option value="">Tous les instituts</option>
+          <option value="IRSS" {{ request('institut')=='IRSS' ? 'selected' : '' }}>IRSS</option>
+          <option value="IRSS" {{ request('institut')=='IRSS' ? 'selected' : '' }}>IRSS</option>
+          <option value="IRSS" {{ request('institut')=='SEA' ? 'selected' : '' }}>IRSS</option>
+          <option value="IRSS" {{ request('institut')=='IRSS' ? 'selected' : '' }}>IRSS</option>
         </select>
 
         <select name="discipline" class="filter-select form-control">

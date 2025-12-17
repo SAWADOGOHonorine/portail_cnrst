@@ -1,5 +1,10 @@
+@php
+    $hideFooter = true;
+@endphp
 
+@extends('layouts.app')
 
+@section('content')
 
 <link rel="stylesheet" href="{{ asset('css/troisformulaire.css') }}">
 <link rel="stylesheet" href="{{ asset('css/register.css') }}">
@@ -62,3 +67,4 @@
     </div>
 </div>
 
+ @endsection

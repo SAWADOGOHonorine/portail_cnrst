@@ -39,7 +39,7 @@
     </div>
 
     <!-- Colonne 3 -->
-    <div class="team">
+    <!-- <div class="team">
       <div class="card-header"><h3>Équipe référente</h3></div>
 
       <h4 class="section-title">Superviseurs</h4>
@@ -51,7 +51,7 @@
       <h4 class="section-title">Technique</h4>
       <p><strong>M. Léonard M. SAWADOGO :</strong> <i class="fa-brands fa-whatsapp"></i> (+226) 71 67 36 51</p>
       <p><strong>M. Issoufou NIKIEMA :</strong> <i class="fa-brands fa-whatsapp"></i> (+226) 79 31 82 46</p>
-    </div>
+    </div> -->
 
   </div>
 </section>
