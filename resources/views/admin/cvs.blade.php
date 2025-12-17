@@ -17,8 +17,6 @@
                         <th>Nom</th>
                         <th>Prénom</th>
                         <th>Email</th>
-
-                        {{-- NOUVEAUX CHAMPS --}}
                         <th class="d-none d-md-table-cell">WhatsApp</th>
                         <th class="d-none d-md-table-cell">Spécialité</th>
                         <th class="d-none d-md-table-cell">Domaine</th>
@@ -29,15 +27,12 @@
                         <th class="d-none d-md-table-cell">Projet de recherche</th>
                         <th class="d-none d-md-table-cell">Genre</th>
                         <th class="d-none d-md-table-cell">Thématique recherche</th>
-
-
-                        {{-- DÉJÀ EXISTANTS --}}
                         <th class="d-none d-md-table-cell">Adresse</th>
                         <th class="d-none d-md-table-cell">Ville</th>
                         <th class="d-none d-md-table-cell">Téléphone</th>
                         <th>Département</th>
                         <th>Institut</th>
-                        <th>CV</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
 
@@ -48,8 +43,6 @@
                             <td>{{ $cv->nom }}</td>
                             <td>{{ $cv->prenom }}</td>
                             <td class="text-truncate">{{ $cv->email }}</td>
-
-                            {{-- NOUVEAUX CHAMPS --}}
                             <td class="d-none d-md-table-cell">{{ $cv->whatsapp ?? 'Non renseigné' }}</td>
                             <td class="d-none d-md-table-cell">{{ $cv->specialite ?? 'Non renseignée' }}</td>
                             <td class="d-none d-md-table-cell">{{ $cv->domaine ?? 'Non renseigné' }}</td>
@@ -60,9 +53,6 @@
                             <td class="d-none d-md-table-cell">{{ $cv->projet_recherche ?? '-' }}</td>
                             <td class="d-none d-md-table-cell">{{ $cv->genre ? ucfirst($cv->genre) : '-' }}</td>
                             <td class="d-none d-md-table-cell">{{ $cv->thematique_recherche ?? '-' }}</td>
-
-
-                            {{-- ANCIENS CHAMPS --}}
                             <td class="d-none d-md-table-cell text-truncate">{{ $cv->adresse ?? 'Non renseignée' }}</td>
                             <td class="d-none d-md-table-cell">{{ $cv->ville ?? 'Non renseignée' }}</td>
                             <td class="d-none d-md-table-cell">{{ $cv->telephone ?? 'Non fourni' }}</td>
@@ -70,17 +60,12 @@
                             <td>{{ $cv->institut ?? 'Non renseigné' }}</td>
 
                             <td class="actions-cell">
-                                @if($cv->cv_path && file_exists(public_path('storage/'.$cv->cv_path)))
-                                    <a href="{{ route('cv.show', $cv->id) }}" class="btn btn-info btn-sm" target="_blank">
-                                        Voir CV
-                                    </a>
-                                    <a href="{{ asset('storage/'.$cv->cv_path) }}" download class="btn btn-primary btn-sm mb-1">
-                                        Télécharger
-                                    </a>
-                                @else
-                                    <span class="text-danger">Fichier introuvable</span>
-                                @endif
-
+                                <a href="{{ route('cv.show', $cv->id) }}" class="btn btn-info btn-sm" target="_blank">
+                                    Voir CV
+                                </a>
+                                <a href="{{ route('cv.downloadPdf', $cv->id) }}" class="btn btn-primary btn-sm mb-1">
+                                    Télécharger
+                                </a>
                             </td>
                         </tr>
                     @endforeach

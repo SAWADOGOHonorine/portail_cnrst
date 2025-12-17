@@ -290,9 +290,13 @@ Route::get('/construction', function () {
 Route::prefix('chercheur')->name('chercheur.')->group(function () {
     Route::get('/', [ChercheurController::class, 'index'])->name('index');
 });
+// Route::get('/cv/{id}/pdf', [CvController::class, 'pdf'])
+//     ->name('cv.pdf');
 
-
-
+// Voir le CV en PDF
+// Route::get('/cv/{id}/pdf', [CvController::class, 'showPdf'])->name('cv.pdf');
+// Télécharger le CV au format PDF à partir des informations du formulaire
+Route::get('/cv/{id}/download', [CvController::class, 'downloadPdf'])->name('cv.downloadPdf');
 
 
 

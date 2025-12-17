@@ -168,14 +168,14 @@
             <textarea id="thematique_recherche" name="thematique_recherche" class="form-control">{{ old('thematique_recherche', $cv->thematique_recherche ?? '') }}</textarea>
         </div>
 
-        {{-- Fichier CV --}}
+        <!-- {{-- Fichier CV --}}
         <div class="mb-3">
             <label for="cv_file" class="form-label">Fichier CV</label>
             <input type="file" id="cv_file" name="cv_file" class="form-control" accept=".pdf,.doc,.docx">
             <span id="file-name" class="text-muted">
                 @if(isset($cv) && $cv->cv_path) Fichier actuel : {{ $cv->cv_path }} @endif
             </span>
-        </div>
+        </div> -->
 
         {{-- Boutons --}}
         <div class="btn-group mt-3">
@@ -184,7 +184,9 @@
                 {{ isset($cv) ? 'Modifier le CV' : 'Enregistrer le CV' }}
             </button>
         </div>
+
     </form>
+    <!--  -->
 </div>
 
 <script>
