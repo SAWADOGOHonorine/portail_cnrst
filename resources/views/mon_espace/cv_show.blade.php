@@ -57,31 +57,35 @@
         </div>
     @endif <br>
 
-    <!-- Bouton Retour centré -->
-    <div class="d-flex justify-content-center gap-2 mt-3">
-        <!-- Bouton Retour vert -->
-        <a href="{{ route('dashboard', ['from' => 'cv']) }}" class="btn btn-success btn-sm custom-retour">
-            ⬅ Retour
-        </a>
+    <hr>
 
-        <!-- Bouton Modifier le CV -->
-        <a href="{{ route('cv.edit', $cv->id) }}" class="btn btn-warning btn-sm custom-modifier">
-            Modifier le CV
-        </a>
-        
-    </div>
-    <div class="mt-4 d-flex gap-2">
-    <a href="{{ route('cv.show', $cv->id ?? 0) }}"
-       class="btn btn-outline-success"
+<!-- Boutons principaux : Voir / Télécharger -->
+<div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+    <a href="{{ route('cv.show', $cv->id) }}"
+       class="btn btn-success px-4"
        target="_blank">
-         Voir le CV
+        👁️ Voir le CV
     </a>
 
-    <a href="{{ route('cv.download', $cv->id ?? 0) }}"
-       class="btn btn-outline-primary">
-        ⬇️ Télécharger le CV
+    <a href="{{ route('cv.download', $cv->id) }}"
+       class="btn btn-primary px-4">
+         Télécharger le CV
     </a>
 </div>
+
+<!-- Boutons secondaires : Retour / Modifier -->
+<div class="d-flex justify-content-center gap-2 mt-3 flex-wrap">
+    <a href="{{ route('dashboard', ['from' => 'cv']) }}"
+       class="btn btn-outline-success btn-sm">
+        ⬅ Retour
+    </a>
+
+    <a href="{{ route('cv.edit', $cv->id) }}"
+       class="btn btn-outline-warning btn-sm">
+         Modifier le CV
+    </a>
+</div>
+
 
 </div>
 
@@ -108,6 +112,16 @@
     border-color: #007bff;
     color: #fff;
 }
+
+.btn {
+    border-radius: 25px;
+}
+
+hr {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
 </style>
 
 
